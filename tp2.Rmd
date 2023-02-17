@@ -1,0 +1,6 @@
+---
+title: "tp2"
+author: "Lapu Matthias | Amaël Kreis"
+date: "2023-02-17"
+output: pdf_document
+---
