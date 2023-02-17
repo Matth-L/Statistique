@@ -2,5 +2,43 @@
 title: "tp2"
 author: "Lapu Matthias | Amaël Kreis"
 date: "2023-02-17"
-output: pdf_document
+output:
+  html_document:
+    df_print: paged
+  pdf_document: default
 ---
+
+## I. Variation sous-jacente et échantillonnage répété
+
+1. Si X ∼ E(0.5), quelle est la probabilité qu’on observe une valeur supérieure à 3?
+
+
+2.Simulez un échantillon de taille n = 20 d’un loi de E(0,5), créez un histogramme de votre échantillon et commentez la forme de votre histogramme. Superposer la vrai densité. Quelle est la probabilité empirique qu’on observe une valeur supérieure à 3 ?
+
+```{r}
+x<-rexp(20,0.5)
+hist(x, freq=FALSE)
+maxvalue <- ceiling(max(x))
+lines(0:maxvalue,dexp(0:maxvalue, 0.5), col="green",)
+```
+
+Commentaire histogramme à insérer 
+
+3.Répétez cette opération 5 ou 6 fois et commentez les différences entre les histogrammes que vous
+obtenez à chaque fois. Utilisez la même limite sur les axes pour faciliter la comparaison. Notez
+également comment la probabilité empirique qu’on observe une valeur supérieure à 3 change.
+```{r}
+
+```
+
+4. Augmentez la taille de votre échantillon à 100 et répétez votre expérience. Que remarquez-vous?
+
+```{r, echo=FALSE} 
+x<-rexp(100,0.5)
+hist(x, freq=FALSE)
+maxvalue <- ceiling(max(x));
+lines(0:maxvalue,dexp(0:maxvalue, 0.5), col="green",)
+```
+
+## II. Variabilité aléatoire du maximum de l’échantillon
+
