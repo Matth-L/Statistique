@@ -10,10 +10,9 @@ output:
 
 ## I. Variation sous-jacente et échantillonnage répété
 
-1. Si X ∼ E(0.5), quelle est la probabilité qu’on observe une valeur supérieure à 3?
+1.  Si X ∼ E(0.5), quelle est la probabilité qu'on observe une valeur supérieure à 3?
 
-
-2.Simulez un échantillon de taille n = 20 d’un loi de E(0,5), créez un histogramme de votre échantillon et commentez la forme de votre histogramme. Superposer la vrai densité. Quelle est la probabilité empirique qu’on observe une valeur supérieure à 3 ?
+2.Simulez un échantillon de taille n = 20 d'un loi de E(0,5), créez un histogramme de votre échantillon et commentez la forme de votre histogramme. Superposer la vrai densité. Quelle est la probabilité empirique qu'on observe une valeur supérieure à 3 ?
 
 ```{r}
 x<-rexp(20,0.5)
@@ -22,39 +21,42 @@ maxvalue <- ceiling(max(x))
 lines(0:maxvalue,dexp(0:maxvalue, 0.5), col="green",)
 ```
 
-Commentaire histogramme à insérer 
+Commentaire histogramme à insérer
 
-3.Répétez cette opération 5 ou 6 fois et commentez les différences entre les histogrammes que vous
-obtenez à chaque fois. Utilisez la même limite sur les axes pour faciliter la comparaison. Notez
-également comment la probabilité empirique qu’on observe une valeur supérieure à 3 change.
+3.Répétez cette opération 5 ou 6 fois et commentez les différences entre les histogrammes que vous obtenez à chaque fois. Utilisez la même limite sur les axes pour faciliter la comparaison. Notez également comment la probabilité empirique qu'on observe une valeur supérieure à 3 change.
+
 ```{r}
 
 ```
 
-4. Augmentez la taille de votre échantillon à 100 et répétez votre expérience. Que remarquez-vous?
+4.  Augmentez la taille de votre échantillon à 100 et répétez votre expérience. Que remarquez-vous?
 
-```{r, echo=FALSE} 
+```{r, echo=FALSE}
 x<-rexp(100,0.5)
 hist(x, freq=FALSE)
 maxvalue <- ceiling(max(x));
 lines(0:maxvalue,dexp(0:maxvalue, 0.5), col="blue",)
 ```
 
-## II. Variabilité aléatoire du maximum de l’échantillon
+## II. Variabilité aléatoire du maximum de l'échantillon
 
+# 1. Simuler un échantillon de taille n = 10 d'une loi U(−1, 1) et enregistrez le maximum de l'échantillon.
 
-# 1. Simuler un échantillon de taille n = 10 d’une loi U(−1, 1) et enregistrez le maximum de l’échantillon.
 ```{r}
 x <- runif(10, -1, 1)
 max <- max(x)
 ```
-# 2. Répétez les deux étapes ci-dessus dix fois, en écrivant le maximum de l’échantillon à chaque fois. Commentez la variabilité des valeurs que vous obtenez pour les maxima de votre échantillon.
+
+# 2. Répétez les deux étapes ci-dessus dix fois, en écrivant le maximum de l'échantillon à chaque fois. Commentez la variabilité des valeurs que vous obtenez pour les maxima de votre échantillon.
+
 ```{r}
 for (i in 1:10) {
   x <- runif(10, -1, 1)
 }
 ```
-# 3. Répétez 100 fois et construisez un histogramme et une boîte à moustaches. Quelle est la loi dumaximum, M = max 1≤i≤n X i où X i ∼ U(−1, 1) (TD1) ? Superposer la densité théoreique sur l’histogramme. Que remarquez-vous ?
+
+# 3. Répétez 100 fois et construisez un histogramme et une boîte à moustaches. Quelle est la loi dumaximum, M = max 1≤i≤n X i où X i ∼ U(−1, 1) (TD1) ? Superposer la densité théoreique sur l'histogramme. Que remarquez-vous ?
+
 ```{r}
 par(mfrow=c(4,4))
 for (i in 1:100) {
@@ -63,7 +65,36 @@ for (i in 1:100) {
   boxplot(x, horizontal = TRUE)
 }
 ```
+
 # 4. Augmentez la taille de votre échantillon à 50 et répétez votre expérience. Que remarquez-vous? Sont-ils proches de la symétrie ?
+
 ```{r}
 x <- runif(50, -1, 1)
-```   
+```
+
+## Monte Carlo Methods
+
+# Moyenne et phénomène de concentration.
+
+1.  Supposons que la variance σ2 = V [ψ(X)] \< ∞. Donner une borne de cette quantité en utilisant l'inégalité de Bienaymé Chebychev.
+
+On trouve grace à l'inégalité de Bienaymé Chebychev:
+
+$$
+a^{2}P(|\psi(X) - \theta| \ge a) \le V[\psi(X)]
+$$
+
+2\. En supposant que a ≤ ψ(Xi) ≤ b, donner une borne en utilisant l'inégalité de Hoeffding.
+
+$$
+On\;a:\;S_{n} = \sum_{k=1}^{n}\psi(X)=n\psi(X)
+$$
+
+$$
+P(|S_{n}-E(S_{n})| \ge t) \le 2exp(-\frac{2t^{2}}{\sum_{k=1}^{n}(b-a)^{2}})
+$$
+
+$$
+\Leftrightarrow 
+P(|S_{n}-n\psi(X)| \ge t) \le 2exp(-\frac{2t^{2}}{n(b-a)^{2}})
+$$
