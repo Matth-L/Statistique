@@ -2,9 +2,7 @@
 title: "tp2"
 author: "Lapu Matthias | Amaël Kreis"
 date: "2023-02-17"
-output:
-  html_document:
-    df_print: paged
+output: 
   pdf_document: 
     latex_engine: xelatex
 ---
@@ -41,14 +39,14 @@ lines(0:maxvalue,dexp(0:maxvalue, 0.5), col="blue",)
 
 ## II. Variabilité aléatoire du maximum de l'échantillon
 
-# 1. Simuler un échantillon de taille n = 10 d'une loi U(−1, 1) et enregistrez le maximum de l'échantillon.
+1. Simuler un échantillon de taille n = 10 d'une loi U(−1, 1) et enregistrez le maximum de l'échantillon.
 
 ```{r}
 x <- runif(10, -1, 1)
 max <- max(x)
 ```
 
-# 2. Répétez les deux étapes ci-dessus dix fois, en écrivant le maximum de l'échantillon à chaque fois. Commentez la variabilité des valeurs que vous obtenez pour les maxima de votre échantillon.
+2. Répétez les deux étapes ci-dessus dix fois, en écrivant le maximum de l'échantillon à chaque fois. Commentez la variabilité des valeurs que vous obtenez pour les maxima de votre échantillon.
 
 ```{r}
 for (i in 1:10) {
@@ -56,7 +54,7 @@ for (i in 1:10) {
 }
 ```
 
-# 3. Répétez 100 fois et construisez un histogramme et une boîte à moustaches. Quelle est la loi dumaximum, M = max 1≤i≤n X i où X i ∼ U(−1, 1) (TD1) ? Superposer la densité théoreique sur l'histogramme. Que remarquez-vous ?
+3. Répétez 100 fois et construisez un histogramme et une boîte à moustaches. Quelle est la loi dumaximum, M = max 1≤i≤n X i où X i ∼ U(−1, 1) (TD1) ? Superposer la densité théoreique sur l'histogramme. Que remarquez-vous ?
 
 ```{r}
 par(mfrow=c(3,4))
@@ -67,43 +65,68 @@ for (i in 1:100) {
 }
 ```
 
-# 4. Augmentez la taille de votre échantillon à 50 et répétez votre expérience. Que remarquez-vous? Sont-ils proches de la symétrie ?
+4. Augmentez la taille de votre échantillon à 50 et répétez votre expérience. Que remarquez-vous? Sont-ils proches de la symétrie ?
 
 ```{r}
 x <- runif(50, -1, 1)
 ```
 
-## Monte Carlo Methods
+# Monte Carlo Methods
 
-# Moyenne et phénomène de concentration.
+## Moyenne et phénomène de concentration.
 
 1.  Supposons que la variance σ2 = V [ψ(X)] \< ∞. Donner une borne de cette quantité en utilisant l'inégalité de Bienaymé Chebychev.
 
 On trouve grace à l'inégalité de Bienaymé Chebychev:
 
 $$
+
 a^{2}P(|\psi(X) - \theta| \ge a) \le V[\psi(X)]
+
 $$
 
 2\. En supposant que a ≤ ψ(Xi) ≤ b, donner une borne en utilisant l'inégalité de Hoeffding.
 
+Posons : 
 $$
-On\;a:\;S_{n} = \sum_{k=1}^{n}\psi(X)=n\psi(X)
+S_{n} = \sum_{k=1}^n \psi(X_k)
+$$
+D'après l'énoncé, nous savons que :
+$$
+\frac{1}{n} \sum_{i=1}^n \psi(X_i) = \hat{\theta}
+$$
+Ainsi : 
+$$
+\frac{S_n}{n} = \hat{\theta} 
+$$
+Donc :
+$$
+S_n=n\hat{\theta}
 $$
 
+
+D'après l'inégalité de Hoeffding nous savons que : 
 $$
-P(|S_{n}-E(S_{n})| \ge t) \le 2exp(-\frac{2t^{2}}{\sum_{k=1}^{n}(b-a)^{2}})
+P(|S_n - E(S_n)| \geq t) \leq 2exp(\frac{-2t²}{\sum_{k=1}^n (b_k-a_k)²})
 $$
 
+Calculons l'esperance de S_n:
 $$
-\Leftrightarrow 
-P(|n\psi(X)-n\theta| \ge t) \le 2exp(-\frac{2t^{2}}{n(b-a)^{2}})
+E(S_n) = E(\sum_{k=1}^n \psi(X_k)) = \sum_{k=1}^n E(\psi(X_k)) = \sum_{k=1}^n \theta = n\theta
+$$
+Ainsi :
+$$
+P(|n\hat{\theta} - n\theta| \geq t) \leq 2exp(\frac{-2t²}{\sum_{k=1}^n (b_k-a_k)²})
+\\
+P(|\hat{\theta} - \theta| \geq \frac{t}{n}) \leq 2exp(\frac{-2t²}{\sum_{k=1}^n (b_k-a_k)²})
+$$
+On pose : 
+$$
+\frac{t}{n} = \delta
+\\
+P(|\hat{\theta} - \theta| \geq \delta) \leq 2exp(\frac{-(2n\delta)²}{\sum_{k=1}^n (b_k-a_k)²})
 $$
 
-$$
-\Leftrightarrow 
-P(|\psi(X)-\theta| \ge u) \le 2exp(-\frac{2nu^{2}}{(b-a)^{2}})
-$$
 
 ## Théorème Central Limite et Estimation Monte Carlo
 
@@ -113,15 +136,18 @@ $$
 P(X\le t)= (1-\left( \frac{a}{t} \right)^{\alpha}) , \;avec \;x \ge a
 $$
 
-Donc
+Donc : 
 
-$$
-E(X) = \int_{0}^{+\infty}1-P(X\le t)dt = \int_{0}^{+\infty}P(X\gt t)dt
+ERROR
 $$
 
+E(X) = \int_0^{+\infty} 1-P(X \le t)dt 
+\\
+= \int_0^\infty P(X \gt t)dt
+\\
+=  a+a^{\alpha}\int_a^{+\infty}\frac{1}{t^{\alpha}}dt=a + \frac{a}{\alpha -1} =\frac{\alpha a}{\alpha -1}
 $$
-=a+a^{\alpha}\int_{a}^{+\infty}\frac{1}{t^{\alpha}}dt=a + \frac{a}{\alpha -1} =\frac{\alpha a}{\alpha -1}
-$$
+
 
 2\. Simuler N = 1000 échantillons i.i.d de loi commune Pareto P(a, α) (avec votre choix de paramètres)
 
@@ -199,3 +225,20 @@ print(mean(rcauchy(100,2,1)))
 print(mean(rcauchy(1000,2,1)))
 print(mean(rcauchy(10000,2,1)))
 ```
+On remarque que malgré le nombre élévé de l'échantillon la moyenne ne semble pas se stabiliser comme pour une loi normale.
+
+3\. Expliquer ce comportement
+
+Nous savons d'après le cours de probabilités que la loi de cauchy n'admet pas d'espérance ni d'écart type. Cela explique donc le comportement de la moyenne malgré la taille de l'échantillon.
+
+4\. Quelle est la médiane d'une loi de cauchy ?
+
+La médiane d'une loi de cauchy est son paramètre. 
+$$
+F^{-1} (\frac{1}{2}) = \theta
+$$
+
+5\. En déduire un estimateur de theta et evaluer la performance de cet estimateur sur les différents échantillons.
+
+Nous pouvons essayer d'approximer \theta , c'est-à-dire la médiane, cela revient donc à chercher une estimation du quantile en 0.5 .
+Utilisons un échantillon (X_1,X_2,...,X_n) de loi C(\theta)

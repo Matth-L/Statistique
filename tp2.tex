@@ -251,29 +251,40 @@ concentration.}\label{moyenne-et-phuxe9nomuxe8ne-de-concentration.}}
 
 On trouve grace à l'inégalité de Bienaymé Chebychev:
 
-\[
-a^{2}P(|\psi(X) - \theta| \ge a) \le V[\psi(X)]
-\]
+\$\$
+
+a\^{}\{2\}P(\textbar{}\psi(X) - \theta\textbar{} \ge a)
+\le V{[}\psi(X){]}
+
+\$\$
 
 2. En supposant que a ≤ ψ(Xi) ≤ b, donner une borne en utilisant
 l'inégalité de Hoeffding.
 
-\[
-On\;a:\;S_{n} = \sum_{k=1}^{n}\psi(X)=n\psi(X)
+Posons : \[
+S_{n} = \sum_{k=1}^n \psi(X_k)
+\] D'après l'énoncé, nous savons que : \[
+\frac{1}{n} \sum_{i=1}^n \psi(X_i) = \hat{\theta}
+\] Ainsi : \[
+\frac{S_n}{n} = \hat{\theta} 
+\] Donc : \[
+S_n=n\hat{\theta}
 \]
 
-\[
-P(|S_{n}-E(S_{n})| \ge t) \le 2exp(-\frac{2t^{2}}{\sum_{k=1}^{n}(b-a)^{2}})
+D'après l'inégalité de Hoeffding nous savons que : \[
+P(|S_n - E(S_n)| \geq t) \leq 2exp(\frac{-2t²}{\sum_{k=1}^n (b_k-a_k)²})
 \]
 
-\[
-\Leftrightarrow 
-P(|n\psi(X)-n\theta| \ge t) \le 2exp(-\frac{2t^{2}}{n(b-a)^{2}})
-\]
-
-\[
-\Leftrightarrow 
-P(|\psi(X)-\theta| \ge u) \le 2exp(-\frac{2nu^{2}}{(b-a)^{2}})
+Calculons l'esperance de S\_n: \[
+E(S_n) = E(\sum_{k=1}^n \psi(X_k)) = \sum_{k=1}^n E(\psi(X_k)) = \sum_{k=1}^n \theta = n\theta
+\] Ainsi : \[
+P(|n\hat{\theta} - n\theta| \geq t) \leq 2exp(\frac{-2t²}{\sum_{k=1}^n (b_k-a_k)²})
+\\
+P(|\hat{\theta} - \theta| \geq \frac{t}{n}) \leq 2exp(\frac{-2t²}{\sum_{k=1}^n (b_k-a_k)²})
+\] On pose : \[
+\frac{t}{n} = \delta
+\\
+P(|\hat{\theta} - \theta| \geq \delta) \leq 2exp(\frac{-(2n\delta)²}{\sum_{k=1}^n (b_k-a_k)²})
 \]
 
 \hypertarget{thuxe9oruxe8me-central-limite-et-estimation-monte-carlo}{%
@@ -287,15 +298,14 @@ Carlo}\label{thuxe9oruxe8me-central-limite-et-estimation-monte-carlo}}
 P(X\le t)= (1-\left( \frac{a}{t} \right)^{\alpha}) , \;avec \;x \ge a
 \]
 
-Donc
+Donc :
 
-\[
-E(X) = \int_{0}^{+\infty}1-P(X\le t)dt = \int_{0}^{+\infty}P(X\gt t)dt
-\]
+\$\$
 
-\[
-=a+a^{\alpha}\int_{a}^{+\infty}\frac{1}{t^{\alpha}}dt=a + \frac{a}{\alpha -1} =\frac{\alpha a}{\alpha -1}
-\]
+E(X) = \int\_0\^{}\{+\infty\} 1-P(X \le t)dt \textbackslash{} =
+\int\_0\^{}\infty  \textbackslash{} =
+a+a\^{}\{\alpha\}\int\_a\^{}\{+\infty\}\frac{1}{t^{\alpha}}dt=a +
+\frac{a}{\alpha -1} =\frac{\alpha a}{\alpha -1} \$\$
 
 2. Simuler N = 1000 échantillons i.i.d de loi commune Pareto P(a, α)
 (avec votre choix de paramètres)
@@ -305,17 +315,17 @@ empiriques ¯Xn,i et Sn,i, i = 1, . . . ,N.
 
 \begin{verbatim}
 ## 
-## Attachement du package : 'EnvStats'
+## Attaching package: 'EnvStats'
 \end{verbatim}
 
 \begin{verbatim}
-## Les objets suivants sont masqués depuis 'package:stats':
+## The following objects are masked from 'package:stats':
 ## 
 ##     predict, predict.lm
 \end{verbatim}
 
 \begin{verbatim}
-## L'objet suivant est masqué depuis 'package:base':
+## The following object is masked from 'package:base':
 ## 
 ##     print.default
 \end{verbatim}
@@ -325,7 +335,7 @@ empiriques ¯Xn,i et Sn,i, i = 1, . . . ,N.
 \end{verbatim}
 
 \begin{verbatim}
-## [1] 1.479070 1.513297 1.461963 1.491601 1.472541
+## [1] 1.487460 1.472908 1.485326 1.518027 1.507711
 \end{verbatim}
 
 \begin{verbatim}
@@ -333,10 +343,10 @@ empiriques ¯Xn,i et Sn,i, i = 1, . . . ,N.
 \end{verbatim}
 
 \begin{verbatim}
-##  [1] 1.492730 1.490853 1.518382 1.459188 1.484109 1.490997 1.515904 1.493364
-##  [9] 1.459353 1.485976 1.519345 1.454689 1.508880 1.475957 1.498536 1.460600
-## [17] 1.480212 1.470221 1.480086 1.506799 1.498481 1.579768 1.533892 1.527462
-## [25] 1.569267 1.501870 1.522958 1.485226 1.529034 1.538133
+##  [1] 1.499894 1.519672 1.522364 1.468937 1.451322 1.486683 1.452024 1.481691
+##  [9] 1.508952 1.570088 1.489554 1.501891 1.448574 1.443806 1.483532 1.452084
+## [17] 1.502127 1.484732 1.426098 1.485033 1.451750 1.527330 1.480730 1.451215
+## [25] 1.461681 1.505029 1.483655 1.512422 1.519213 1.524950
 \end{verbatim}
 
 \begin{verbatim}
@@ -344,19 +354,19 @@ empiriques ¯Xn,i et Sn,i, i = 1, . . . ,N.
 \end{verbatim}
 
 \begin{verbatim}
-##   [1] 1.481298 1.544367 1.474200 1.536694 1.567344 1.508928 1.558064 1.486939
-##   [9] 1.496005 1.467260 1.490799 1.515588 1.493461 1.513691 1.485057 1.510824
-##  [17] 1.477423 1.498575 1.517541 1.537846 1.445613 1.531868 1.504366 1.485822
-##  [25] 1.514643 1.490130 1.505432 1.480597 1.502357 1.485207 1.501143 1.535528
-##  [33] 1.523921 1.543857 1.542164 1.456337 1.484615 1.500274 1.482810 1.526243
-##  [41] 1.484604 1.530666 1.524066 1.479331 1.483951 1.495713 1.458394 1.516140
-##  [49] 1.476872 1.531987 1.519867 1.504368 1.492814 1.482882 1.507432 1.483867
-##  [57] 1.502059 1.468874 1.467594 1.494807 1.518294 1.472056 1.564442 1.481049
-##  [65] 1.490093 1.524345 1.489757 1.535153 1.487791 1.564464 1.480847 1.465269
-##  [73] 1.511971 1.505830 1.481756 1.482172 1.472652 1.477693 1.529220 1.524099
-##  [81] 1.491203 1.512400 1.537463 1.516096 1.521223 1.495108 1.512389 1.502470
-##  [89] 1.514787 1.519197 1.517017 1.582732 1.478491 1.504561 1.491144 1.516476
-##  [97] 1.519475 1.546534 1.482847 1.495771
+##   [1] 1.492941 1.454623 1.443223 1.520507 1.503998 1.473358 1.473075 1.489662
+##   [9] 1.461139 1.524066 1.553936 1.456047 1.490737 1.505474 1.499006 1.549254
+##  [17] 1.480466 1.510400 1.490471 1.511473 1.518553 1.509567 1.503490 1.484580
+##  [25] 1.467155 1.470034 1.496399 1.462850 1.500983 1.508323 1.486882 1.517643
+##  [33] 1.498492 1.508529 1.483257 1.480772 1.483903 1.498798 1.490409 1.480664
+##  [41] 1.490655 1.528188 1.486317 1.511870 1.495859 1.521006 1.521578 1.481983
+##  [49] 1.477889 1.535034 1.477682 1.467623 1.556859 1.500293 1.513635 1.509774
+##  [57] 1.518170 1.505354 1.507985 1.477155 1.508069 1.457613 1.441372 1.487798
+##  [65] 1.478796 1.489362 1.553588 1.506480 1.500650 1.474263 1.518875 1.496767
+##  [73] 1.489254 1.488775 1.496504 1.487728 1.544605 1.471270 1.487851 1.466834
+##  [81] 1.476674 1.537760 1.466334 1.510743 1.486411 1.497422 1.527061 1.526516
+##  [89] 1.499211 1.537902 1.524346 1.509914 1.499561 1.503574 1.502828 1.494851
+##  [97] 1.497833 1.501851 1.503485 1.502991
 \end{verbatim}
 
 \begin{verbatim}
@@ -364,7 +374,7 @@ empiriques ¯Xn,i et Sn,i, i = 1, . . . ,N.
 \end{verbatim}
 
 \begin{verbatim}
-## [1] 0.002187649 0.002290068 0.002137337 0.002224873 0.002168376
+## [1] 0.002212536 0.002169458 0.002206192 0.002304406 0.002273193
 \end{verbatim}
 
 \begin{verbatim}
@@ -372,11 +382,11 @@ empiriques ¯Xn,i et Sn,i, i = 1, . . . ,N.
 \end{verbatim}
 
 \begin{verbatim}
-##  [1] 0.002228243 0.002222642 0.002305484 0.002129228 0.002202580 0.002223071
-##  [7] 0.002297965 0.002230137 0.002129711 0.002208123 0.002308409 0.002116119
-## [13] 0.002276720 0.002178449 0.002245610 0.002133352 0.002191026 0.002161550
-## [19] 0.002190654 0.002270442 0.002245446 0.002495668 0.002352824 0.002333142
-## [25] 0.002462600 0.002255614 0.002319400 0.002205895 0.002337946 0.002365854
+##  [1] 0.002249682 0.002309402 0.002317592 0.002157776 0.002106335 0.002210227
+##  [7] 0.002108374 0.002195409 0.002276937 0.002465178 0.002218771 0.002255677
+## [13] 0.002098366 0.002084577 0.002200866 0.002108547 0.002256385 0.002204428
+## [19] 0.002033757 0.002205322 0.002107578 0.002332737 0.002192560 0.002106026
+## [25] 0.002136512 0.002265112 0.002201234 0.002287421 0.002308009 0.002325473
 \end{verbatim}
 
 \begin{verbatim}
@@ -384,23 +394,23 @@ empiriques ¯Xn,i et Sn,i, i = 1, . . . ,N.
 \end{verbatim}
 
 \begin{verbatim}
-##   [1] 0.002194243 0.002385071 0.002173265 0.002361429 0.002456568 0.002276864
-##   [7] 0.002427564 0.002210987 0.002238030 0.002152851 0.002222481 0.002297006
-##  [13] 0.002230425 0.002291259 0.002205394 0.002282590 0.002182778 0.002245726
-##  [19] 0.002302929 0.002364969 0.002089797 0.002346618 0.002263117 0.002207668
-##  [25] 0.002294145 0.002220488 0.002266326 0.002192167 0.002257075 0.002205841
-##  [31] 0.002253431 0.002357845 0.002322336 0.002383496 0.002378271 0.002120917
-##  [37] 0.002204081 0.002250821 0.002198725 0.002329418 0.002204049 0.002342938
-##  [43] 0.002322778 0.002188419 0.002202111 0.002237157 0.002126913 0.002298682
-##  [49] 0.002181151 0.002346985 0.002309997 0.002263122 0.002228495 0.002198939
-##  [55] 0.002272351 0.002201862 0.002256181 0.002157590 0.002153833 0.002234447
-##  [61] 0.002305217 0.002166947 0.002447480 0.002193505 0.002220376 0.002323627
-##  [67] 0.002219376 0.002356694 0.002213523 0.002447548 0.002192908 0.002147014
-##  [73] 0.002286057 0.002267525 0.002195601 0.002196834 0.002168705 0.002183577
-##  [79] 0.002338514 0.002322878 0.002223686 0.002287353 0.002363794 0.002298547
-##  [85] 0.002314120 0.002235347 0.002287322 0.002257417 0.002294581 0.002307958
-##  [91] 0.002301339 0.002505041 0.002185937 0.002263702 0.002223510 0.002299700
-##  [97] 0.002308805 0.002391769 0.002198834 0.002237330
+##   [1] 0.002228872 0.002115927 0.002082891 0.002311943 0.002262011 0.002170784
+##   [7] 0.002169950 0.002219094 0.002134929 0.002322777 0.002414718 0.002120072
+##  [13] 0.002222296 0.002266451 0.002247019 0.002400189 0.002191780 0.002281308
+##  [19] 0.002221504 0.002284551 0.002306002 0.002278793 0.002260483 0.002203979
+##  [25] 0.002152543 0.002160999 0.002239211 0.002139931 0.002252950 0.002275039
+##  [31] 0.002210817 0.002303239 0.002245478 0.002275661 0.002200051 0.002192686
+##  [37] 0.002201967 0.002246395 0.002221318 0.002192367 0.002222051 0.002335358
+##  [43] 0.002209139 0.002285750 0.002237594 0.002313459 0.002315200 0.002196273
+##  [49] 0.002184157 0.002356331 0.002183544 0.002153916 0.002423809 0.002250880
+##  [55] 0.002291090 0.002279419 0.002304841 0.002266090 0.002274018 0.002181987
+##  [61] 0.002274271 0.002124636 0.002077552 0.002213542 0.002186838 0.002218199
+##  [67] 0.002413636 0.002269481 0.002251950 0.002173451 0.002306982 0.002240310
+##  [73] 0.002217876 0.002216450 0.002239524 0.002213336 0.002385804 0.002164634
+##  [79] 0.002213700 0.002151602 0.002180567 0.002364706 0.002150136 0.002282343
+##  [85] 0.002209419 0.002242274 0.002331917 0.002330252 0.002247633 0.002365142
+##  [91] 0.002323631 0.002279840 0.002248684 0.002260736 0.002258492 0.002234580
+##  [97] 0.002243503 0.002255557 0.002260468 0.002258982
 \end{verbatim}
 
 \includegraphics{tp2_files/figure-latex/echantillons-1.pdf}
@@ -425,7 +435,8 @@ empiriques ¯Xn,i et Sn,i, i = 1, . . . ,N.
 \NormalTok{moy30CentreeReduite }\OtherTok{\textless{}{-}}\NormalTok{ (moy30}\SpecialCharTok{{-}}\FunctionTok{mean}\NormalTok{(moy30))}\SpecialCharTok{/}\FunctionTok{mean}\NormalTok{(moy30}\SpecialCharTok{\^{}}\DecValTok{2}\SpecialCharTok{/}\DecValTok{1000}\NormalTok{)}
 \NormalTok{moy100CentreeReduite }\OtherTok{\textless{}{-}}\NormalTok{ (moy100}\SpecialCharTok{{-}}\FunctionTok{mean}\NormalTok{(moy100))}\SpecialCharTok{/}\FunctionTok{mean}\NormalTok{(moy100}\SpecialCharTok{\^{}}\DecValTok{2}\SpecialCharTok{/}\DecValTok{1000}\NormalTok{)}
 
-\FunctionTok{hist}\NormalTok{(moy5CentreeReduite,}\AttributeTok{breaks =} \DecValTok{5}\NormalTok{)}
+\FunctionTok{hist}\NormalTok{(moy5CentreeReduite)}
+\FunctionTok{lines}\NormalTok{(}\FunctionTok{seq}\NormalTok{(}\SpecialCharTok{{-}}\DecValTok{50}\NormalTok{,}\DecValTok{50}\NormalTok{,}\AttributeTok{by=}\FloatTok{0.1}\NormalTok{),}\FunctionTok{dpareto}\NormalTok{(}\FunctionTok{seq}\NormalTok{(}\SpecialCharTok{{-}}\DecValTok{50}\NormalTok{,}\DecValTok{50}\NormalTok{,}\AttributeTok{by=}\FloatTok{0.1}\NormalTok{),}\DecValTok{1}\NormalTok{,}\DecValTok{3}\NormalTok{),}\AttributeTok{col =} \StringTok{"blue"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -433,7 +444,8 @@ empiriques ¯Xn,i et Sn,i, i = 1, . . . ,N.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\FunctionTok{hist}\NormalTok{(moy30CentreeReduite,}\AttributeTok{breaks =} \DecValTok{30}\NormalTok{)}
+\FunctionTok{hist}\NormalTok{(moy30CentreeReduite,}\AttributeTok{breaks =} \DecValTok{10}\NormalTok{)}
+\FunctionTok{lines}\NormalTok{(}\FunctionTok{seq}\NormalTok{(}\SpecialCharTok{{-}}\DecValTok{50}\NormalTok{,}\DecValTok{50}\NormalTok{,}\AttributeTok{by=}\FloatTok{0.1}\NormalTok{),}\FunctionTok{dpareto}\NormalTok{(}\FunctionTok{seq}\NormalTok{(}\SpecialCharTok{{-}}\DecValTok{50}\NormalTok{,}\DecValTok{50}\NormalTok{,}\AttributeTok{by=}\FloatTok{0.1}\NormalTok{),}\DecValTok{1}\NormalTok{,}\DecValTok{3}\NormalTok{),}\AttributeTok{col =} \StringTok{"blue"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -441,7 +453,8 @@ empiriques ¯Xn,i et Sn,i, i = 1, . . . ,N.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\FunctionTok{hist}\NormalTok{(moy100CentreeReduite,}\AttributeTok{breaks =} \DecValTok{100}\NormalTok{)}
+\FunctionTok{hist}\NormalTok{(moy100CentreeReduite,}\AttributeTok{breaks =} \DecValTok{20}\NormalTok{)}
+\FunctionTok{lines}\NormalTok{(}\FunctionTok{seq}\NormalTok{(}\SpecialCharTok{{-}}\DecValTok{50}\NormalTok{,}\DecValTok{50}\NormalTok{,}\AttributeTok{by=}\FloatTok{0.1}\NormalTok{),}\FunctionTok{dpareto}\NormalTok{(}\FunctionTok{seq}\NormalTok{(}\SpecialCharTok{{-}}\DecValTok{50}\NormalTok{,}\DecValTok{50}\NormalTok{,}\AttributeTok{by=}\FloatTok{0.1}\NormalTok{),}\DecValTok{1}\NormalTok{,}\DecValTok{3}\NormalTok{),}\AttributeTok{col =} \StringTok{"blue"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -456,57 +469,27 @@ la moyenne empirique ¯Xn.
 
 Moyenne empirique:
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\FunctionTok{print}\NormalTok{(}\FunctionTok{mean}\NormalTok{(}\FunctionTok{rcauchy}\NormalTok{(}\DecValTok{20}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{1}\NormalTok{)))}
-\end{Highlighting}
-\end{Shaded}
-
 \begin{verbatim}
-## [1] 1.400194
+## [1] 1.516915
 \end{verbatim}
 
 2. Faites varier la taille de l'échantillon n = 20, 100, 1000 et 10000.
 Qu'en déduire ?
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\FunctionTok{print}\NormalTok{(}\FunctionTok{mean}\NormalTok{(}\FunctionTok{rcauchy}\NormalTok{(}\DecValTok{20}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{1}\NormalTok{)))}
-\end{Highlighting}
-\end{Shaded}
-
 \begin{verbatim}
-## [1] 2.203773
+## [1] 6.068616
 \end{verbatim}
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\FunctionTok{print}\NormalTok{(}\FunctionTok{mean}\NormalTok{(}\FunctionTok{rcauchy}\NormalTok{(}\DecValTok{100}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{1}\NormalTok{)))}
-\end{Highlighting}
-\end{Shaded}
-
 \begin{verbatim}
-## [1] 2.411406
+## [1] 1.684488
 \end{verbatim}
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\FunctionTok{print}\NormalTok{(}\FunctionTok{mean}\NormalTok{(}\FunctionTok{rcauchy}\NormalTok{(}\DecValTok{1000}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{1}\NormalTok{)))}
-\end{Highlighting}
-\end{Shaded}
-
 \begin{verbatim}
-## [1] 1.047212
+## [1] 2.765645
 \end{verbatim}
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\FunctionTok{print}\NormalTok{(}\FunctionTok{mean}\NormalTok{(}\FunctionTok{rcauchy}\NormalTok{(}\DecValTok{10000}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{1}\NormalTok{)))}
-\end{Highlighting}
-\end{Shaded}
-
 \begin{verbatim}
-## [1] 2.090977
+## [1] 1.222625
 \end{verbatim}
 
 \end{document}
