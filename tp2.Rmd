@@ -233,12 +233,23 @@ Nous savons d'après le cours de probabilités que la loi de cauchy n'admet pas 
 
 4\. Quelle est la médiane d'une loi de cauchy ?
 
-La médiane d'une loi de cauchy est son paramètre. 
+La courbe est symétrique ,    la médiane d'une loi de cauchy est son paramètre. 
+
 $$
+f(x,\theta) = \frac{1}{\pi} \frac{1}{1 + (x-\theta)²}
+\\
+\frac{1}{2} = \frac{1}{\pi} \int_{-a}^{a} \frac{dx}{1+(x-\theta)²}
+\\
 F^{-1} (\frac{1}{2}) = \theta
 $$
 
 5\. En déduire un estimateur de theta et evaluer la performance de cet estimateur sur les différents échantillons.
 
-Nous pouvons essayer d'approximer \theta , c'est-à-dire la médiane, cela revient donc à chercher une estimation du quantile en 0.5 .
+Nous pouvons essayer d'approximer \theta , c'est-à-dire la médiane, cela revient donc à chercher une estimation du quantile en 0.5 . D'après le cours, les quantiles permettent de localiser les valeurs les plus fréquentes. Nous allons donc essayer d'estimer le quantile 
 Utilisons un échantillon (X_1,X_2,...,X_n) de loi C(\theta)
+
+Idée : Prendre la médiane des echantillons X_(1/2) ? Parait bizarre
+
+```{r}
+print(qcauchy(0.5))
+```
