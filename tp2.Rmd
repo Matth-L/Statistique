@@ -126,7 +126,26 @@ $$
 \\
 P(|\hat{\theta} - \theta| \geq \delta) \leq 2exp(\frac{-(2n\delta)²}{\sum_{k=1}^n (b_k-a_k)²})
 $$
+3\. De combien d'échantillons auriez-vous besoin pour que la probabilité que \delta  = 2\phi soit inférieur à 1%.
 
+## Application pour l'estimation de probabilité 
+
+1\. Pour la question 1 avec \epsilon(0.5) identifier le paramètre d'intéret \theta et donner un estimateur de \hat{\theta}
+
+Le paramètre d'intérêt est la moyenne de la fonction exponentielle, c'est à dire 2 pour \epsilon(0.5)
+
+Un estimateur \hat{\theta} de la fonction serait : 
+$$
+E(\epsilon(\theta)) = \frac{1}{\theta}
+\\
+\bar{X_n} = \frac{1}{n} \sum_{i=1}^{n} X_i
+\\
+\hat{\theta_n} = \frac{1}{\bar{X_n}}
+$$
+La moyenne empirique tend presque surement vers la moyenne , ainsi l'estimateur est donc consistant.
+Il faut ensuite utiliser l'inégalité de Hoeffding.
+
+L'énoncé demande à ce que E(Z) = garantie probabiliste de l'erreur. Il faut trouver Z .
 
 ## Théorème Central Limite et Estimation Monte Carlo
 
@@ -138,7 +157,7 @@ $$
 
 Donc : 
 
-ERROR
+ERROR LATEX
 $$
 
 E(X) = \int_0^{+\infty} 1-P(X \le t)dt 
