@@ -171,7 +171,7 @@ Z = \psi(| \hat{\theta} - \theta |)
 $$
 En calculant l'esperance nous avons donc : 
 $$
-E(Z)= \int \psi(|\hat{\theta} - \theta|)
+E(Z)= \int \psi(|\hat{\theta} - \theta|)f(x)dx
 $$
 
 ## Théorème Central Limite et Estimation Monte Carlo
