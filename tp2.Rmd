@@ -3,8 +3,9 @@ title: "tp2"
 author: "Lapu Matthias | Amaël Kreis"
 date: "2023-02-17"
 output: 
-  pdf_document: 
-    latex_engine: xelatex
+  pdf_document:
+    latex_engine : xelatex
+  
 ---
 
 ## I. Variation sous-jacente et échantillonnage répété
@@ -75,15 +76,18 @@ x <- runif(50, -1, 1)
 
 ## Moyenne et phénomène de concentration.
 
-1.  Supposons que la variance σ2 = V [ψ(X)] \< ∞. Donner une borne de cette quantité en utilisant l'inégalité de Bienaymé Chebychev.
+1.  Donner une borne de cette quantité en utilisant l'inégalité de Bienaymé Chebychev.
 
-On trouve grace à l'inégalité de Bienaymé Chebychev:
-
+Inégalité de Bienaymé Chebychev
+$$
+P(| \hat{\theta}-\theta| \ge \delta) \le \frac{V(\hat{\theta})}{\delta²}
 $$
 
-a^{2}P(|\psi(X) - \theta| \ge a) \le V[\psi(X)]
-
+Calculons la variance grâce à son caractère quadratique ainsi qu'à l'indépendance des X_i :
 $$
+V(\hat{\theta}) = V(\frac{1}{n} \sum_{i=1}^{n} \psi(X)) = \frac{1}{n²}V(\sum_{i=1}^n \psi(X)) = \frac{1}{n²} \sum_{i=1}^n V(\psi(X)) = \frac{1}{n²} *n\sigma² = \frac{\sigma²}{n}
+$$
+On retrouve donc une borne pour cette inégalité.
 
 2\. En supposant que a ≤ ψ(Xi) ≤ b, donner une borne en utilisant l'inégalité de Hoeffding.
 
@@ -117,29 +121,25 @@ $$
 Ainsi :
 $$
 P(|n\hat{\theta} - n\theta| \geq t) \leq 2exp(\frac{-2t²}{\sum_{k=1}^n (b_k-a_k)²})
-\\
 P(|\hat{\theta} - \theta| \geq \frac{t}{n}) \leq 2exp(\frac{-2t²}{\sum_{k=1}^n (b_k-a_k)²})
 $$
 On pose : 
 $$
 \frac{t}{n} = \delta
-\\
 P(|\hat{\theta} - \theta| \geq \delta) \leq 2exp(\frac{-(2n\delta)²}{\sum_{k=1}^n (b_k-a_k)²})
 $$
 3\. De combien d'échantillons auriez-vous besoin pour que la probabilité que \delta  = 2\phi soit inférieur à 1%.
 
 ## Application pour l'estimation de probabilité 
 
-1\. Pour la question 1 avec \epsilon(0.5) identifier le paramètre d'intéret \theta et donner un estimateur de \hat{\theta}
+1\. Pour la question 1 : 
 
-Le paramètre d'intérêt est la moyenne de la fonction exponentielle, c'est à dire 2 pour \epsilon(0.5)
+Le paramètre d'intérêt est la moyenne de la fonction exponentielle, c'est à dire 2 
 
-Un estimateur \hat{\theta} de la fonction serait : 
+Un estimateur serait : 
 $$
 E(\epsilon(\theta)) = \frac{1}{\theta}
-\\
 \bar{X_n} = \frac{1}{n} \sum_{i=1}^{n} X_i
-\\
 \hat{\theta_n} = \frac{1}{\bar{X_n}}
 $$
 La moyenne empirique tend presque surement vers la moyenne , ainsi l'estimateur est donc consistant.
@@ -147,26 +147,31 @@ Il faut ensuite utiliser l'inégalité de Hoeffding.
 
 L'énoncé demande à ce que E(Z) = garantie probabiliste de l'erreur. Il faut trouver Z .
 
+On pose Z = 
+$$
+Z = \psi(| \hat{\theta} - \theta |)
+$$
+En calculant l'esperance nous avons donc : 
+$$
+E(Z)= \int \psi(|\hat{\theta} - \theta|)
+$$
+
 ## Théorème Central Limite et Estimation Monte Carlo
 
 1\. Vérifier que l'espérance théorique d'une loi de Pareto est E [X] = αa/α−1.
+
 
 $$
 P(X\le t)= (1-\left( \frac{a}{t} \right)^{\alpha}) , \;avec \;x \ge a
 $$
 
 Donc : 
-
-ERROR LATEX
 $$
-
-E(X) = \int_0^{+\infty} 1-P(X \le t)dt 
-\\
-= \int_0^\infty P(X \gt t)dt
-\\
-=  a+a^{\alpha}\int_a^{+\infty}\frac{1}{t^{\alpha}}dt=a + \frac{a}{\alpha -1} =\frac{\alpha a}{\alpha -1}
+E(X) = \int_0^{+\infty} 1-P(X \le t)dt =
+\int_0^{+\infty} P(X    > t) dt =
+a+a^{\alpha}\int_a^{+\infty}\frac{1}{t^{\alpha}}dt=a + \frac{a}{\alpha -1} =
+\frac{\alpha a}{\alpha -1}
 $$
-
 
 2\. Simuler N = 1000 échantillons i.i.d de loi commune Pareto P(a, α) (avec votre choix de paramètres)
 
@@ -233,17 +238,22 @@ lines(seq(-50,50,by=0.1),dpareto(seq(-50,50,by=0.1),1,3),col = "blue")
 Moyenne empirique:
 
 ```{r, echo=FALSE}
-print(mean(rcauchy(20,2,1)))
+cauchy20 <- rcauchy(20, scale=2)
+print(mean(cauchy20))
 ```
 
 2\. Faites varier la taille de l'échantillon n = 20, 100, 1000 et 10000. Qu'en déduire ?
 
 ```{r,echo=FALSE}
-print(mean(rcauchy(20,2,1)))
-print(mean(rcauchy(100,2,1)))
-print(mean(rcauchy(1000,2,1)))
-print(mean(rcauchy(10000,2,1)))
+cauchy100 <- rcauchy(100,scale=2)
+cauchy1000 <- rcauchy(1000,scale=2)
+cauchy10000 <- rcauchy(10000,scale=2)
+print(mean(cauchy20))
+print(mean(cauchy100))
+print(mean(cauchy1000))
+print(mean(cauchy10000))
 ```
+
 On remarque que malgré le nombre élévé de l'échantillon la moyenne ne semble pas se stabiliser comme pour une loi normale.
 
 3\. Expliquer ce comportement
@@ -252,23 +262,26 @@ Nous savons d'après le cours de probabilités que la loi de cauchy n'admet pas 
 
 4\. Quelle est la médiane d'une loi de cauchy ?
 
-La courbe est symétrique ,    la médiane d'une loi de cauchy est son paramètre. 
+La courbe est symétrique ,la médiane d'une loi de cauchy est \theta. D'après RStudio, quand la position n'est pas défini celle-ci est mise entre à 0. Par conséquent nous devons vérifier si la médiane semble proche de 0.
 
 $$
 f(x,\theta) = \frac{1}{\pi} \frac{1}{1 + (x-\theta)²}
-\\
 \frac{1}{2} = \frac{1}{\pi} \int_{-a}^{a} \frac{dx}{1+(x-\theta)²}
-\\
 F^{-1} (\frac{1}{2}) = \theta
 $$
 
 5\. En déduire un estimateur de theta et evaluer la performance de cet estimateur sur les différents échantillons.
 
-Nous pouvons essayer d'approximer \theta , c'est-à-dire la médiane, cela revient donc à chercher une estimation du quantile en 0.5 . D'après le cours, les quantiles permettent de localiser les valeurs les plus fréquentes. Nous allons donc essayer d'estimer le quantile 
-Utilisons un échantillon (X_1,X_2,...,X_n) de loi C(\theta)
-
-Idée : Prendre la médiane des echantillons X_(1/2) ? Parait bizarre
+Nous pouvons essayer d'approximer theta , c'est-à-dire la médiane, cela revient donc à chercher une estimation du quantile en 0.5 . D'après le cours, les quantiles permettent de localiser les valeurs les plus fréquentes. Nous allons donc essayer d'estimer le quantile.
 
 ```{r}
-print(qcauchy(0.5))
+hist(cauchy20,breaks=20)
+abline(v=mean(cauchy20),col="red",lwd=3)
+hist(cauchy100,breaks=100)
+abline(v=mean(cauchy100),col="red",lwd=3)
+hist(cauchy1000,xlim=c(-100,100),breaks=1000)
+abline(v=mean(cauchy1000),col="red",lwd=3)
+hist(cauchy10000,xlim=c(-100,100),breaks=10000)
+abline(v=mean(cauchy10000),col="red",lwd=3)
 ```
+D'après les graphiques nous pouvons remarquer que l'estimation de theta semble proche de la vrai valeur, n'ayant pas de moyen de calculer l'espérance de la loi cela semble être un bon estimateur, car celui-ci semble proche de 0, assez pour jugé les performances de cet estimateur comme suffisant. 
