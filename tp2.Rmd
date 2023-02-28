@@ -1,12 +1,12 @@
 ---
-title: "tp2"
+title: "Tp Statistiques 2"
 author: "Lapu Matthias | Amaël Kreis"
-date: "2023-02-17"
 output: 
   pdf_document:
     latex_engine : xelatex
   
 ---
+# Simulation et convergence
 
 ## I. Variation sous-jacente et échantillonnage répété
 
@@ -129,6 +129,24 @@ $$
 P(|\hat{\theta} - \theta| \geq \delta) \leq 2exp(\frac{-(2n\delta)²}{\sum_{k=1}^n (b_k-a_k)²})
 $$
 3\. De combien d'échantillons auriez-vous besoin pour que la probabilité que \delta  = 2\phi soit inférieur à 1%.
+
+Servons-nous de l'inégalité de Bienaymé-Tchebychev que nous avons trouvé lors du 1.
+
+$$
+P(|\hat{\theta} - \theta| \ge \delta) \le \frac{\delta²}{n\sigma²}
+$$
+Remplaçons par : 
+$$\delta = 2\sigma$$
+$$\delta²=4\sigma²$$
+Ainsi : 
+$$
+\frac{\sigma²}{n\delta²} = \frac{1}{4n}
+$$
+Or l'énoncé demande à ce que la probabilité soit inférieur à 1% , c'est-à-dire que : 
+$$
+\frac{1}{4n} = 0.01  \Longrightarrow n=25
+$$
+Afin que la probabilité soit inférieur à 1%, il faut 25 échantillons.
 
 ## Application pour l'estimation de probabilité 
 
