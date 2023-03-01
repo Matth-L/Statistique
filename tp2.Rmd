@@ -12,11 +12,17 @@ output:
 
 1.  Si X ∼ E(0.5), quelle est la probabilité qu'on observe une valeur supérieure à 3?
 
-On a $$ f(0.5) = 0.5e^{-0.5x} $$
-Donc pour $$ X\sim\xi(0.5) $$
-On trouve
+On a 
+$$ 
+f(0.5) = 0.5e^{-0.5x} 
 $$
-P(X \gt 3)=
+Donc pour 
+$$ 
+X\sim\xi(0.5) 
+$$
+On trouve:
+$$
+P(X > 3)=
 \int_{3}^{+\infty} \frac{1}{2}e^{\frac{-x}{2}}dx
 = \left[-e^{-\frac{x}{2}}\right]_3^{+\infty}
 =e^{-\frac{3}{2}}\approx0.223
@@ -96,70 +102,87 @@ $$
 
 1.  Donner une borne de cette quantité en utilisant l'inégalité de Bienaymé Chebychev.
 
-Inégalité de Bienaymé Chebychev $$
+Inégalité de Bienaymé Chebychev 
+$$
 P(| \hat{\theta}-\theta| \ge \delta) \le \frac{V(\hat{\theta})}{\delta²}
 $$
 
-Calculons la variance grâce à son caractère quadratique ainsi qu'à l'indépendance des X_i : $$
+Calculons la variance grâce à son caractère quadratique ainsi qu'à l'indépendance des X_i : 
+$$
 V(\hat{\theta}) = V(\frac{1}{n} \sum_{i=1}^{n} \psi(X)) = \frac{1}{n²}V(\sum_{i=1}^n \psi(X)) = \frac{1}{n²} \sum_{i=1}^n V(\psi(X)) = \frac{1}{n²} *n\sigma² = \frac{\sigma²}{n}
-$$ On retrouve donc une borne pour cette inégalité.
+$$
+On retrouve donc une borne pour cette inégalité.
 
 2\. En supposant que a ≤ ψ(Xi) ≤ b, donner une borne en utilisant l'inégalité de Hoeffding.
 
-Posons : $$
+Posons : 
+$$
 S_{n} = \sum_{k=1}^n \psi(X_k)
-$$ D'après l'énoncé, nous savons que : $$
+$$ 
+D'après l'énoncé, nous savons que : 
+$$
 \frac{1}{n} \sum_{i=1}^n \psi(X_i) = \hat{\theta}
-$$ Ainsi : $$
+$$
+Ainsi : 
+$$
 \frac{S_n}{n} = \hat{\theta} 
-$$ Donc : $$
+$$ 
+Donc : 
+$$
 S_n=n\hat{\theta}
 $$
 
-D'après l'inégalité de Hoeffding nous savons que : $$
+D'après l'inégalité de Hoeffding nous savons que : 
+$$
 P(|S_n - E(S_n)| \geq t) \leq 2exp(\frac{-2t²}{\sum_{k=1}^n (b_k-a_k)²})
 $$
 
-Calculons l'esperance de S_n: $$
-E(S_n) = E(\sum_{k=1}^n \psi(X_k)) = \sum_{k=1}^n E(\psi(X_k)) = \sum_{k=1}^n \theta = n\theta
-$$ Ainsi : $$
-P(|n\hat{\theta} - n\theta| \geq t) \leq 2exp(\frac{-2t²}{\sum_{k=1}^n (b_k-a_k)²})
-<<<<<<< HEAD
-\\
-=======
-$$ $$
->>>>>>> 5c4f8c576378bb68fcb570730fef6495603a544a
-P(|\hat{\theta} - \theta| \geq \frac{t}{n}) \leq 2exp(\frac{-2t²}{\sum_{k=1}^n (b_k-a_k)²})
-$$ On pose : $\frac{t}{n} = \delta$
-
+Calculons l'esperance de S_n: 
 $$
-<<<<<<< HEAD
+E(S_n) = E(\sum_{k=1}^n \psi(X_k)) = \sum_{k=1}^n E(\psi(X_k)) = \sum_{k=1}^n \theta = n\theta
+$$ 
+Ainsi : 
+$$
+P(|n\hat{\theta} - n\theta| \geq t) \leq 2exp(\frac{-2t²}{\sum_{k=1}^n (b_k-a_k)²})
+P(|\hat{\theta} - \theta| \geq \frac{t}{n}) \leq 2exp(\frac{-2t²}{\sum_{k=1}^n (b_k-a_k)²})
+$$ 
+
 On pose : 
 $$
 \frac{t}{n} = \delta
 \\
-=======
->>>>>>> 5c4f8c576378bb68fcb570730fef6495603a544a
 P(|\hat{\theta} - \theta| \geq \delta) \leq 2exp(\frac{-(2n\delta)²}{\sum_{k=1}^n (b_k-a_k)²})
-$$ 3. De combien d'échantillons auriez-vous besoin pour que la probabilité que \delta = 2\phi soit inférieur à 1%.
+$$ 
+3. De combien d'échantillons auriez-vous besoin pour que la probabilité que \delta = 2\phi soit inférieur à 1%.
 
 Servons-nous de l'inégalité de Bienaymé-Tchebychev que nous avons trouvé lors du 1.
 
 $$
 P(|\hat{\theta} - \theta| \ge \delta) \le \frac{\delta²}{n\sigma²}
-$$ Remplaçons par : $$\delta = 2\sigma$$ $$\delta²=4\sigma²$$ Ainsi : $$
+$$ 
+Remplaçons par : 
+$$
+\delta = 2\sigma\delta²=4\sigma²
+$$
+Ainsi : 
+$$
 \frac{\sigma²}{n\delta²} = \frac{1}{4n}
-$$ Or l'énoncé demande à ce que la probabilité soit inférieur à 1% , c'est-à-dire que : $$
+$$ 
+Or l'énoncé demande à ce que la probabilité soit inférieur à 1% , c'est-à-dire que : 
+$$
 \frac{1}{4n} = 0.01  \Longrightarrow n=25
-$$ Afin que la probabilité soit inférieur à 1%, il faut 25 échantillons.
+$$ 
+Afin que la probabilité soit inférieur à 1%, il faut 25 échantillons.
 
 ## Application pour l'estimation de probabilité
 
 1\. Pour la question 1 :
 
-<<<<<<< HEAD
 L'espérance de la loi est 2. 
-En prenant un échantillon $$(X_1,X_2,...,X_n)$$
+En prenant un échantillon 
+$$
+(X_1,X_2,...,X_n)
+$$
 Le paramètre d'intérêt est donc l'estimateur de cette loi: 
 $$
 X_i \sim \varepsilon(\theta) 
@@ -187,24 +210,13 @@ $$
 Ainsi, nous avons donc :
 $$
 \eta = P(|\hat{\theta} - \theta| \ge \delta) = E[Z]
-=======
-Le paramètre d'intérêt est la moyenne de la fonction exponentielle, c'est à dire 2
+$$
+Le paramètre d'intérêt est la moyenne de la fonction exponentielle, c'est à dire 2.
 
-Un estimateur serait : $$
-E(\epsilon(\theta)) = \frac{1}{\theta}
-\bar{X_n} = \frac{1}{n} \sum_{i=1}^{n} X_i
-\hat{\theta_n} = \frac{1}{\bar{X_n}}
-$$ La moyenne empirique tend presque surement vers la moyenne , ainsi l'estimateur est donc consistant. Il faut ensuite utiliser l'inégalité de Hoeffding.
+La moyenne empirique tend presque surement vers la moyenne , ainsi l'estimateur est donc consistant. Il faut ensuite utiliser l'inégalité de Hoeffding.
 
 L'énoncé demande à ce que E(Z) = garantie probabiliste de l'erreur. Il faut trouver Z .
 
-On pose Z = $$
-Z = \psi(| \hat{\theta} - \theta |)
-$$ En calculant l'esperance nous avons donc : $$
-E(Z)= \int \psi(|\hat{\theta} - \theta|)f(x)dx
->>>>>>> 5c4f8c576378bb68fcb570730fef6495603a544a
-$$
-A l'aide de la méthode de Monte-Carlo nous retrouvons donc : 
 $$
 \eta \approx  \frac{1}{n} \sum_{i=1}^n Z_i
 $$
@@ -217,7 +229,8 @@ $$
 P(X\le t)= (1-\left( \frac{a}{t} \right)^{\alpha}) , \;avec \;x \ge a
 $$
 
-Donc : $$
+Donc : 
+$$
 E(X) = \int_0^{+\infty} 1-P(X \le t)dt =
 \int_0^{+\infty} P(X    > t) dt =
 a+a^{\alpha}\int_a^{+\infty}\frac{1}{t^{\alpha}}dt=a + \frac{a}{\alpha -1} =
