@@ -74,6 +74,14 @@ x <- runif(50, -1, 1)
 
 # Monte Carlo Methods
 
+Vérifier que :
+$$
+E[\hat{\theta}] = \theta
+$$
+On se sert de la linéarité de l'espérance : 
+$$
+E[\frac{1}{n} \sum_{i=1}^{n} \psi(X)] = \frac{1}{n} \sum_{i=1}^n E[\psi(X)] = \frac{1}{n}*n*\theta=\theta
+$$
 ## Moyenne et phénomène de concentration.
 
 1.  Donner une borne de cette quantité en utilisant l'inégalité de Bienaymé Chebychev.
@@ -121,11 +129,13 @@ $$
 Ainsi :
 $$
 P(|n\hat{\theta} - n\theta| \geq t) \leq 2exp(\frac{-2t²}{\sum_{k=1}^n (b_k-a_k)²})
+\\
 P(|\hat{\theta} - \theta| \geq \frac{t}{n}) \leq 2exp(\frac{-2t²}{\sum_{k=1}^n (b_k-a_k)²})
 $$
 On pose : 
 $$
 \frac{t}{n} = \delta
+\\
 P(|\hat{\theta} - \theta| \geq \delta) \leq 2exp(\frac{-(2n\delta)²}{\sum_{k=1}^n (b_k-a_k)²})
 $$
 3\. De combien d'échantillons auriez-vous besoin pour que la probabilité que \delta  = 2\phi soit inférieur à 1%.
@@ -152,28 +162,41 @@ Afin que la probabilité soit inférieur à 1%, il faut 25 échantillons.
 
 1\. Pour la question 1 : 
 
-Le paramètre d'intérêt est la moyenne de la fonction exponentielle, c'est à dire 2 
-
-Un estimateur serait : 
+L'espérance de la loi est 2. 
+En prenant un échantillon $$(X_1,X_2,...,X_n)$$
+Le paramètre d'intérêt est donc l'estimateur de cette loi: 
 $$
-E(\epsilon(\theta)) = \frac{1}{\theta}
-\bar{X_n} = \frac{1}{n} \sum_{i=1}^{n} X_i
-\hat{\theta_n} = \frac{1}{\bar{X_n}}
+X_i \sim \varepsilon(\theta) 
+\\
+\forall \theta \in R^*_+
+\\
+E[X_i] = \frac{1}{\theta}
+\\
+\bar{X} = \frac{1}{n} \sum_{i=1}^{n} X_i
 $$
-La moyenne empirique tend presque surement vers la moyenne , ainsi l'estimateur est donc consistant.
-Il faut ensuite utiliser l'inégalité de Hoeffding.
+La moyenne empirique tend presque surement vers l'estimateur.
+Ainsi : 
+$$
+\hat{\theta}_n = \frac{1}{\bar{X}}
+$$
+2\. 
+Utilisons l'inégalité de Hoeffding.
 
 L'énoncé demande à ce que E(Z) = garantie probabiliste de l'erreur. Il faut trouver Z .
 
-On pose Z = 
+On pose :
 $$
-Z = \psi(| \hat{\theta} - \theta |)
+Z = 1_{|\hat{\theta} - \theta| \ge \delta} 
 $$
-En calculant l'esperance nous avons donc : 
+Ainsi, nous avons donc :
 $$
-E(Z)= \int \psi(|\hat{\theta} - \theta|)f(x)dx
+\eta = P(|\hat{\theta} - \theta| \ge \delta) = E[Z]
 $$
-
+A l'aide de la méthode de Monte-Carlo nous retrouvons donc : 
+$$
+\eta \approx  \frac{1}{n} \sum_{i=1}^n Z_i
+$$
+  
 ## Théorème Central Limite et Estimation Monte Carlo
 
 1\. Vérifier que l'espérance théorique d'une loi de Pareto est E [X] = αa/α−1.
@@ -280,7 +303,7 @@ Nous savons d'après le cours de probabilités que la loi de cauchy n'admet pas 
 
 4\. Quelle est la médiane d'une loi de cauchy ?
 
-La courbe est symétrique ,la médiane d'une loi de cauchy est \theta. D'après RStudio, quand la position n'est pas défini celle-ci est mise entre à 0. Par conséquent nous devons vérifier si la médiane semble proche de 0.
+La courbe est symétrique ,la médiane d'une loi de cauchy est \theta. D'après RStudio, quand la position n'est pas défini celle-ci est mise à 0. Par conséquent nous devons vérifier si la médiane semble proche de 0.
 
 $$
 f(x,\theta) = \frac{1}{\pi} \frac{1}{1 + (x-\theta)²}
