@@ -28,7 +28,7 @@ P(X > 3)=
 =e^{-\frac{3}{2}}\approx0.223
 $$
 
-2.Simulez un échantillon de taille n = 20 d'un loi de E(0,5), créez un histogramme de votre échantillon et commentez la forme de votre histogramme. Superposer la vrai densité. Quelle est la probabilité empirique qu'on observe une valeur supérieure à 3 ?
+2.Simulez un échantillon de taille n = 20 d'un loi de $\epsilon(0,5), créez un histogramme de votre échantillon et commentez la forme de votre histogramme. Superposer la vrai densité. Quelle est la probabilité empirique qu'on observe une valeur supérieure à 3 ?
 
 ```{r q2}
 x<-rexp(20,0.5)
@@ -81,7 +81,7 @@ max100 <- c() #création d'un vecteur vide
 for(i in 1:100){
  max100[i] = max(runif(10,-1,1))
 }
-hist(max100,breaks=100)
+hist(max100,breaks=50)
 densitermax100 <- density(max100)
 lines(densitermax100,lwd=2,col="blue") #superposition de la densité de la loi
 boxplot(max100, horizontal = TRUE)
@@ -233,13 +233,14 @@ Le paramètre d'intérêt est la moyenne de la fonction exponentielle, c'est à 
 
 La moyenne empirique tend presque surement vers la moyenne , ainsi l'estimateur est donc consistant. Il faut ensuite utiliser l'inégalité de Hoeffding.
 
-L'énoncé demande à ce que E(Z) = garantie probabiliste de l'erreur. Il faut trouver Z .
-
 $$
 \eta \approx  \frac{1}{n} \sum_{i=1}^n Z_i
 $$
-Il va donc falloir faire un échantillon d'un échantillon. 
+On va donc essayer d'estimer cela à l'aide de R : 
 
+```{r}
+
+```
 ## Théorème Central Limite et Estimation Monte Carlo
 
 1\. Vérifier que l'espérance théorique d'une loi de Pareto est E [X] = αa/α−1.
@@ -343,7 +344,7 @@ Nous savons d'après le cours de probabilités que la loi de cauchy n'admet pas 
 
 4\. Quelle est la médiane d'une loi de cauchy ?
 
-La courbe est symétrique ,la médiane d'une loi de cauchy est \theta. D'après RStudio, quand la position n'est pas défini celle-ci est mise à 0. Par conséquent nous devons vérifier si la médiane semble proche de 0.
+La courbe est symétrique ,la médiane d'une loi de cauchy est \theta. D'après le manuel de R, quand la position n'est pas défini celle-ci est mise à 0. Par conséquent nous devons vérifier si la médiane semble proche de 0.
 
 $$
 f(x,\theta) = \frac{1}{\pi} \frac{1}{1 + (x-\theta)²}
