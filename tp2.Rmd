@@ -10,13 +10,13 @@ output:
 
 ## I. Variation sous-jacente et échantillonnage répété
 
-1.  Si X ∼ E(0.5), quelle est la probabilité qu'on observe une valeur supérieure à 3?
+1\.  Si X ∼ E(0.5), quelle est la probabilité qu'on observe une valeur supérieure à 3?
 
-On a 
+On a :
 $$ 
 f(0.5) = 0.5e^{-0.5x} 
 $$
-Donc pour 
+Donc pour :
 $$ 
 X\sim\xi(0.5) 
 $$
@@ -59,27 +59,32 @@ lines(0:maxvalue,dexp(0:maxvalue, 0.5), col="blue",)
 1.  Simuler un échantillon de taille n = 10 d'une loi U(−1, 1) et enregistrez le maximum de l'échantillon.
 
 ```{r}
-x <- runif(10, -1, 1)
-max <- max(x)
+loiU <- runif(10, -1, 1)
+max1 <- max(loiU)
+print(max1)
 ```
 
 2.  Répétez les deux étapes ci-dessus dix fois, en écrivant le maximum de l'échantillon à chaque fois. Commentez la variabilité des valeurs que vous obtenez pour les maxima de votre échantillon.
 
 ```{r}
+max10 <- c()
 for (i in 1:10) {
-  x <- runif(10, -1, 1)
+  max10[i] = max(runif(10,-1,1))
 }
+print(max10)
 ```
 
 3.  Répétez 100 fois et construisez un histogramme et une boîte à moustaches. Quelle est la loi dumaximum, M = max 1≤i≤n X i où X i ∼ U(−1, 1) (TD1) ? Superposer la densité théoreique sur l'histogramme. Que remarquez-vous ?
 
 ```{r}
-par(mfrow=c(3,4))
-for (i in 1:100) {
-  x <- runif(10, -1, 1)
-  hist(x)
-  boxplot(x, horizontal = TRUE)
+max100 <- c() #création d'un vecteur vide
+for(i in 1:100){
+ max100[i] = max(runif(10,-1,1))
 }
+hist(max100,breaks=100)
+densitermax100 <- density(max100)
+lines(densitermax100,lwd=2,col="blue") #superposition de la densité de la loi
+boxplot(max100, horizontal = TRUE)
 ```
 
 4.  Augmentez la taille de votre échantillon à 50 et répétez votre expérience. Que remarquez-vous? Sont-ils proches de la symétrie ?
@@ -102,7 +107,7 @@ $$
 
 1.  Donner une borne de cette quantité en utilisant l'inégalité de Bienaymé Chebychev.
 
-Inégalité de Bienaymé Chebychev 
+Rappelons l'inégalité de Bienaymé Chebychev : 
 $$
 P(| \hat{\theta}-\theta| \ge \delta) \le \frac{V(\hat{\theta})}{\delta²}
 $$
@@ -113,6 +118,9 @@ V(\hat{\theta}) = V(\frac{1}{n} \sum_{i=1}^{n} \psi(X)) = \frac{1}{n²}V(\sum_{i
 $$
 On retrouve donc une borne pour cette inégalité.
 
+$$
+P(|\hat{\theta} - \theta| \ge \delta) \le \frac{\sigma²}{n\delta²}
+$$
 2\. En supposant que a ≤ ψ(Xi) ≤ b, donner une borne en utilisant l'inégalité de Hoeffding.
 
 Posons : 
@@ -144,6 +152,7 @@ $$
 Ainsi : 
 $$
 P(|n\hat{\theta} - n\theta| \geq t) \leq 2exp(\frac{-2t²}{\sum_{k=1}^n (b_k-a_k)²})
+\\
 P(|\hat{\theta} - \theta| \geq \frac{t}{n}) \leq 2exp(\frac{-2t²}{\sum_{k=1}^n (b_k-a_k)²})
 $$ 
 
@@ -158,11 +167,13 @@ $$
 Servons-nous de l'inégalité de Bienaymé-Tchebychev que nous avons trouvé lors du 1.
 
 $$
-P(|\hat{\theta} - \theta| \ge \delta) \le \frac{\delta²}{n\sigma²}
+P(|\hat{\theta} - \theta| \ge \delta) \le \frac{\sigma²}{n\delta²}
 $$ 
 Remplaçons par : 
 $$
-\delta = 2\sigma\delta²=4\sigma²
+\delta = 2\sigma
+\\
+\delta²=4\sigma²
 $$
 Ainsi : 
 $$
@@ -220,7 +231,8 @@ L'énoncé demande à ce que E(Z) = garantie probabiliste de l'erreur. Il faut t
 $$
 \eta \approx  \frac{1}{n} \sum_{i=1}^n Z_i
 $$
-  
+Il va donc falloir faire un échantillon d'un échantillon. 
+
 ## Théorème Central Limite et Estimation Monte Carlo
 
 1\. Vérifier que l'espérance théorique d'une loi de Pareto est E [X] = αa/α−1.
@@ -237,9 +249,7 @@ a+a^{\alpha}\int_a^{+\infty}\frac{1}{t^{\alpha}}dt=a + \frac{a}{\alpha -1} =
 \frac{\alpha a}{\alpha -1}
 $$
 
-2\. Simuler N = 1000 échantillons i.i.d de loi commune Pareto P(a, α) (avec votre choix de paramètres)
-
-de taille n = 5, 30, 100 et calculer les moyennes et variances empiriques ¯Xn,i et Sn,i, i = 1, . . . ,N.
+2 et 3 \. Simuler N = 1000 échantillons i.i.d de loi commune Pareto P(a, α) (avec votre choix de paramètres) de taille n = 5, 30, 100 et calculer les moyennes et variances empiriques ¯Xn,i et Sn,i, i = 1, . . . ,N. Puis tracer l'histogramme des moyennes empiriques.
 
 ```{r echantillons,echo=FALSE}
 s<-library("EnvStats")
@@ -299,7 +309,7 @@ lines(seq(-50,50,by=0.1),dpareto(seq(-50,50,by=0.1),1,3),col = "blue")
 
 1\. Simuler un échantillon de taille n = 20 d'une loi de C(2) et calculer la moyenne empirique ¯Xn.
 
-Moyenne empirique:
+Cauchy20 est une simulation d'un échantillon n=20.
 
 ```{r, echo=FALSE}
 cauchy20 <- rcauchy(20, scale=2)
