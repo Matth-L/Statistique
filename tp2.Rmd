@@ -90,7 +90,14 @@ boxplot(max100, horizontal = TRUE)
 4.  Augmentez la taille de votre échantillon à 50 et répétez votre expérience. Que remarquez-vous? Sont-ils proches de la symétrie ?
 
 ```{r}
-x <- runif(50, -1, 1)
+max100loi50 <- c()
+for(i in 1:100){
+  max100loi50[i] <- max(runif(50, -1, 1))
+}
+hist(max100,breaks=100)
+densitermax100 <- density(max100)
+lines(densitermax100,lwd=2,col="blue") #superposition de la densité de la loi
+boxplot(max100, horizontal = TRUE)
 ```
 
 # Monte Carlo Methods
