@@ -30,12 +30,10 @@ $$
 
 2.Simulez un échantillon de taille n = 20 d'un loi de $\epsilon(0,5), créez un histogramme de votre échantillon et commentez la forme de votre histogramme. Superposer la vrai densité. Quelle est la probabilité empirique qu'on observe une valeur supérieure à 3 ?
 
-```{r q2,echo=FALSE}
-x<-rexp(20,0.5)
-hist(x, freq=FALSE,main = "Loi exponentielle pour n = 20")
-maxvalue <- ceiling(max(x))
-lines(0:maxvalue,dexp(0:maxvalue, 0.5), col="red",)
-print(paste("Ici P(X>3)=",sum(x>3)/20))
+![](tp2_files/figure-latex/q2-1.pdf)<!-- --> 
+
+```
+## [1] "Ici P(X>3)= 0.1"
 ```
 
 L'histogramme peut être très proche de la densité ou au contraire s'en éloigner énormément.
@@ -43,22 +41,20 @@ L'histogramme peut être très proche de la densité ou au contraire s'en éloig
 3.Répétez cette opération 5 ou 6 fois et commentez les différences entre les histogrammes que vous obtenez à chaque fois. Utilisez la même limite sur les axes pour faciliter la comparaison. Notez également comment la probabilité empirique qu'on observe une valeur supérieure à 3 change.
 
 
-```{r,echo=FALSE}
-for (i in 1:6) {
-  x<-rexp(20,0.5)
-  print(paste("Echantillon ",i," P(X>3)=",sum(x>3)/20))
-}
+
+```
+## [1] "Echantillon  1  P(X>3)= 0.25"
+## [1] "Echantillon  2  P(X>3)= 0.25"
+## [1] "Echantillon  3  P(X>3)= 0.2"
+## [1] "Echantillon  4  P(X>3)= 0.05"
+## [1] "Echantillon  5  P(X>3)= 0.3"
+## [1] "Echantillon  6  P(X>3)= 0.25"
 ```
 Les histogrammes sont tous très différent d'un échantillon a un autre, cela est du a la faible taille des échantillons.
 
 4.Augmentez la taille de votre échantillon à 100 et répétez votre expérience. Que remarquez-vous?
 
-```{r, echo=FALSE}
-x<-rexp(100,0.5)
-hist(x, freq=FALSE,main = "Loi exponentielle pour n = 100")
-maxvalue <- ceiling(max(x));
-lines(0:maxvalue,dexp(0:maxvalue, 0.5), col="red",)
-```
+![](tp2_files/figure-latex/unnamed-chunk-2-1.pdf)<!-- --> 
 
 On remarque que l'histogramme est bien plus proche de la densité que précedement.
 
@@ -66,15 +62,21 @@ On remarque que l'histogramme est bien plus proche de la densité que précedeme
 
 1.Simuler un échantillon de taille n = 10 d'une loi U(−1, 1) et enregistrez le maximum de l'échantillon.
 
-```{r}
+
+```r
 loiU <- runif(10, -1, 1)
 max1 <- max(loiU)
 print(max1)
 ```
 
+```
+## [1] 0.9233449
+```
+
 2.Répétez les deux étapes ci-dessus dix fois, en écrivant le maximum de l'échantillon à chaque fois. Commentez la variabilité des valeurs que vous obtenez pour les maxima de votre échantillon.
 
-```{r}
+
+```r
 max10 <- c() #création d'un vecteur vide
 for (i in 1:10) {
   max10[i] = max(runif(10,-1,1))#chaque maximum est inséré à la position i du vecteur
@@ -82,9 +84,15 @@ for (i in 1:10) {
 print(max10)
 ```
 
+```
+##  [1] 0.9069923 0.9723631 0.6583771 0.9517615 0.9316664 0.9822200 0.8168893
+##  [8] 0.7688478 0.9189602 0.8949810
+```
+
 3.Répétez 100 fois et construisez un histogramme et une boîte à moustaches. Quelle est la loi du maximum, M = max 1≤i≤n X i où X i ∼ U(−1, 1) (TD1) ? Superposer la densité théorique sur l'histogramme. Que remarquez-vous ?
 
-```{r}
+
+```r
 max100 <- c() 
 for(i in 1:100){
  max100[i] = max(runif(10,-1,1)) 
@@ -92,8 +100,15 @@ for(i in 1:100){
 hist(max100,breaks=10,main = "Histogramme du maximum de la loi uniforme n=10", freq = FALSE)
 densitermax100 <- density(max100) #cette fonction permet d'obtenir la densité de la loi
 lines(densitermax100,lwd=2,col="red") #superposition de la densité i
+```
+
+![](tp2_files/figure-latex/unnamed-chunk-5-1.pdf)<!-- --> 
+
+```r
 boxplot(max100, horizontal = TRUE)
 ```
+
+![](tp2_files/figure-latex/unnamed-chunk-5-2.pdf)<!-- --> 
 On remarque que la densité est très proche des maximums obtenues.
 
 On cherche à déterminer la loi du maximum d'un échantillon de loi uniforme : 
@@ -117,15 +132,23 @@ $$
 $$
 4.Augmentez la taille de votre échantillon à 50 et répétez votre expérience. Que remarquez-vous? Sont-ils proches de la symétrie ?
 
-```{r}
+
+```r
 max100loi50 <- c()
 for(i in 1:100){
   max100loi50[i] <- max(runif(50, -1, 1))
 }
 hist(max100loi50,breaks=10, main = "Histogramme du maximum de la loi uniforme n=50", freq = FALSE)
 lines(density(max100loi50),lwd=2,col="red")
+```
+
+![](tp2_files/figure-latex/unnamed-chunk-6-1.pdf)<!-- --> 
+
+```r
 boxplot(max100, horizontal = TRUE)
 ```
+
+![](tp2_files/figure-latex/unnamed-chunk-6-2.pdf)<!-- --> 
 Ils ne semble pas particulièrement plus proche de la symétrie.
 # Monte Carlo Methods
 
@@ -280,57 +303,11 @@ $$
 
 On prend $$ a = 1, \alpha = 3 $$
 
-```{r echantillons,echo=FALSE}
-library("EnvStats",warn.conflicts=FALSE)
-#vars
-N <- 1000
-a <- 1
-alpha <- 3
-#creation des echantillons
-ech5 <- matrix(NA,5,1000) #echantillon de taille 5
-for (i in seq(5)) {
-  ech5[i,] <- rpareto(N,a,alpha)
-}
-ech30 <- matrix(NA,30,1000) #echantillon de taille 30
-for (i in seq(30)) {
-  ech30[i,] <- rpareto(N,a,alpha)
-}
-ech100 <- matrix(NA,100,1000)  #echantillon de taille 100
-for (i in seq(100)) {
-  ech100[i,] <- rpareto(N,a,alpha)
-}
-
-moy5 <- rowMeans(ech5)
-moy30 <- rowMeans(ech30)
-moy100 <- rowMeans(ech100)
-var5 <- moy5^2/1000
-var30 <- moy30^2/1000
-var100 <- moy100^2/1000
-#print(paste("Moyenne empirique n = 5:", moy5))
-#print(paste("Moyenne empirique n = 30:", moy30))
-#print(paste("Moyenne empirique n = 100:", moy100))
-#print(paste("Variance empirique n = 5:",moy5^2/1000))
-#print(paste("Variance empirique n = 30:",moy30^2/1000))
-#print(paste("Variance empirique n = 100:",moy100^2/1000))
-hist(moy5,main="Moyennes empiriques pour n=5")
-hist(moy30,breaks = 15,main="Moyennes empiriques pour n=30")
-hist(moy100,breaks = 30,main="Moyennes empiriques pour n=100")
-```
+![](tp2_files/figure-latex/echantillons-1.pdf)<!-- --> ![](tp2_files/figure-latex/echantillons-2.pdf)<!-- --> ![](tp2_files/figure-latex/echantillons-3.pdf)<!-- --> 
 
 4.  A l'aide d'une renormalisation adéquate (an, bn), montrer que Un,i = ¯Xn,i−an/ bn a une loi que vous pouvez approchez. Comparez histogramme de les moyennes empiriques normalisées, Un,i, et distribution théorique approchée. Quelle est l'influence de la taille de l'échantillon n sur la qualité de cette approximation?
 
-```{r normalisation, echo= FALSE}
-moy5CentreeReduite <- (moy5-mean(moy5))/mean(moy5^2/1000)
-moy30CentreeReduite <- (moy30-mean(moy30))/mean(moy30^2/1000)
-moy100CentreeReduite <- (moy100-mean(moy100))/mean(moy100^2/1000)
-
-hist(moy5CentreeReduite,freq=FALSE)
-lines(seq(-50,50,by=0.1),dpareto(seq(-50,50,by=0.1),1,3),col = "blue")
-hist(moy30CentreeReduite,freq=FALSE,breaks = 15)
-lines(seq(-50,50,by=0.1),dpareto(seq(-50,50,by=0.1),1,3),col = "blue")
-hist(moy100CentreeReduite,freq=FALSE,breaks = 30)
-lines(seq(-50,50,by=0.1),dpareto(seq(-50,50,by=0.1),1,3),col = "blue")
-```
+![](tp2_files/figure-latex/normalisation-1.pdf)<!-- --> ![](tp2_files/figure-latex/normalisation-2.pdf)<!-- --> ![](tp2_files/figure-latex/normalisation-3.pdf)<!-- --> 
 
 ## Quand le théorème de central limite ne s'applique pas
 
@@ -338,21 +315,28 @@ lines(seq(-50,50,by=0.1),dpareto(seq(-50,50,by=0.1),1,3),col = "blue")
 
 Cauchy20 est une simulation d'un échantillon n=20.
 
-```{r, echo=FALSE}
-cauchy20 <- rcauchy(20, scale=2)
-print(mean(cauchy20))
+
+```
+## [1] -1.292373
 ```
 
 2\. Faites varier la taille de l'échantillon n = 20, 100, 1000 et 10000. Qu'en déduire ?
 
-```{r,echo=FALSE}
-cauchy100 <- rcauchy(100,scale=2)
-cauchy1000 <- rcauchy(1000,scale=2)
-cauchy10000 <- rcauchy(10000,scale=2)
-print(mean(cauchy20))
-print(mean(cauchy100))
-print(mean(cauchy1000))
-print(mean(cauchy10000))
+
+```
+## [1] -1.292373
+```
+
+```
+## [1] 18.93397
+```
+
+```
+## [1] 2.717784
+```
+
+```
+## [1] -1.691469
 ```
 
 On remarque que malgré le nombre élévé de l'échantillon la moyenne ne semble pas se stabiliser comme pour une loi normale.
@@ -375,15 +359,33 @@ $$
 
 Nous pouvons essayer d'approximer theta , c'est-à-dire la médiane, cela revient donc à chercher une estimation du quantile en 0.5 . D'après le cours, les quantiles permettent de localiser les valeurs les plus fréquentes. Nous allons donc essayer d'estimer le quantile.
 
-```{r}
+
+```r
 hist(cauchy20,breaks=20)
 abline(v=mean(cauchy20),col="red",lwd=3)
+```
+
+![](tp2_files/figure-latex/unnamed-chunk-9-1.pdf)<!-- --> 
+
+```r
 hist(cauchy100,breaks=100)
 abline(v=mean(cauchy100),col="red",lwd=3)
+```
+
+![](tp2_files/figure-latex/unnamed-chunk-9-2.pdf)<!-- --> 
+
+```r
 hist(cauchy1000,xlim=c(-100,100),breaks=1000)
 abline(v=mean(cauchy1000),col="red",lwd=3)
+```
+
+![](tp2_files/figure-latex/unnamed-chunk-9-3.pdf)<!-- --> 
+
+```r
 hist(cauchy10000,xlim=c(-100,100),breaks=10000)
 abline(v=mean(cauchy10000),col="red",lwd=3)
 ```
+
+![](tp2_files/figure-latex/unnamed-chunk-9-4.pdf)<!-- --> 
 
 D'après les graphiques nous pouvons remarquer que l'estimation de theta semble proche de la vrai valeur, n'ayant pas de moyen de calculer l'espérance de la loi cela semble être un bon estimateur, car celui-ci semble proche de 0, assez pour jugé les performances de cet estimateur comme suffisant.
