@@ -30,29 +30,36 @@ $$
 
 2.Simulez un échantillon de taille n = 20 d'un loi de $\epsilon(0,5), créez un histogramme de votre échantillon et commentez la forme de votre histogramme. Superposer la vrai densité. Quelle est la probabilité empirique qu'on observe une valeur supérieure à 3 ?
 
-```{r q2}
+```{r q2,echo=FALSE}
 x<-rexp(20,0.5)
-hist(x, freq=FALSE)
+hist(x, freq=FALSE,main = "Loi exponentielle pour n = 20")
 maxvalue <- ceiling(max(x))
 lines(0:maxvalue,dexp(0:maxvalue, 0.5), col="green",)
+print(paste("Ici P(X>3)=",sum(x>3)/20))
 ```
 
-Commentaire histogramme à insérer
+L'histogramme peut être très proche de la densité ou au contraire s'en éloigner énormément.
 
 3.Répétez cette opération 5 ou 6 fois et commentez les différences entre les histogrammes que vous obtenez à chaque fois. Utilisez la même limite sur les axes pour faciliter la comparaison. Notez également comment la probabilité empirique qu'on observe une valeur supérieure à 3 change.
 
-```{r}
+Les histogrammes sont tous très différent d'un échantillon a un autre, cela est du a la faible taille des échantillons.
 
+```{r,echo=FALSE}
+for (i in 1:6) {
+  x<-rexp(20,0.5)
+  print(paste("Echantillon ",i," P(X>3)=",sum(x>3)/20))
+}
 ```
 
 4.  Augmentez la taille de votre échantillon à 100 et répétez votre expérience. Que remarquez-vous?
 
 ```{r, echo=FALSE}
 x<-rexp(100,0.5)
-hist(x, freq=FALSE)
+hist(x, freq=FALSE,main = "Loi exponentielle pour n = 100")
 maxvalue <- ceiling(max(x));
 lines(0:maxvalue,dexp(0:maxvalue, 0.5), col="blue",)
 ```
+L'histogramme est bien plus proche de la densité que précedement.
 
 ## II. Variabilité aléatoire du maximum de l'échantillon
 
@@ -259,8 +266,10 @@ $$
 
 2 et 3 \. Simuler N = 1000 échantillons i.i.d de loi commune Pareto P(a, α) (avec votre choix de paramètres) de taille n = 5, 30, 100 et calculer les moyennes et variances empiriques ¯Xn,i et Sn,i, i = 1, . . . ,N. Puis tracer l'histogramme des moyennes empiriques.
 
+On prend $$ a = 1, \alpha = 3 $$
+
 ```{r echantillons,echo=FALSE}
-s<-library("EnvStats")
+library("EnvStats",warn.conflicts=FALSE)
 #vars
 N <- 1000
 a <- 1
@@ -278,38 +287,36 @@ ech100 <- matrix(NA,100,1000)  #echantillon de taille 100
 for (i in seq(100)) {
   ech100[i,] <- rpareto(N,a,alpha)
 }
-print("Moyenne empirique n = 5")
+
 moy5 <- rowMeans(ech5)
-print(moy5)
-print("Moyenne empirique n = 30")
 moy30 <- rowMeans(ech30)
-print(moy30)
-print("Moyenne empirique n = 100")
 moy100 <- rowMeans(ech100)
-print(moy100)
-print("Variance empirique n = 5")
-print(moy5^2/1000)
-print("Variance empirique n = 30")
-print(moy30^2/1000)
-print("Variance empirique n = 100")
-print(moy100^2/1000)
-hist(moy5)
-hist(moy30,breaks = 10)
-hist(moy100,breaks = 20)
+var5 <- moy5^2/1000
+var30 <- moy30^2/1000
+var100 <- moy100^2/1000
+#print(paste("Moyenne empirique n = 5:", moy5))
+#print(paste("Moyenne empirique n = 30:", moy30))
+#print(paste("Moyenne empirique n = 100:", moy100))
+#print(paste("Variance empirique n = 5:",moy5^2/1000))
+#print(paste("Variance empirique n = 30:",moy30^2/1000))
+#print(paste("Variance empirique n = 100:",moy100^2/1000))
+hist(moy5,main="Moyennes empiriques pour n=5")
+hist(moy30,breaks = 15,main="Moyennes empiriques pour n=30")
+hist(moy100,breaks = 30,main="Moyennes empiriques pour n=100")
 ```
 
 4.  A l'aide d'une renormalisation adéquate (an, bn), montrer que Un,i = ¯Xn,i−an/ bn a une loi que vous pouvez approchez. Comparez histogramme de les moyennes empiriques normalisées, Un,i, et distribution théorique approchée. Quelle est l'influence de la taille de l'échantillon n sur la qualité de cette approximation?
 
-```{r normalisation, }
+```{r normalisation, echo= FALSE}
 moy5CentreeReduite <- (moy5-mean(moy5))/mean(moy5^2/1000)
 moy30CentreeReduite <- (moy30-mean(moy30))/mean(moy30^2/1000)
 moy100CentreeReduite <- (moy100-mean(moy100))/mean(moy100^2/1000)
 
 hist(moy5CentreeReduite,freq=FALSE)
 lines(seq(-50,50,by=0.1),dpareto(seq(-50,50,by=0.1),1,3),col = "blue")
-hist(moy30CentreeReduite,freq=FALSE,breaks = 10)
+hist(moy30CentreeReduite,freq=FALSE,breaks = 15)
 lines(seq(-50,50,by=0.1),dpareto(seq(-50,50,by=0.1),1,3),col = "blue")
-hist(moy100CentreeReduite,freq=FALSE,breaks = 20)
+hist(moy100CentreeReduite,freq=FALSE,breaks = 30)
 lines(seq(-50,50,by=0.1),dpareto(seq(-50,50,by=0.1),1,3),col = "blue")
 ```
 
