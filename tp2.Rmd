@@ -219,6 +219,7 @@ $$
 $$ 
 Afin que la probabilité soit inférieur à 1%, il faut 25 échantillons.
 
+
 ## Application pour l'estimation de probabilité
 
 1. Pour la question I avec E(0.5), identifier le paramètre d’intérêt θ et donner un estimateur θ̂.
