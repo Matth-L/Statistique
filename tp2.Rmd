@@ -10,7 +10,7 @@ output:
 
 ## I. Variation sous-jacente et échantillonnage répété
 
-1.Si X ∼ $\epsilon(0.5), quelle est la probabilité qu'on observe une valeur supérieure à 3?
+1.Si $X ∼ \epsilon(0.5)$, quelle est la probabilité qu'on observe une valeur supérieure à 3?
 
 On a :
 $$ 
@@ -28,7 +28,7 @@ P(X > 3)=
 =e^{-\frac{3}{2}}\approx0.223
 $$
 
-2.Simulez un échantillon de taille n = 20 d'un loi de $\epsilon(0,5), créez un histogramme de votre échantillon et commentez la forme de votre histogramme. Superposer la vrai densité. Quelle est la probabilité empirique qu'on observe une valeur supérieure à 3 ?
+2.Simulez un échantillon de taille n = 20 d'un loi de $\epsilon(0,5)$, créez un histogramme de votre échantillon et commentez la forme de votre histogramme. Superposer la vrai densité. Quelle est la probabilité empirique qu'on observe une valeur supérieure à 3 ?
 
 ```{r q2}
 x<-rexp(20,0.5)
@@ -82,7 +82,7 @@ for (i in 1:10) {
 print(max10)
 ```
 
-3.Répétez 100 fois et construisez un histogramme et une boîte à moustaches. Quelle est la loi du maximum, M = max 1≤i≤n X i où X i ∼ U(−1, 1) (TD1) ? Superposer la densité théorique sur l'histogramme. Que remarquez-vous ?
+3.Répétez 100 fois et construisez un histogramme et une boîte à moustaches. Quelle est la loi du maximum, $M = max(1 \le i \le n X_i)$ où $X_i ∼ U(−1, 1)$ (TD1) ? Superposer la densité théorique sur l'histogramme. Que remarquez-vous ?
 
 ```{r}
 max100 <- c() 
@@ -102,7 +102,7 @@ F_M(x) = P(M \le x) = P(max(X_i) \le x)
 \\
 = P(\bigl\{X_1 \le x \bigl\} \cap \bigl\{ X_2 \le x\bigl\} ... \bigl\{ X_n \le x\bigl\})
 $$
-Par indépendance des $X_i
+Par indépendance des $X_i$
 $$
  = \prod_{i=1}^n P(X_i \le x)
 $$
@@ -111,7 +111,7 @@ Car les $X_i sont identiquement distribués, ils possèdent la même loi donc la
 $$
 = (F_{X_1}(x))^n
 $$
-La loi du maximum, lorsque $X \in [a;b] est donc : 
+La loi du maximum, lorsque $X \in [a;b]$ est donc : 
 $$
 (\frac{x-a}{b-a})^n
 $$
@@ -155,7 +155,7 @@ On retrouve donc une borne pour cette inégalité.
 $$
 P(|\hat{\theta} - \theta| \ge \delta) \le \frac{\sigma²}{n\delta²}
 $$
-2\. En supposant que a ≤ ψ(Xi) ≤ b, donner une borne en utilisant l'inégalité de Hoeffding.
+2\. En supposant que $a \le \psi(Xi) \le b$, donner une borne en utilisant l'inégalité de Hoeffding.
 
 Posons : 
 $$
@@ -179,7 +179,7 @@ $$
 P(|S_n - E(S_n)| \geq t) \leq 2exp(\frac{-2t²}{\sum_{k=1}^n (b_k-a_k)²})
 $$
 
-Calculons l'esperance de S_n: 
+Calculons l'esperance de $S_n$: 
 $$
 E(S_n) = E(\sum_{k=1}^n \psi(X_k)) = \sum_{k=1}^n E(\psi(X_k)) = \sum_{k=1}^n \theta = n\theta
 $$ 
@@ -196,7 +196,7 @@ $$
 \\
 P(|\hat{\theta} - \theta| \geq \delta) \leq 2exp(\frac{-(2n\delta)²}{\sum_{k=1}^n (b_k-a_k)²})
 $$ 
-3. De combien d'échantillons auriez-vous besoin pour que la probabilité que \delta = 2\phi soit inférieur à 1%.
+3. De combien d'échantillons auriez-vous besoin pour que la probabilité que $\delta = 2\sigma$ soit inférieur à 1%.
 
 Servons-nous de l'inégalité de Bienaymé-Tchebychev que nous avons trouvé lors du 1.
 
@@ -222,7 +222,7 @@ Afin que la probabilité soit inférieur à 1%, il faut 25 échantillons.
 
 ## Application pour l'estimation de probabilité
 
-1. Pour la question I avec E(0.5), identifier le paramètre d’intérêt θ et donner un estimateur θ̂.
+1. Pour la question I avec $\epsilon(0.5)$, identifier le paramètre d’intérêt θ et donner un estimateur θ̂.
 
 On cherche un estimateur pour la loi exponentielle.
 En prenant un échantillon :
@@ -263,7 +263,7 @@ $$
 
 # Théorème Central Limite et Estimation Monte Carlo
 
-1\. Vérifier que l'espérance théorique d'une loi de Pareto est E [X] = αa/α−1.
+1\. Vérifier que l'espérance théorique d'une loi de Pareto est $E [X] = \frac{αa}{α−1}.$
 
 $$
 P(X\le t)= (1-\left( \frac{a}{t} \right)^{\alpha}) , \;avec \;x \ge a
@@ -277,7 +277,8 @@ a+a^{\alpha}\int_a^{+\infty}\frac{1}{t^{\alpha}}dt=a + \frac{a}{\alpha -1} =
 \frac{\alpha a}{\alpha -1}
 $$
 
-2 et 3 \. Simuler N = 1000 échantillons i.i.d de loi commune Pareto P(a, α) (avec votre choix de paramètres) de taille n = 5, 30, 100 et calculer les moyennes et variances empiriques ¯Xn,i et Sn,i, i = 1, . . . ,N. Puis tracer l'histogramme des moyennes empiriques.
+2 et 3. Simuler N = 1000 échantillons i.i.d de loi commune Pareto P(a, α) (avec votre choix de paramètres) de taille n = 5, 30, 100 et calculer les moyennes et variances empiriques $\bar{X}_{n,i}$ et$S_n,i, i = 1, . . . ,N$. 
+Puis tracer l'histogramme des moyennes empiriques.
 
 On prend $$ a = 1, \alpha = 3 $$
 
@@ -318,7 +319,7 @@ hist(moy30,breaks = 15,main="Moyennes empiriques pour n=30")
 hist(moy100,breaks = 30,main="Moyennes empiriques pour n=100")
 ```
 
-4.  A l'aide d'une renormalisation adéquate (an, bn), montrer que Un,i = ¯Xn,i−an/ bn a une loi que vous pouvez approchez. Comparez histogramme de les moyennes empiriques normalisées, Un,i, et distribution théorique approchée. Quelle est l'influence de la taille de l'échantillon n sur la qualité de cette approximation?
+4.  A l'aide d'une renormalisation adéquate $(a_n, b_n)$, montrer que $U_n,i = \frac{\bar{X}_{n,i} - a_n}{b_n}$ a une loi que vous pouvez approchez. Comparez histogramme de les moyennes empiriques normalisées, Un,i, et distribution théorique approchée. Quelle est l'influence de la taille de l'échantillon n sur la qualité de cette approximation?
 
 ```{r normalisation, echo= FALSE}
 var5 <- (rowSums((ech5-moy5)^2))/1000
@@ -339,7 +340,7 @@ lines(seq(-50,50,by=0.1),dnorm(seq(-50,50,by=0.1),0,1),col = "blue")
 
 ## Quand le théorème de central limite ne s'applique pas
 
-1\. Simuler un échantillon de taille n = 20 d'une loi de C(2) et calculer la moyenne empirique ¯Xn.
+1\. Simuler un échantillon de taille n = 20 d'une loi de C(2) et calculer la moyenne empirique $\bar{X}_n$.
 
 Cauchy20 est une simulation d'un échantillon n=20.
 
@@ -368,7 +369,7 @@ Nous savons d'après le cours de probabilités que la loi de cauchy n'admet pas 
 
 4\. Quelle est la médiane d'une loi de cauchy ?
 
-La courbe est symétrique ,la médiane d'une loi de cauchy est \theta. D'après le manuel de R, quand la position n'est pas défini celle-ci est mise à 0. Par conséquent nous devons vérifier si la médiane semble proche de 0.
+La courbe est symétrique ,la médiane d'une loi de cauchy est $\theta$. D'après le manuel de R, quand la position n'est pas défini celle-ci est mise à 0. Par conséquent nous devons vérifier si la médiane semble proche de 0.
 
 $$
 f(x,\theta) = \frac{1}{\pi} \frac{1}{1 + (x-\theta)²}
