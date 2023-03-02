@@ -277,7 +277,7 @@ a+a^{\alpha}\int_a^{+\infty}\frac{1}{t^{\alpha}}dt=a + \frac{a}{\alpha -1} =
 \frac{\alpha a}{\alpha -1}
 $$
 
-2 et 3. Simuler N = 1000 échantillons i.i.d de loi commune Pareto P(a, α) (avec votre choix de paramètres) de taille n = 5, 30, 100 et calculer les moyennes et variances empiriques $\bar{X}_{n,i}$ et$S_n,i, i = 1, . . . ,N$. 
+2 et 3. Simuler N = 1000 échantillons i.i.d de loi commune Pareto P(a, α) (avec votre choix de paramètres) de taille n = 5, 30, 100 et calculer les moyennes et variances empiriques $\bar{X}_{n,i}$ et$S_{n,i} , i = 1, . . . ,N$. 
 Puis tracer l'histogramme des moyennes empiriques.
 
 On prend $$ a = 1, \alpha = 3 $$
@@ -319,7 +319,7 @@ hist(moy30,breaks = 15,main="Moyennes empiriques pour n=30")
 hist(moy100,breaks = 30,main="Moyennes empiriques pour n=100")
 ```
 
-4.  A l'aide d'une renormalisation adéquate $(a_n, b_n)$, montrer que $U_n,i = \frac{\bar{X}_{n,i} - a_n}{b_n}$ a une loi que vous pouvez approchez. Comparez histogramme de les moyennes empiriques normalisées, Un,i, et distribution théorique approchée. Quelle est l'influence de la taille de l'échantillon n sur la qualité de cette approximation?
+4.  A l'aide d'une renormalisation adéquate $(a_n, b_n)$, montrer que $U_{n,i} = \frac{\bar{X}_{n,i} - a_n}{b_n}$ a une loi que vous pouvez approchez. Comparez histogramme de les moyennes empiriques normalisées, Un,i, et distribution théorique approchée. Quelle est l'influence de la taille de l'échantillon n sur la qualité de cette approximation?
 
 ```{r normalisation, echo= FALSE}
 var5 <- (rowSums((ech5-moy5)^2))/1000
