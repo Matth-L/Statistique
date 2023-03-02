@@ -95,6 +95,7 @@ densitermax100 <- density(max100) #cette fonction permet d'obtenir la densité d
 lines(densitermax100,lwd=2,col="red") #superposition de la densité i
 boxplot(max100, horizontal = TRUE)
 ```
+
 On remarque que la densité est très proche des maximums obtenus.
 
 On cherche à déterminer la loi du maximum d'un échantillon de loi uniforme : 
@@ -127,6 +128,7 @@ hist(max100loi50,breaks=10, main = "Histogramme du maximum de la loi uniforme n=
 lines(density(max100loi50),lwd=2,col="red")
 boxplot(max100, horizontal = TRUE)
 ```
+
 Ils ne semblent pas particulièrement plus proches de la symétrie.
 
 # Monte Carlo Methods
