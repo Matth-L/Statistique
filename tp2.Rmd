@@ -10,7 +10,7 @@ output:
 
 ## I. Variation sous-jacente et échantillonnage répété
 
-1\.  Si X ∼ E(0.5), quelle est la probabilité qu'on observe une valeur supérieure à 3?
+1.Si X ∼ $\epsilon(0.5), quelle est la probabilité qu'on observe une valeur supérieure à 3?
 
 On a :
 $$ 
@@ -42,7 +42,6 @@ L'histogramme peut être très proche de la densité ou au contraire s'en éloig
 
 3.Répétez cette opération 5 ou 6 fois et commentez les différences entre les histogrammes que vous obtenez à chaque fois. Utilisez la même limite sur les axes pour faciliter la comparaison. Notez également comment la probabilité empirique qu'on observe une valeur supérieure à 3 change.
 
-Les histogrammes sont tous très différent d'un échantillon a un autre, cela est du a la faible taille des échantillons.
 
 ```{r,echo=FALSE}
 for (i in 1:6) {
@@ -50,8 +49,9 @@ for (i in 1:6) {
   print(paste("Echantillon ",i," P(X>3)=",sum(x>3)/20))
 }
 ```
+Les histogrammes sont tous très différent d'un échantillon a un autre, cela est du a la faible taille des échantillons.
 
-4.  Augmentez la taille de votre échantillon à 100 et répétez votre expérience. Que remarquez-vous?
+4.Augmentez la taille de votre échantillon à 100 et répétez votre expérience. Que remarquez-vous?
 
 ```{r, echo=FALSE}
 x<-rexp(100,0.5)
@@ -59,11 +59,12 @@ hist(x, freq=FALSE,main = "Loi exponentielle pour n = 100")
 maxvalue <- ceiling(max(x));
 lines(0:maxvalue,dexp(0:maxvalue, 0.5), col="blue",)
 ```
-L'histogramme est bien plus proche de la densité que précedement.
+
+On remarque que l'histogramme est bien plus proche de la densité que précedement.
 
 ## II. Variabilité aléatoire du maximum de l'échantillon
 
-1.  Simuler un échantillon de taille n = 10 d'une loi U(−1, 1) et enregistrez le maximum de l'échantillon.
+1.Simuler un échantillon de taille n = 10 d'une loi U(−1, 1) et enregistrez le maximum de l'échantillon.
 
 ```{r}
 loiU <- runif(10, -1, 1)
@@ -71,39 +72,57 @@ max1 <- max(loiU)
 print(max1)
 ```
 
-2.  Répétez les deux étapes ci-dessus dix fois, en écrivant le maximum de l'échantillon à chaque fois. Commentez la variabilité des valeurs que vous obtenez pour les maxima de votre échantillon.
+2.Répétez les deux étapes ci-dessus dix fois, en écrivant le maximum de l'échantillon à chaque fois. Commentez la variabilité des valeurs que vous obtenez pour les maxima de votre échantillon.
 
 ```{r}
-max10 <- c()
+max10 <- c() #création d'un vecteur vide
 for (i in 1:10) {
-  max10[i] = max(runif(10,-1,1))
+  max10[i] = max(runif(10,-1,1))#chaque maximum est inséré à la position i du vecteur
 }
 print(max10)
 ```
 
-3.  Répétez 100 fois et construisez un histogramme et une boîte à moustaches. Quelle est la loi dumaximum, M = max 1≤i≤n X i où X i ∼ U(−1, 1) (TD1) ? Superposer la densité théoreique sur l'histogramme. Que remarquez-vous ?
+3.Répétez 100 fois et construisez un histogramme et une boîte à moustaches. Quelle est la loi du maximum, M = max 1≤i≤n X i où X i ∼ U(−1, 1) (TD1) ? Superposer la densité théorique sur l'histogramme. Que remarquez-vous ?
 
 ```{r}
-max100 <- c() #création d'un vecteur vide
+max100 <- c() 
 for(i in 1:100){
- max100[i] = max(runif(10,-1,1))
+ max100[i] = max(runif(10,-1,1)) 
 }
-hist(max100,breaks=50)
-densitermax100 <- density(max100)
-lines(densitermax100,lwd=2,col="blue") #superposition de la densité de la loi
+hist(max100,breaks=10,main = "Histogramme du maximum de la loi uniforme n=10")
+densitermax100 <- density(max100) #cette fonction permet d'obtenir la densité de la loi
+lines(densitermax100,lwd=2,col="blue") #superposition de la densité i
 boxplot(max100, horizontal = TRUE)
 ```
 
-4.  Augmentez la taille de votre échantillon à 50 et répétez votre expérience. Que remarquez-vous? Sont-ils proches de la symétrie ?
+On cherche à déterminer la loi du maximum d'un échantillon de loi uniforme : 
+$$
+F_M(x) = P(M \le x) = P(max(X_i) \le x) 
+\\
+= P(\bigl\{X_1 \le x \bigl\} \cap \bigl\{ X_2 \le x\bigl\} ... \bigl\{ X_n \le x\bigl\})
+$$
+Par indépendance des $X_i
+$$
+ = \prod_{i=1}^n P(X_i \le x)
+$$
+Car les $X_i sont identiquement distribués, ils possèdent la même loi donc la même fonction de répartition.
+
+$$
+= (F_{X_1}(x))^n
+$$
+La loi du maximum, lorsque $X \in [a;b] est donc : 
+$$
+(\frac{x-a}{b-a})^n
+$$
+4.Augmentez la taille de votre échantillon à 50 et répétez votre expérience. Que remarquez-vous? Sont-ils proches de la symétrie ?
 
 ```{r}
 max100loi50 <- c()
 for(i in 1:100){
   max100loi50[i] <- max(runif(50, -1, 1))
 }
-hist(max100,breaks=100)
-densitermax100 <- density(max100)
-lines(densitermax100,lwd=2,col="blue") #superposition de la densité de la loi
+hist(max100,breaks=100, main = "Histogramme du maximum de la loi uniforme n=50")
+lines(density(max100loi50),lwd=2,col="blue")
 boxplot(max100, horizontal = TRUE)
 ```
 
@@ -113,20 +132,20 @@ Vérifier que :
 $$
 E[\hat{\theta}] = \theta
 $$
-On se sert de la linéarité de l'espérance : 
+Nous utiliserons la linéarité de l'espérance : 
 $$
 E[\frac{1}{n} \sum_{i=1}^{n} \psi(X)] = \frac{1}{n} \sum_{i=1}^n E[\psi(X)] = \frac{1}{n}*n*\theta=\theta
 $$
 ## Moyenne et phénomène de concentration.
 
-1.  Donner une borne de cette quantité en utilisant l'inégalité de Bienaymé Chebychev.
+1.Donner une borne de cette quantité en utilisant l'inégalité de Bienaymé Chebychev.
 
 Rappelons l'inégalité de Bienaymé Chebychev : 
 $$
 P(| \hat{\theta}-\theta| \ge \delta) \le \frac{V(\hat{\theta})}{\delta²}
 $$
 
-Calculons la variance grâce à son caractère quadratique ainsi qu'à l'indépendance des X_i : 
+Calculons la variance de cette quantité grâce au caractère quadratique de la variance ainsi qu'à l'indépendance des $X_i :
 $$
 V(\hat{\theta}) = V(\frac{1}{n} \sum_{i=1}^{n} \psi(X)) = \frac{1}{n²}V(\sum_{i=1}^n \psi(X)) = \frac{1}{n²} \sum_{i=1}^n V(\psi(X)) = \frac{1}{n²} *n\sigma² = \frac{\sigma²}{n}
 $$
@@ -201,14 +220,13 @@ Afin que la probabilité soit inférieur à 1%, il faut 25 échantillons.
 
 ## Application pour l'estimation de probabilité
 
-1\. Pour la question 1 :
+1. Pour la question I avec E(0.5), identifier le paramètre d’intérêt θ et donner un estimateur θ̂.
 
-L'espérance de la loi est 2. 
-En prenant un échantillon 
+On cherche un estimateur pour la loi exponentielle.
+En prenant un échantillon :
 $$
 (X_1,X_2,...,X_n)
 $$
-Le paramètre d'intérêt est donc l'estimateur de cette loi: 
 $$
 X_i \sim \varepsilon(\theta) 
 \\
@@ -236,19 +254,12 @@ Ainsi, nous avons donc :
 $$
 \eta = P(|\hat{\theta} - \theta| \ge \delta) = E[Z]
 $$
-Le paramètre d'intérêt est la moyenne de la fonction exponentielle, c'est à dire 2.
-
-La moyenne empirique tend presque surement vers la moyenne , ainsi l'estimateur est donc consistant. Il faut ensuite utiliser l'inégalité de Hoeffding.
-
+D'après la méthode de Monte Carlo, on a donc : 
 $$
 \eta \approx  \frac{1}{n} \sum_{i=1}^n Z_i
 $$
-On va donc essayer d'estimer cela à l'aide de R : 
 
-```{r}
-
-```
-## Théorème Central Limite et Estimation Monte Carlo
+# Théorème Central Limite et Estimation Monte Carlo
 
 1\. Vérifier que l'espérance théorique d'une loi de Pareto est E [X] = αa/α−1.
 
