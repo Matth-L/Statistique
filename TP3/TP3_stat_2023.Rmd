@@ -43,8 +43,7 @@ Soit $X_1,\ldots,X_n$ un échantillon de $n$ variables indépendantes de loi de 
 
 ```{r}
 n = 25
-gamma0 <- rgamma(n,c(2.5,1.5))
-hist(gamma0)
+hist(rgamma(n,c(2.5,1.5)))
 hist(rgamma(n,c(3,4)))
 hist(rgamma(n,c(2,6)))
 ```
@@ -55,6 +54,7 @@ La formule de la vraisemblance de la loi gamma est :
 $$
 L(\alpha ,\beta |x)={\frac {\beta ^{\alpha }}{\Gamma (\alpha )}}x^{\alpha -1}\exp(-\beta x)
 $$
+La formule de la log-vraisemblance est donc : 
 $$
 \log L(\alpha ,\beta |x)=\alpha \log \beta -\log \Gamma (\alpha )+(\alpha -1)\log x-\beta x
 $$
@@ -75,24 +75,46 @@ logL_gamma <- function(alpha,beta,interval){
 ```
 
 ```{r}
-array <- c()
+#on va créer une matrice ou i = alpha j = beta
+mat <-  matrix(nrow=10,ncol=10)
 interval <- seq(1,10)
 for(i in interval){
   for(j in interval){
-    array <- c(array,logL_gamma(i,j,gamma0));
+    res <- logL_gamma(i, j, gamma0)
+    mat[i, j] <- res
   }
 }
-print(mean(array)); # la moyenne d'un tableau
 ```
 
 9. Tracer la courbe des valeurs ainsi calculées. Comme la fonction, $\ell(\theta)$, a deux arguments, vous pouvez réaliser des tracés de contour (`contour`). Pour plus de simplicité, il suffit de tracer comme une fonction unidimensionnelle en supposant que l'autre est fixe: $\ell(\alpha|\beta=\beta_0)$ avec quelque $\beta_0$ de votre choix et $\ell(\beta| \alpha=\alpha_0)$ pour quelque $\alpha_0$ de votre choix. Que remarquez-vous?
 
 ```{r}
+n <- length(interval)
+#on fixe les valeurs pour alpha et beta
+beta <- 2
+logBeta <- mat[,beta]
+alpha <- 3 # Valeur de alpha fixe
+logAlpha <- mat[alpha,]
+#on trace les courbes
+contour(interval, interval, mat,
+        xlab = "Valeur de alpha", ylab = "Valeur de beta",
+        main = "Contour de vraisemblance en fonction de alpha et beta")
 ```
 
 10. Donner l'expression mathématique du vecteur Score (les dérivées premières) à laquelle l'EMV répond. 
 En utilisant la fonction `optim`, trouver la valeur de $\theta$ la plus probable pour votre l'échantillon.
 
+
+Le score est le gradient de la log-vraisemblance.
+Soit $\theta$ un vecteur des paramètres du modèle 
+$$
+S(\theta) = \nabla \theta L(\theta)
+$$
+Chaque composante du vecteur Score est la dérivé partielle de la log-vraisemblance par rapport à un paramètre du modèle.
+
+```{r}
+#l'échantillon est la matrice 
+```
 
 11. Répéter l'estimation 100 fois avec de nouveaux ensembles de données (échantillons) et tracer les estimations $\hat\alpha$ vs $\hat\beta$. Sont-elles indépendantes ?
 Trouver l'intervalle où 95\% des estimations sont incluses pour chaque paramètre. Vous venez de trouver un intervalle de confiance empirique à 95\% !
