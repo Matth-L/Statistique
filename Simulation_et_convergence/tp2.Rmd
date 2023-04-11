@@ -1,5 +1,5 @@
 ---
-title: "Tp Statistiques 2"
+title: "Tp Statistiques 2 Groupe 4"
 author: "Lapu Matthias | Amaël Kreis"
 output: 
   pdf_document:

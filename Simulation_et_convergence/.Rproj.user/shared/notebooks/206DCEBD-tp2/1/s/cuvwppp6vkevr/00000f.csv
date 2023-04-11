@@ -1,0 +1,2 @@
+"0","x<-rexp(20,0.5)"
+"0","hist(x, freq=FALSE,main = ""Loi exponentielle pour n = 20"")"

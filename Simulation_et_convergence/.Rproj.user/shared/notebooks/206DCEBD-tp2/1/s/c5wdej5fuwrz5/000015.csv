@@ -1,0 +1,5 @@
+"0","max100loi50 <- c()"
+"0","for(i in 1:100){"
+"0","  max100loi50[i] <- max(runif(50, -1, 1))"
+"0","}"
+"0","hist(max100loi50,breaks=10, main = ""Histogramme du maximum de la loi uniforme n=50"", freq = FALSE)"
