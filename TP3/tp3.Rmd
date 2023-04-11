@@ -1,0 +1,59 @@
+---
+title: "TP3"
+author: "Matthias LAPU | Amael KREIS"
+date: "2023-03-31"
+output: html_document
+---
+
+# Vraisemblance pour plusieurs paramètre : La Loi Gamma 
+
+7. Présentez l'histogramme des données simulées. Choisir 3 paramètres candidats, 
+
+```{r}
+n = 25
+gamma0 <- rgamma(n,c(2.5,1.5))
+hist(gamma0)
+hist(rgamma(n,c(3,4)))
+hist(rgamma(n,c(2,6)))
+```
+ 8.Ecrire la log vraisemblance 
+ 
+ la formule de la vraisemblance de la loi gamma est : 
+ $$
+ L(\alpha ,\beta |x)={\frac {\beta ^{\alpha }}{\Gamma (\alpha )}}x^{\alpha -1}\exp(-\beta x)
+ $$
+ $$
+ \log L(\alpha ,\beta |x)=\alpha \log \beta -\log \Gamma (\alpha )+(\alpha -1)\log x-\beta x
+ $$
+ 
+```{r}
+logL_gamma_unit <- function(alpha,beta,x){
+  return( alpha*log(beta) - log(gamma(alpha)) + (alpha-1)*log(x) - beta*x ) 
+}
+
+logL_gamma <- function(alpha,beta,interval){
+  sum <- 0
+  for(i in interval) {
+    sum =  sum + logL_gamma_unit(alpha,beta,i)
+  }
+  return (sum)
+}
+```
+ 
+Pour votre échantillon , estimer la log-vraisemblance de paramètre \theta en faisant varier 1 paramètre à la fois. On va estimer alpha et beta de [0;10], alpha et beta sont > 0 
+
+```{r}
+array <- c()
+interval <- seq(1,10)
+for(i in interval){
+  for(j in interval){
+    array <- c(array,logL_gamma(i,j,gamma0));
+  }
+}
+print(mean(array)); # la moyenne d'un tableau
+```
+
+9.Tracer la courbe des valeurs ainsi calculés.
+```{r}
+print(array)
+```
