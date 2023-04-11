@@ -1,0 +1,362 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+\PassOptionsToPackage{dvipsnames,svgnames,x11names}{xcolor}
+%
+\documentclass[
+]{article}
+\usepackage{amsmath,amssymb}
+\usepackage{lmodern}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\usepackage[margin=1in]{geometry}
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same} % disable monospaced font for URLs
+\hypersetup{
+  pdftitle={TP Statistiques 3},
+  pdfauthor={Matthias LAPU , Amael KREIS},
+  colorlinks=true,
+  linkcolor={red},
+  filecolor={Maroon},
+  citecolor={Blue},
+  urlcolor={blue},
+  pdfcreator={LaTeX via pandoc}}
+
+\title{TP Statistiques 3}
+\author{Matthias LAPU , Amael KREIS}
+\date{31 mars 2023}
+
+\begin{document}
+\maketitle
+
+\hypertarget{estimation-du-maximum-de-vraisemblance-et-lintervalle-de-confiance}{%
+\subsection{Estimation du Maximum de vraisemblance et L'intervalle de
+confiance}\label{estimation-du-maximum-de-vraisemblance-et-lintervalle-de-confiance}}
+
+\hypertarget{vraisemblance-la-loi-bernoulli}{%
+\subsubsection{Vraisemblance: La loi
+Bernoulli}\label{vraisemblance-la-loi-bernoulli}}
+
+Soit \(X\) une variable aléatoire de Bernoulli (\texttt{rbinom}) avec
+\(p=0.6\).
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Simuler un échantillon i.i.d de taille \(n=10\). Quelle est une façon
+  simple d'estimer \(p\)?
+\item
+  Générer une fonction de vraisemblance, nommée \texttt{L\_bern}, en
+  fonction de \((p, x)\), qui donne la vraisemblance d'un échantillon
+  \(x=(x_1,\ldots,x_n)\) pour une valeur donnée de \(p\).
+\item
+  Pour votre échantillon, estimer la vraisemblance de l'échantillon pour
+  \(n\) lois Bernoulli de paramètres \(p\) allant de 0 à 1. Tracez la
+  courbe des valeurs calculées. Que remarquez-vous?
+\item
+  En utilisant la fonction \texttt{optim} de R, trouvez la valeur de
+  \(p\) la plus probable d'avoir généré cet échantillon.
+\end{enumerate}
+
+Attention : \texttt{optim} est par défaut une routine de
+\textbf{minimization}. Remarque : Avec la méthode de \emph{L-BFGS-B}
+dans la fonction \texttt{optim}, vous pouvez traiter des contraintes sur
+le(s) paramètre(s), lorsque c'est nécessaire.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{4}
+\item
+  Tester avec des échantillons de taille allant de \(n=10\) à \(n=2000\)
+  et comparer l'écart entre la valeur théorique attendue et la valeur
+  obtenue. Que remarquez-vous? Comment combattre l'instabilité numérique
+  due aux multiplications de probabilités?
+\item
+  Trouver deux intervalles de confiance de niveau 0.90 pour le paramètre
+  \(p\), d'après (i) l'inégalité de Bienaymé-Chebycheff et (ii)
+  l'inégalité de Hoeffding et les comparer. Incluent-ils la valeur
+  réelle ?
+\end{enumerate}
+
+\hypertarget{vraisemblance-pour-plusieurs-paramuxe8tres-la-loi-gamma}{%
+\subsubsection{Vraisemblance pour plusieurs paramètres: La Loi
+Gamma}\label{vraisemblance-pour-plusieurs-paramuxe8tres-la-loi-gamma}}
+
+Soit \(X_1,\ldots,X_n\) un échantillon de \(n\) variables indépendantes
+de loi de Gamma(\(\alpha, \beta\)) où \(\theta = (\alpha, \beta)\) est
+inconnue. Simuler un échantillon i.i.d de taille \(n=25\) avec
+\(\theta_0 = (2.5, 1.5)\).
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{6}
+\tightlist
+\item
+  Présentez l'histogramme des données simulées. Choisir trois paramètres
+  candidats, disons, \(\theta_0\) (vrai) \(\theta_1, \theta_2\).
+  Comparer l'histogramme avec les densités candidates. Que
+  remarquez-vous?
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{n }\OtherTok{=} \DecValTok{25}
+\NormalTok{gamma0 }\OtherTok{\textless{}{-}} \FunctionTok{rgamma}\NormalTok{(n,}\FunctionTok{c}\NormalTok{(}\FloatTok{2.5}\NormalTok{,}\FloatTok{1.5}\NormalTok{))}
+\FunctionTok{hist}\NormalTok{(gamma0)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{TP3_stat_2023_files/figure-latex/unnamed-chunk-1-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{hist}\NormalTok{(}\FunctionTok{rgamma}\NormalTok{(n,}\FunctionTok{c}\NormalTok{(}\DecValTok{3}\NormalTok{,}\DecValTok{4}\NormalTok{)))}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{TP3_stat_2023_files/figure-latex/unnamed-chunk-1-2.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{hist}\NormalTok{(}\FunctionTok{rgamma}\NormalTok{(n,}\FunctionTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{,}\DecValTok{6}\NormalTok{)))}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{TP3_stat_2023_files/figure-latex/unnamed-chunk-1-3.pdf}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{7}
+\tightlist
+\item
+  Ecrire la log vraisemblance \texttt{logL\_gamma}. Générez une fonction
+  de log-vraisemblance avec les arguments \((\theta, x)\), qui donne la
+  log vraisemblance d'un échantillon pour une valeur donnée de
+  \(\theta=(\alpha,\beta)\) et les donnéé \(x = (x_1,\ldots,x_n)\). Pour
+  votre échantillon, estimer la log-vraisemblance de paramètre
+  \(\theta=(\alpha,\beta)\), en faissant varier un paramètre à la fois.
+\end{enumerate}
+
+La formule de la vraisemblance de la loi gamma est : \[
+L(\alpha ,\beta |x)={\frac {\beta ^{\alpha }}{\Gamma (\alpha )}}x^{\alpha -1}\exp(-\beta x)
+\] \[
+\log L(\alpha ,\beta |x)=\alpha \log \beta -\log \Gamma (\alpha )+(\alpha -1)\log x-\beta x
+\]
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{logL\_gamma\_unit }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(alpha,beta,x)\{}
+  \FunctionTok{return}\NormalTok{( alpha}\SpecialCharTok{*}\FunctionTok{log}\NormalTok{(beta) }\SpecialCharTok{{-}} \FunctionTok{log}\NormalTok{(}\FunctionTok{gamma}\NormalTok{(alpha)) }\SpecialCharTok{+}\NormalTok{ (alpha}\DecValTok{{-}1}\NormalTok{)}\SpecialCharTok{*}\FunctionTok{log}\NormalTok{(x) }\SpecialCharTok{{-}}\NormalTok{ beta}\SpecialCharTok{*}\NormalTok{x ) }
+\NormalTok{\}}
+
+\CommentTok{\#on fait varier un paramètre et on calcule la somme }
+\NormalTok{logL\_gamma }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(alpha,beta,interval)\{}
+\NormalTok{  sum }\OtherTok{\textless{}{-}} \DecValTok{0}
+  \ControlFlowTok{for}\NormalTok{(i }\ControlFlowTok{in}\NormalTok{ interval) \{}
+\NormalTok{    sum }\OtherTok{=}\NormalTok{  sum }\SpecialCharTok{+} \FunctionTok{logL\_gamma\_unit}\NormalTok{(alpha,beta,i)}
+\NormalTok{  \}}
+  \FunctionTok{return}\NormalTok{ (sum)}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{array }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{()}
+\NormalTok{interval }\OtherTok{\textless{}{-}} \FunctionTok{seq}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{10}\NormalTok{)}
+\ControlFlowTok{for}\NormalTok{(i }\ControlFlowTok{in}\NormalTok{ interval)\{}
+  \ControlFlowTok{for}\NormalTok{(j }\ControlFlowTok{in}\NormalTok{ interval)\{}
+\NormalTok{    array }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(array,}\FunctionTok{logL\_gamma}\NormalTok{(i,j,gamma0));}
+\NormalTok{  \}}
+\NormalTok{\}}
+\FunctionTok{print}\NormalTok{(}\FunctionTok{mean}\NormalTok{(array)); }\CommentTok{\# la moyenne d\textquotesingle{}un tableau}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] -124.6043
+\end{verbatim}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{8}
+\item
+  Tracer la courbe des valeurs ainsi calculées. Comme la fonction,
+  \(\ell(\theta)\), a deux arguments, vous pouvez réaliser des tracés de
+  contour (\texttt{contour}). Pour plus de simplicité, il suffit de
+  tracer comme une fonction unidimensionnelle en supposant que l'autre
+  est fixe: \(\ell(\alpha|\beta=\beta_0)\) avec quelque \(\beta_0\) de
+  votre choix et \(\ell(\beta| \alpha=\alpha_0)\) pour quelque
+  \(\alpha_0\) de votre choix. Que remarquez-vous?
+\item
+  Donner l'expression mathématique du vecteur Score (les dérivées
+  premières) à laquelle l'EMV répond. En utilisant la fonction
+  \texttt{optim}, trouver la valeur de \(\theta\) la plus probable pour
+  votre l'échantillon.
+\end{enumerate}
+
+Le score de la fonction de vraisemblance est le vecteur des dérivées
+premières de la fonction de log-vraisemblance par rapport au paramètre
+θ.
+
+Score(θ) = ∇\_θ log L(θ)
+
+où ∇\_θ représente le gradient par rapport à θ et log L(θ) est le
+logarithme de la fonction de vraisemblance.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{10}
+\item
+  Répéter l'estimation 100 fois avec de nouveaux ensembles de données
+  (échantillons) et tracer les estimations \(\hat\alpha\) vs
+  \(\hat\beta\). Sont-elles indépendantes ? Trouver l'intervalle où 95\%
+  des estimations sont incluses pour chaque paramètre. Vous venez de
+  trouver un intervalle de confiance empirique à 95\% ! Visualisez vos
+  résultats à l'aide d'un histogramme. Que remarquez-vous?
+\item
+  Tester avec des échantillons de taille \(n=15\) et \(n=100\) et
+  comparer avec les résultats précédents. Quel est l'effet de la taille
+  de l'échantillon ?
+\end{enumerate}
+
+\hypertarget{normalituxe9-asymptotique-de-lemv-et-lintervalle-de-confidence}{%
+\subsubsection{Normalité asymptotique de l'EMV et l'intervalle de
+confidence}\label{normalituxe9-asymptotique-de-lemv-et-lintervalle-de-confidence}}
+
+En pratique, nous n'avons qu'un seul ensemble de données avec des
+paramètres \(\theta=(\theta_1,\ldots,\theta_p)\) inconnus, la simulation
+de multiples échantillons permettant de construire la distribution de
+l'estimateur n'est donc plus possible. Dans ce cas, on peut construire
+des intervalles basés sur une approximation asymptotique de la
+distribution, en utilisant le fait que
+\(\hat{\theta}\approx \mathcal{N}(\theta,I_n(\theta)^{-1})\).
+
+L'évaluation de l'information de Fisher directe nécessite de calculer le
+hessien \(H\) et son espérance analytiquement en différenciant l'opposé
+de la log-vraisemblance deux fois par rapport aux paramètres (pour
+obtenir la matrice complète), puis d'inverser explicitement la matrice,
+et enfin de remplacer \(\theta\) par \(\hat{\theta}\).
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{12}
+\tightlist
+\item
+  Pour revenir à l'exemple du Gamma (\(n=25\)), trouver l'information de
+  Fisher et estimer la covariance asymptotique. A partir de là,
+  construire un intervalle de confiance asymptotique de niveau \(0.95\).
+  Comparer avec la solution de 11.
+\end{enumerate}
+
+En général, il n'est pas possible d'évaluer l'information de Fisher de
+manière analytique, ou cela peut prendre trop de temps. Dans ce cas, on
+utilise l' ``information observée'' (sans ésperance),
+\(I_O(\hat{\theta})^{-1}= -H(\hat{\theta})^{-1}\).
+
+Nous pouvons utiliser l'option `hessian=TRUE' dans \texttt{optim} pour
+obtenir la matrice hessienne et estimer la fonction de covariance par
+son inverse.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{13}
+\item
+  Estimer la covariance asymptotique avec l'information observée et
+  construire un intervalle de confiance asymptotique de niveau \(0.95\).
+\item
+  Nous utilisons la simulation pour comparer la performance de ces deux
+  estimateurs. Simuler plusieurs fois un nouvel ensemble de données,
+  construiser les deux intervalles de confiance et compter combien de
+  fois cet intervalle contient les vraies valeurs. Quelle est votre
+  conclusion?
+\end{enumerate}
+
+\end{document}

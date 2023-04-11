@@ -64,6 +64,7 @@ logL_gamma_unit <- function(alpha,beta,x){
   return( alpha*log(beta) - log(gamma(alpha)) + (alpha-1)*log(x) - beta*x ) 
 }
 
+#on fait varier un paramètre et on calcule la somme 
 logL_gamma <- function(alpha,beta,interval){
   sum <- 0
   for(i in interval) {
@@ -87,11 +88,11 @@ print(mean(array)); # la moyenne d'un tableau
 9. Tracer la courbe des valeurs ainsi calculées. Comme la fonction, $\ell(\theta)$, a deux arguments, vous pouvez réaliser des tracés de contour (`contour`). Pour plus de simplicité, il suffit de tracer comme une fonction unidimensionnelle en supposant que l'autre est fixe: $\ell(\alpha|\beta=\beta_0)$ avec quelque $\beta_0$ de votre choix et $\ell(\beta| \alpha=\alpha_0)$ pour quelque $\alpha_0$ de votre choix. Que remarquez-vous?
 
 ```{r}
-print(array)
 ```
 
 10. Donner l'expression mathématique du vecteur Score (les dérivées premières) à laquelle l'EMV répond. 
 En utilisant la fonction `optim`, trouver la valeur de $\theta$ la plus probable pour votre l'échantillon.
+
 
 11. Répéter l'estimation 100 fois avec de nouveaux ensembles de données (échantillons) et tracer les estimations $\hat\alpha$ vs $\hat\beta$. Sont-elles indépendantes ?
 Trouver l'intervalle où 95\% des estimations sont incluses pour chaque paramètre. Vous venez de trouver un intervalle de confiance empirique à 95\% !
