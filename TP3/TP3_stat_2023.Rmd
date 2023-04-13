@@ -141,8 +141,9 @@ logLGammaV2 <- function (theta){
 
 ```{r}
 #on trace les courbes
-i <- seq(1,10)
-contour(i,i,outer(i,i,logLGamma))
+x <- seq(1,10,0.2)
+y <- seq(1,10,0.2)
+contour(x,y,outer(x,y,logLGamma),nlevels = 25)
 ```
 
 10. Donner l'expression mathématique du vecteur Score (les dérivées premières) à laquelle l'EMV répond. 
