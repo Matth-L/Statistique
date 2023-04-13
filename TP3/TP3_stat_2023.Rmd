@@ -108,7 +108,8 @@ L(\alpha ,\beta |x)={\frac {\beta ^{\alpha }}{\Gamma (\alpha )}}x^{\alpha -1}\ex
 $$
 La formule de la log-vraisemblance est donc : 
 $$
-\log L(\alpha ,\beta |x)=\alpha \log \beta -\log \Gamma (\alpha )+(\alpha -1)\log x-\beta x
+\frac{\partial L(\alpha ,\beta |x) }{\partial x} = 
+\log \mathcal{L}(\alpha ,\beta |x)=\alpha \log \beta -\log \Gamma (\alpha )+(\alpha -1)\log x-\beta x
 $$
  
 ```{r}
