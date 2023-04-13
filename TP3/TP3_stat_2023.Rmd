@@ -89,8 +89,6 @@ for(i in interval){
 9. Tracer la courbe des valeurs ainsi calculées. Comme la fonction, $\ell(\theta)$, a deux arguments, vous pouvez réaliser des tracés de contour (`contour`). Pour plus de simplicité, il suffit de tracer comme une fonction unidimensionnelle en supposant que l'autre est fixe: $\ell(\alpha|\beta=\beta_0)$ avec quelque $\beta_0$ de votre choix et $\ell(\beta| \alpha=\alpha_0)$ pour quelque $\alpha_0$ de votre choix. Que remarquez-vous?
 
 ```{r}
-n <- length(interval)
-#on fixe les valeurs pour alpha et beta
 beta <- 2
 logBeta <- mat[,beta]
 alpha <- 3 # Valeur de alpha fixe
@@ -120,6 +118,24 @@ Chaque composante du vecteur Score est la dérivé partielle de la log-vraisembl
 Trouver l'intervalle où 95\% des estimations sont incluses pour chaque paramètre. Vous venez de trouver un intervalle de confiance empirique à 95\% !
 Visualisez vos résultats à l'aide d'un histogramme. Que remarquez-vous?
 
+```{r}
+mat <-  matrix(nrow=100,ncol=100)
+interval <- seq(1,100)
+for(i in interval){
+  for(j in interval){
+    res <- logL_gamma(i, j, gamma0)
+    mat[i, j] <- res
+  }
+}
+beta <- 5
+logBeta <- mat[,beta]
+alpha <- 54 # Valeur de alpha fixe
+logAlpha <- mat[alpha,]
+#on trace les courbes
+contour(interval, interval, mat,
+        xlab = "Valeur de alpha", ylab = "Valeur de beta",
+        main = "Contour de vraisemblance en fonction de alpha et beta")
+```
 12. Tester avec des échantillons de taille $n=15$ et $n=100$ et comparer avec les résultats précédents. Quel est l'effet de la taille de l'échantillon ?
 
 
