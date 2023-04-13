@@ -25,7 +25,7 @@ Soit $X$ une variable aléatoire de Bernoulli (`rbinom`) avec $p=0.6$.
 
 ```{r Bernoulli}
 echantillon <- rbinom(10,1,0.6)
-print(x)
+print(echantillon)
 ```
 Une façon simple d'estimer p est de calculer la moyenne empirique de l'échantillon
 ```{r Bernoulli moy}
@@ -157,7 +157,7 @@ $$
 
 ```{r}
 x0 <- c(1,1)
-# la fonction optim minimise il faut donc faire -1 pour la maximiser
+# la fonction optim minimise il faut donc multiplier par -1 pour la maximiser
 optim(par = x0, fn = logLGammaV2, method = "L-BFGS-B", control = list(fnscale = -1)) 
 ```
 
@@ -218,6 +218,11 @@ En général, il n'est pas  possible d'évaluer l'information de Fisher de mani�
 Nous pouvons utiliser l'option 'hessian=TRUE' dans `optim` pour obtenir la matrice hessienne et estimer la fonction de covariance par son inverse.
 
 IL Y A UNE FONCTION POUR CELA 
+```{r}
+res <- optim(par = x0, fn = logLGammaV2, method = "L-BFGS-B", control = list(fnscale = -1), hessian = TRUE) 
+#La matrice Hessienne se trouve en 6eme position
+print(-solve(res[[6]]))
+```
 
 14. Estimer la covariance asymptotique avec l'information observée et construire un intervalle de confiance asymptotique de niveau $0.95$. 
 
