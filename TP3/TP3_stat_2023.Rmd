@@ -117,38 +117,32 @@ logL_gamma_unit <- function(alpha,beta,x){
 }
 
 #on fait varier un paramètre et on calcule la somme 
-logL_gamma <- function(alpha,beta,interval){
+logL_gamma <- function(alpha,beta,v){
   sum <- 0
-  for(i in interval) {
+  for(i in v) {
     sum =  sum + logL_gamma_unit(alpha,beta,i)
   }
   return (sum)
 }
-```
 
-```{r}
-#on va créer une matrice ou i = alpha j = beta
-mat <-  matrix(nrow=10,ncol=10)
-interval <- seq(1,10)
-for(i in interval){
-  for(j in interval){
-    res <- logL_gamma(i, j, gamma0)
-    mat[i, j] <- res
-  }
+sample <- rgamma(n, 2.5, 1.5) 
+logLGamma <- function (alpha,beta){
+  return (logL_gamma(alpha,beta,sample))
+}
+
+# il faut re-créer des fonctions 
+logLGammaV2 <- function (theta){
+  return (logL_gamma(theta[1],theta[2],sample))
 }
 ```
+
 
 9. Tracer la courbe des valeurs ainsi calculées. Comme la fonction, $\ell(\theta)$, a deux arguments, vous pouvez réaliser des tracés de contour (`contour`). Pour plus de simplicité, il suffit de tracer comme une fonction unidimensionnelle en supposant que l'autre est fixe: $\ell(\alpha|\beta=\beta_0)$ avec quelque $\beta_0$ de votre choix et $\ell(\beta| \alpha=\alpha_0)$ pour quelque $\alpha_0$ de votre choix. Que remarquez-vous?
 
 ```{r}
-beta <- 2
-logBeta <- mat[,beta]
-alpha <- 3 # Valeur de alpha fixe
-logAlpha <- mat[alpha,]
 #on trace les courbes
-contour(interval, interval, mat,
-        xlab = "Valeur de alpha", ylab = "Valeur de beta",
-        main = "Contour de vraisemblance en fonction de alpha et beta")
+i <- seq(1,10)
+contour(i,i,outer(i,i,logLGamma))
 ```
 
 10. Donner l'expression mathématique du vecteur Score (les dérivées premières) à laquelle l'EMV répond. 
@@ -160,36 +154,56 @@ Soit $\theta$ un vecteur des paramètres du modèle
 $$
 S(\theta) = \nabla \theta L(\theta)
 $$
-Chaque composante du vecteur Score est la dérivé partielle de la log-vraisemblance par rapport à un paramètre du modèle.
 
 ```{r}
-#l'échantillon est la matrice 
+x0 <- c(1,1)
+# la fonction optim minimise il faut donc faire -1 pour la maximiser
+optim(par = x0, fn = logLGammaV2, method = "L-BFGS-B", control = list(fnscale = -1)) 
 ```
+
 
 11. Répéter l'estimation 100 fois avec de nouveaux ensembles de données (échantillons) et tracer les estimations $\hat\alpha$ vs $\hat\beta$. Sont-elles indépendantes ?
 Trouver l'intervalle où 95\% des estimations sont incluses pour chaque paramètre. Vous venez de trouver un intervalle de confiance empirique à 95\% !
 Visualisez vos résultats à l'aide d'un histogramme. Que remarquez-vous?
 
 ```{r}
-mat <-  matrix(nrow=100,ncol=100)
-interval <- seq(1,100)
-for(i in interval){
-  for(j in interval){
-    res <- logL_gamma(i, j, gamma0)
-    mat[i, j] <- res
-  }
+# on fait 100 estimations 
+n=100
+logLGammaV2 <- function (theta,echantillon){
+  return (logL_gamma(theta[1],theta[2],echantillon))
 }
-beta <- 5
-logBeta <- mat[,beta]
-alpha <- 54 # Valeur de alpha fixe
-logAlpha <- mat[alpha,]
-#on trace les courbes
-contour(interval, interval, mat,
-        xlab = "Valeur de alpha", ylab = "Valeur de beta",
-        main = "Contour de vraisemblance en fonction de alpha et beta")
+
+
+x0 <- c(1,1)
+list <- vector("list",100)
+#remplit 100 échantillons de alpha et beta
+for (i in 1:100){
+    list[[i]] <- optim(par = x0, fn = logLGammaV2,echantillon=rgamma(25,2.5,1.5), method = "L-BFGS-B", control = list(fnscale = -1))$par
+}
+
+alphaVect <- c()
+betaVect <- c()
+for(i in 1:100){
+  
+  alphaVect <- c(alphaVect,list[[i]][1] )
+  betaVect <-  c(betaVect,list[[i]][2] )
+}
+
+#intervalle de confiance pour alpha et beta
+confAlpha = quantile(alphaVect,c(0.025,0.975))
+confBeta = quantile(betaVect,c(0.025,0.975))
+
+#histogramme pour le vectreur alpha et le vecteur beta
+
+hist(alphaVect)
+hist(betaVect)
 ```
+
+On remarque les valerus de alpha et beta sont plus importante vers 2.5 et 1.5 ce qui sont les résultats que l'on souhaite originellement 
+
 12. Tester avec des échantillons de taille $n=15$ et $n=100$ et comparer avec les résultats précédents. Quel est l'effet de la taille de l'échantillon ?
 
+L'augmentation de la taille de l'échantillon permet de se rapprocher de la bonne valeur $\theta$.
 
 ### Normalité asymptotique de l’EMV et l'intervalle de confidence
 
@@ -202,6 +216,8 @@ L'évaluation de l'information de Fisher directe nécessite de calculer le hessi
 En général, il n'est pas  possible d'évaluer l'information de Fisher de manière analytique, ou cela peut prendre trop de temps. Dans ce cas, on utilise l' "information observée" (sans ésperance), $I_O(\hat{\theta})^{-1}= -H(\hat{\theta})^{-1}$.
 
 Nous pouvons utiliser l'option 'hessian=TRUE' dans `optim` pour obtenir la matrice hessienne et estimer la fonction de covariance par son inverse.
+
+IL Y A UNE FONCTION POUR CELA 
 
 14. Estimer la covariance asymptotique avec l'information observée et construire un intervalle de confiance asymptotique de niveau $0.95$. 
 
