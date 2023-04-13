@@ -5,6 +5,61 @@ date: "2023-03-31"
 output: html_document
 ---
 
+# Estimation du maximum de vraisemblance et de l'intervalle de confiance
+
+## Vraisemblance: La loi de Bernoulli
+
+### Question 1
+```{r Bernoulli}
+echantillon <- rbinom(10,1,0.6)
+print(x)
+```
+Une façon simple d'estimer p est de calculer la moyenne empirique de l'échantillon
+```{r Bernoulli moy}
+print(mean(echantillon))
+```
+
+### Question 2
+
+```{r Bernoulli vraisemblance}
+L_bern <- function(p,x) {
+  n <- sum(x)
+  return(p^n * (1-p)^(length(x) - n))
+}
+```
+
+### Question 3
+
+```{r vraisemblance}
+p <- seq(0,1,length.out = 100)
+plot(p,L_bern(p,echantillon),type = "l")
+```
+
+### Question 4
+
+```{r optim}
+fn <- function(p){
+  r <-L_bern(p,echantillon)
+  return(1 - r)
+}
+optim(par = 0.5,fn,method = "L-BFGS-B",lower = 0,upper = 1)
+
+```
+### Question 5
+```{r Bernoulli echantillon de tailles differentes}
+res <- c()
+for(i in seq(10,2000,10)){
+  echantillon <- rbinom(i,1,0.6)
+  res <- c(res,optim(par = 0.2,fn,method = "L-BFGS-B",lower = 0,upper = 1)[[1]])
+}
+```
+
+Il faut utiliser la logvraisemblance -> faire des maths
+
+
+
+
+
 # Vraisemblance pour plusieurs paramètre : La Loi Gamma 
 
 7. Présentez l'histogramme des données simulées. Choisir 3 paramètres candidats, 
