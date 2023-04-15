@@ -317,7 +317,7 @@ abline(v= confBeta[1])
 abline(v= confBeta[2])
 ```
 L'augmentation de la taille de l'échantillon permet de se rapprocher de
-la bonne valeur $\theta$.
+la bonne valeur $\theta$, en effet on peut apercevoir l'intervalle de confiance réduire.
 
 ### Normalité asymptotique de l'EMV et l'intervalle de confidence
 
