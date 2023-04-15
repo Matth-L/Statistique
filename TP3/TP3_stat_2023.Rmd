@@ -93,7 +93,7 @@ Il faut utiliser la logvraisemblance -\> faire des maths
 6.  Trouver deux intervalles de confiance de niveau 0.90 pour le
     paramètre $p$, d'après (i) l'inégalité de Bienaymé-Chebycheff et
     (ii) l'inégalité de Hoeffding et les comparer. Incluent-ils la
-         valeur réelle ?
+    valeur réelle ?
 
 ### Vraisemblance pour plusieurs paramètres: La Loi Gamma
 
@@ -253,19 +253,23 @@ de remplacer $\theta$ par $\hat{\theta}$.
 13. Pour revenir à l'exemple du Gamma ($n=25$), trouver l'information de
     Fisher et estimer la covariance asymptotique. A partir de là,
     construire un intervalle de confiance asymptotique de niveau $0.95$.
-    Comparer avec la solution de 11. $$
-    \mathcal{L}(\alpha ,\beta |x)=\alpha \log \beta -\log \Gamma (\alpha )+(\alpha -1)\log x-\beta x
-    $$ Calcul du Hessien: 
+    Comparer avec la solution de 11.
 $$
-\begin{matrix}
-\frac{\partial \mathcal{L}(\alpha ,\beta |x)}{\partial \alpha} = \log \beta - \frac{\partial \log \Gamma (\alpha)}{\partial \alpha}+\log(x)  &~~~~& \frac{\partial^2 \mathcal{L}(\alpha ,\beta |x)}{\partial \alpha^2} = -\frac{\partial^2 \log \Gamma (\alpha)}{\partial \alpha^2}\\ 
-\frac{\partial \mathcal{L}(\alpha ,\beta |x)}{\partial \beta} = \frac{\alpha}{\beta} - x && \frac{\partial^2 \mathcal{L}(\alpha ,\beta |x)}{\partial^2 \beta} = -\frac{\alpha}{\beta^2}
-\end{matrix}
+\mathcal{L}(\alpha ,\beta |x)=\alpha \log \beta -\log \Gamma (\alpha )+(\alpha -1)\log x-\beta x
+$$
+Calcul du Hessien:
+$$
+\frac{\partial \mathcal{L}(\alpha ,\beta |x)}{\partial \alpha} = \log \beta - \frac{\partial \log \Gamma (\alpha)}{\partial \alpha}+\log(x) ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\frac{\partial^2 \mathcal{L}(\alpha ,\beta |x)}{\partial \alpha^2} = -\frac{\partial^2 \log \Gamma (\alpha)}{\partial \alpha^2}
+$$
+$$
+\frac{\partial \mathcal{L}(\alpha ,\beta |x)}{\partial \beta} = \frac{\alpha}{\beta} - x ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\frac{\partial^2 \mathcal{L}(\alpha ,\beta |x)}{\partial^2 \beta} = -\frac{\alpha}{\beta^2}
 $$
 
 $$
 \frac{\partial^2 \mathcal{L}(\alpha ,\beta |x)}{\partial \alpha \partial \beta} = \frac{1}{\beta}
-$$ Donc $$
+$$
+Donc
+$$
 I(\alpha,\beta) = \begin{pmatrix}
 \frac{\partial^2 \log \Gamma (\alpha)}{\partial \alpha^2} & -\frac{1}{\beta}\\ 
 -\frac{1}{\beta} & \frac{\alpha}{\beta^2}
