@@ -360,6 +360,36 @@ I(\alpha,\beta) = \begin{pmatrix}
 -\frac{1}{\beta} & \frac{\alpha}{\beta^2}
 \end{pmatrix}
 $$
+De plus, comme $\hat{\theta } \approx \mathcal{N}(\theta,I_n(\theta)^{-1})$,
+On a
+$$
+\sqrt{n}(\hat{\theta} - \theta^*)\overset{\mathcal{L}}{\rightarrow} \mathcal{N}(0,I_1^{-1}(\theta^*))
+$$
+Donc $Var(\hat{\theta}) = I_1^{-1}(\theta)$
+
+On sait que $I(\theta)=nI_1(\theta)$
+
+D'où
+$$
+I_1(\theta)^{-1} = \frac{1}{n}I(\theta)=\frac{1}{det(I(\theta))}\begin{pmatrix}
+\frac{\partial^2 \log \Gamma (\alpha)}{\partial \alpha^2} & -\frac{1}{\beta}\\ 
+-\frac{1}{\beta} & \frac{\alpha}{\beta^2}
+\end{pmatrix}
+$$
+On commence par calculer le determinant:
+$$
+det(I(\theta)) = \frac{\partial^2 \log \Gamma (\alpha)}{\partial \alpha^2} \times
+\frac{\alpha}{\beta^2} - \frac{1}{\beta^2}=
+\frac{1}{\beta^2}(\frac{\partial^2 \log \Gamma (\alpha)}{\partial \alpha^2}-1)
+$$
+Puis on trouve la covariance asymptotique:
+$$
+Var(\hat{\theta}) = \frac{\beta^2}{\frac{\partial^2 \log \Gamma (\alpha)}{\partial \alpha^2}-1}
+\begin{pmatrix}
+\frac{\alpha}{\beta^2} & \frac{1}{\beta}\\ 
+\frac{1}{\beta} & \frac{\partial^2 \log \Gamma (\alpha)}{\partial \alpha^2}
+\end{pmatrix}
+$$
 
 En général, il n'est pas possible d'évaluer l'information de Fisher de
 manière analytique, ou cela peut prendre trop de temps. Dans ce cas, on
