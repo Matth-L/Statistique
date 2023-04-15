@@ -1,7 +1,6 @@
 ---
-title: "TP Statistiques 3"
+title: "TP3 Statistiques"
 author: "Matthias LAPU , Amael KREIS"
-date: "31 mars 2023"
 output:
   pdf_document: default
   html_document:
@@ -109,10 +108,16 @@ $\theta_0 = (2.5, 1.5)$.
 
 ```{r}
 n = 25
-hist(rgamma(n,c(2.5,1.5)))
-hist(rgamma(n,c(3,4)))
-hist(rgamma(n,c(2,6)))
+theta0 <- c(2.5,1.5)
+theta1 <- c(3,4)
+theta2 <- c(2,6)
+echantillonGamma <- rgamma(n,theta0[1],theta0[2])
+hist(echantillonGamma,probability = TRUE) # le bon paramètre à estimer
+lines(density(echantillonGamma),col="red",lwd=3)
+curve(dgamma(x,shape = theta1[1], rate = theta1[2]),add=T,col="blue",lwd=3)
+curve(dgamma(x,shape = theta2[1], rate = theta2[2]),add=T,col="green",lwd=3)
 ```
+On remarque que l'échantillon est de trop petite taille pour avoir des informations étudiable.
 
 8.  Ecrire la log vraisemblance `logL_gamma`. Générez une fonction de
     log-vraisemblance avec les arguments $(\theta, x)$, qui donne la log
@@ -121,9 +126,12 @@ hist(rgamma(n,c(2,6)))
     votre échantillon, estimer la log-vraisemblance de paramètre
     $\theta=(\alpha,\beta)$, en faissant varier un paramètre à la fois.
 
-La formule de la vraisemblance de la loi gamma est : $$
+La formule de la vraisemblance de la loi gamma est : 
+$$
 L(\alpha ,\beta |x)={\frac {\beta ^{\alpha }}{\Gamma (\alpha )}}x^{\alpha -1}\exp(-\beta x)
-$$ La formule de la log-vraisemblance est donc : $$
+$$ 
+La formule de la log-vraisemblance est donc : 
+$$
 \frac{\partial L(\alpha ,\beta |x) }{\partial x} = 
 \log \mathcal{L}(\alpha ,\beta |x)=\alpha \log \beta -\log \Gamma (\alpha )+(\alpha -1)\log x-\beta x
 $$
@@ -174,7 +182,8 @@ contour(x,y,outer(x,y,logLGamma),nlevels = 25)
     l'échantillon.
 
 Le score est le gradient de la log-vraisemblance. Soit $\theta$ un
-vecteur des paramètres du modèle $$
+vecteur des paramètres du modèle 
+$$
 S(\theta) = \nabla \theta L(\theta)
 $$
 
@@ -218,10 +227,14 @@ for(i in 1:100){
 confAlpha = quantile(alphaVect,c(0.025,0.975))
 confBeta = quantile(betaVect,c(0.025,0.975))
 
-#histogramme pour le vectreur alpha et le vecteur beta
+#histogramme pour le vecteur alpha et le vecteur beta
 
-hist(alphaVect)
-hist(betaVect)
+hist(alphaVect,main=" Histogramme des valeurs d'alpha ")
+abline(v= confAlpha[1])
+abline(v= confAlpha[2])
+hist(betaVect,main=" Histogramme des valeurs de beta ")
+abline(v= confBeta[1])
+abline(v= confBeta[2])
 ```
 
 On remarque les valerus de alpha et beta sont plus importante vers 2.5
@@ -230,7 +243,79 @@ et 1.5 ce qui sont les résultats que l'on souhaite originellement
 12. Tester avec des échantillons de taille $n=15$ et $n=100$ et comparer
     avec les résultats précédents. Quel est l'effet de la taille de
     l'échantillon ?
+    
+Avec un échantillon n=15
+```{r}
+# on fait 100 estimations 
+n=100
+logLGammaV2 <- function (theta,echantillon){
+  return (logL_gamma(theta[1],theta[2],echantillon))
+}
 
+
+x0 <- c(1,1)
+list <- vector("list",n)
+for (i in 1:n){
+    list[[i]] <- optim(par = x0, fn = logLGammaV2,echantillon=rgamma(15,2.5,1.5), method = "L-BFGS-B", control = list(fnscale = -1))$par
+}
+
+alphaVect <- c()
+betaVect <- c()
+for(i in 1:n){
+  
+  alphaVect <- c(alphaVect,list[[i]][1] )
+  betaVect <-  c(betaVect,list[[i]][2] )
+}
+
+#intervalle de confiance pour alpha et beta
+confAlpha = quantile(alphaVect,c(0.025,0.975))
+confBeta = quantile(betaVect,c(0.025,0.975))
+
+#histogramme pour le vecteur alpha et le vecteur beta
+
+hist(alphaVect,main=" Histogramme des valeurs d'alpha ")
+abline(v= confAlpha[1])
+abline(v= confAlpha[2])
+hist(betaVect,main=" Histogramme des valeurs de beta ")
+abline(v= confBeta[1])
+abline(v= confBeta[2])
+```
+Avec un échantillon n=100
+```{r}
+# on fait 100 estimations 
+n=100
+logLGammaV2 <- function (theta,echantillon){
+  return (logL_gamma(theta[1],theta[2],echantillon))
+}
+
+
+x0 <- c(1,1)
+list <- vector("list",n)
+for (i in 1:n){
+    list[[i]] <- optim(par = x0, fn = logLGammaV2,echantillon=rgamma(100,2.5,1.5), method = "L-BFGS-B", control = list(fnscale = -1))$par
+}
+
+alphaVect <- c()
+betaVect <- c()
+for(i in 1:n){
+  
+  alphaVect <- c(alphaVect,list[[i]][1] )
+  betaVect <-  c(betaVect,list[[i]][2] )
+}
+
+#intervalle de confiance pour alpha et beta
+confAlpha = quantile(alphaVect,c(0.025,0.975))
+confBeta = quantile(betaVect,c(0.025,0.975))
+
+#histogramme pour le vecteur alpha et le vecteur beta
+
+hist(alphaVect,main=" Histogramme des valeurs d'alpha ")
+abline(v= confAlpha[1])
+abline(v= confAlpha[2])
+hist(betaVect,main=" Histogramme des valeurs de beta ")
+abline(v= confBeta[1])
+abline(v= confBeta[2])
+```
 L'augmentation de la taille de l'échantillon permet de se rapprocher de
 la bonne valeur $\theta$.
 
