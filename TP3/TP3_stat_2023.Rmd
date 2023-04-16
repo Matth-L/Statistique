@@ -111,9 +111,9 @@ Appliquons cette inégalité à la moyenne empirique :
 $$
 P(|\bar{X}-p| \ge \delta) \le \frac{p(1-p)}{\delta²n}
 \\
-P(|\bar{X}-p| \lt \delta) \ge 1 - \frac{p(1-p)}{\delta²n}
+P(|\bar{X}-p| < \delta) \ge 1 - \frac{p(1-p)}{\delta²n}
 \\
-P(\bar{X}-\delta \lt p \lt \bar{X} + \delta) \ge 1 - \frac{p(1-p)}{\delta²n}
+P(\bar{X}-\delta < p < \bar{X} + \delta) \ge 1 - \frac{p(1-p)}{\delta²n}
 $$
 On trouve donc notre intervalle de confiance, cependant p est encore dans la partie droite. Il est donc nécessaire de l'enlever pour continuer notre estimation.
 passons $p(1-p)$ sous forme canonique :
@@ -124,7 +124,7 @@ p(1-p) \le \frac{1}{4}
 $$
 Modifions l'inégalité : 
 $$
-P(\bar{X}-\delta \lt p \lt \bar{X} + \delta) \ge 1 - \frac{1}{\delta²4n}
+P(\bar{X}-\delta < p < \bar{X} + \delta) \ge 1 - \frac{1}{\delta²4n}
 $$
 Finalement nous avons donc : 
 $$
@@ -132,7 +132,7 @@ $$
 $$
 Ainsi : 
 $$
-P(\bar{X}- \frac{1}{2\sqrt{\alpha*n}} \lt p \lt \bar{X} +\frac{1}{2\sqrt{\alpha*n}}  ) \ge 1 - \alpha
+P(\bar{X}- \frac{1}{2\sqrt{\alpha*n}} < p < \bar{X} +\frac{1}{2\sqrt{\alpha*n}}  ) \ge 1 - \alpha
 $$
 Finalement, nous avons donc : 
 $$
@@ -465,9 +465,8 @@ IL Y A UNE FONCTION POUR CELA
     construire un intervalle de confiance asymptotique de niveau $0.95$.
 
 ```{r question 14}
-#hessien <- optim(par = x0, fn = logLGammaV2, method = "L-BFGS-B", control = list(fnscale = -1), hessian = TRUE) 
-#La matrice Hessienne se trouve en 6eme position
-#print(-solve(hessien[[6]]))
+hessien <- optim(par = x0, fn = logLGammaV2,echantillon=rgamma(15,2.5,1.5), method = "L-BFGS-B", control = list(fnscale = -1), hessian = TRUE) 
+print(-solve(hessien[[6]]))
 ```
 
 15. Nous utilisons la simulation pour comparer la performance de ces
