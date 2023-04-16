@@ -465,7 +465,7 @@ IL Y A UNE FONCTION POUR CELA
     construire un intervalle de confiance asymptotique de niveau $0.95$.
 
 ```{r question 14}
-hessien <- optim(par = x0, fn = logLGammaV2,echantillon=rgamma(15,2.5,1.5), method = "L-BFGS-B", control = list(fnscale = -1), hessian = TRUE) 
+hessien <- optim(par = x0, fn = logLGammaV2,echantillon=rgamma(25,2.5,1.5), method = "L-BFGS-B", control = list(fnscale = -1), hessian = TRUE) 
 print(-solve(hessien[[6]]))
 ```
 
