@@ -31,7 +31,7 @@ print(echantillon)
 ```
 
 Une façon simple d'estimer p est de calculer la moyenne empirique de
-l'échantillon.
+l'échantillon.Cependant cette méthode n'est pas très précise pour de petit échantillon.
 
 ```{r Bernoulli moy}
 print(mean(echantillon))
@@ -40,6 +40,7 @@ print(mean(echantillon))
 2.  Générer une fonction de vraisemblance, nommée `L_bern`, en fonction
     de $(p, x)$, qui donne la vraisemblance d'un échantillon
     $x=(x_1,\ldots,x_n)$ pour une valeur donnée de $p$.
+    
 
 ```{r Bernoulli vraisemblance}
 L_bern <- function(p,x) {
@@ -132,9 +133,18 @@ Ainsi :
 $$
 P(\bar{X}- \frac{1}{2\sqrt{\alpha*n}} \lt p \lt \bar{X} +\frac{1}{2\sqrt{\alpha*n}}  ) \ge 1 - \alpha
 $$
-l'énoncé demande à ce qu'$\alpha$ soit égale à 0.10, ainsi 
+Finalement, nous avons donc : 
 $$
-\delta = \frac{1}{2\sqrt{0.10*n}}
+I_{n,\alpha} = [\bar{X} \pm \frac{1}{2\sqrt{\alpha * n}}]
+$$
+(ii)Inégalité de Hoeffding:
+Rappelons l'inégalité : 
+$$
+P(|\bar{X} - p]| \ge \delta) \le 2exp(-2n\delta^{2}) \\
+$$
+Avec : $\alpha = 2exp(-2n\delta^{2})$ , on obtient l'intervalle de confiance suivante :
+$$
+I_{n,\alpha} = [\bar{X} \pm \sqrt{\frac{1}{2n}\log({\frac{2}{\alpha}}})]
 $$
 
 ### Vraisemblance pour plusieurs paramètres: La Loi Gamma
@@ -227,13 +237,18 @@ contour(x,y,outer(x,y,logLGamma),nlevels = 50,main="Différentes valeurs d'alpha
 Le score est le gradient de la log-vraisemblance. Soit $\theta$ un
 vecteur des paramètres du modèle 
 $$
-S(\theta) = \nabla \theta L(\theta)
+S(\theta) = \nabla_\theta \mathcal{L}(\theta)
+= \left(\begin{array}{cc} 
+n(\log(\beta) - \frac{\psi_{0}(\alpha)}{\alpha}) + \sum_{i=1}^{n}\log(x_{i}) \\
+\frac{n\alpha}{\beta} - \sum_{i=1}^{n}x_{i}
+\end{array}\right)
 $$
+Avec $\psi$ la fonction digamma dérivé de la fonction gamma.
 
 ```{r}
 x0 <- c(1,1)
 # la fonction optim minimise il faut donc multiplier par -1 pour la maximiser
-optim(par = x0, fn = logLGammaV2, method = "L-BFGS-B", control = list(fnscale = -1)) 
+optim(par = x0, fn = logLGammaV2, method = "L-BFGS-B", control = list(fnscale = -1))
 ```
 
 11. Répéter l'estimation 100 fois avec de nouveaux ensembles de données
