@@ -31,7 +31,7 @@ print(echantillon)
 ```
 
 Une façon simple d'estimer p est de calculer la moyenne empirique de
-l'échantillon.Cependant cette méthode n'est pas très précise pour de petit échantillon.
+l'échantillon.Cependant cette méthode n'est pas très précise pour de petits échantillons.
 
 ```{r Bernoulli moy}
 print(mean(echantillon))
@@ -57,6 +57,7 @@ L_bern <- function(p,x) {
 p <- seq(0,1,length.out = 100)
 plot(p,L_bern(p,echantillon),type = "l")
 ```
+LA plupart du temps, le sommet de la fonction se trouve a x=p.
 
 4.  En utilisant la fonction `optim` de R, trouvez la valeur de $p$ la
     plus probable d'avoir généré cet échantillon.
@@ -88,7 +89,7 @@ for(i in seq(10,2000,10)){
 }
 ```
 
-Il faut utiliser la logvraisemblance -\> faire des maths
+Il faut utiliser la logvraisemblance car le log transforme les multiplications en addition donc cela permet de réduire l'instabilité.
 
 6.  Trouver deux intervalles de confiance de niveau 0.90 pour le
     paramètre $p$, d'après (i) l'inégalité de Bienaymé-Chebycheff et
@@ -339,7 +340,7 @@ abline(v= confBeta[1])
 abline(v= confBeta[2])
 ```
 Avec un échantillon n=100
-```{r}
+```{r echantillon 100}
 # on fait 100 estimations 
 n=100
 logLGammaV2 <- function (theta,echantillon){
@@ -463,10 +464,10 @@ IL Y A UNE FONCTION POUR CELA
 14. Estimer la covariance asymptotique avec l'information observée et
     construire un intervalle de confiance asymptotique de niveau $0.95$.
 
-```{r}
-#res <- optim(par = x0, fn = logLGammaV2, method = "L-BFGS-B", control = list(fnscale = -1), hessian = TRUE) 
+```{r question 14}
+#hessien <- optim(par = x0, fn = logLGammaV2, method = "L-BFGS-B", control = list(fnscale = -1), hessian = TRUE) 
 #La matrice Hessienne se trouve en 6eme position
-#print(-solve(res[[6]]))
+#print(-solve(hessien[[6]]))
 ```
 
 15. Nous utilisons la simulation pour comparer la performance de ces
