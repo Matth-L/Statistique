@@ -31,7 +31,7 @@ print(echantillon)
 ```
 
 Une façon simple d'estimer p est de calculer la moyenne empirique de
-l'échantillon
+l'échantillon.
 
 ```{r Bernoulli moy}
 print(mean(echantillon))
@@ -93,6 +93,49 @@ Il faut utiliser la logvraisemblance -\> faire des maths
     paramètre $p$, d'après (i) l'inégalité de Bienaymé-Chebycheff et
     (ii) l'inégalité de Hoeffding et les comparer. Incluent-ils la
     valeur réelle ?
+
+(i) : 
+On étudie un échantillon avec de nombreuses valeurs. Nous savons que la moyenne empirique est un estimateur convergent de p. Prenons :
+$$
+\bar{X} = \frac{1}{n} \sum_{i=1}^n X_i 
+\\
+X_i \sim B(p)
+$$
+Rappelons l'inégalité de Bienaymé-Tchebychev :
+$$
+P(|X-\mu| \ge \delta) \le \frac{V(X)}{\delta²}
+$$
+Appliquons cette inégalité à la moyenne empirique :
+$$
+P(|\bar{X}-p| \ge \delta) \le \frac{p(1-p)}{\delta²n}
+\\
+P(|\bar{X}-p| \lt \delta) \ge 1 - \frac{p(1-p)}{\delta²n}
+\\
+P(\bar{X}-\delta \lt p \lt \bar{X} + \delta) \ge 1 - \frac{p(1-p)}{\delta²n}
+$$
+On trouve donc notre intervalle de confiance, cependant p est encore dans la partie droite. Il est donc nécessaire de l'enlever pour continuer notre estimation.
+passons $p(1-p)$ sous forme canonique :
+$$
+p(1-p) = p-p² = -(p-\frac{1}{2}) + \frac{1}{4}
+\\
+p(1-p) \le \frac{1}{4}
+$$
+Modifions l'inégalité : 
+$$
+P(\bar{X}-\delta \lt p \lt \bar{X} + \delta) \ge 1 - \frac{1}{\delta²4n}
+$$
+Finalement nous avons donc : 
+$$
+\alpha = \frac{1}{\delta²4n}\rightarrow \delta = \frac{1}{2\sqrt{\alpha*n}}
+$$
+Ainsi : 
+$$
+P(\bar{X}- \frac{1}{2\sqrt{\alpha*n}} \lt p \lt \bar{X} +\frac{1}{2\sqrt{\alpha*n}}  ) \ge 1 - \alpha
+$$
+l'énoncé demande à ce qu'$\alpha$ soit égale à 0.10, ainsi 
+$$
+\delta = \frac{1}{2\sqrt{0.10*n}}
+$$
 
 ### Vraisemblance pour plusieurs paramètres: La Loi Gamma
 
@@ -171,9 +214,9 @@ logLGammaV2 <- function (theta){
 
 ```{r}
 #on trace les courbes
-x <- seq(1,10,0.2)
-y <- seq(1,10,0.2)
-contour(x,y,outer(x,y,logLGamma),nlevels = 25)
+x <- seq(1,10,0.1)
+y <- seq(1,10,0.1)
+contour(x,y,outer(x,y,logLGamma),nlevels = 50,main="Différentes valeurs d'alpha et beta")
 ```
 
 10. Donner l'expression mathématique du vecteur Score (les dérivées
@@ -229,16 +272,16 @@ confBeta = quantile(betaVect,c(0.025,0.975))
 
 #histogramme pour le vecteur alpha et le vecteur beta
 
-hist(alphaVect,main=" Histogramme des valeurs d'alpha ")
+hist(alphaVect,main=" Histogramme des valeurs d'alpha ; 100 estimations")
 abline(v= confAlpha[1])
 abline(v= confAlpha[2])
-hist(betaVect,main=" Histogramme des valeurs de beta ")
+hist(betaVect,main=" Histogramme des valeurs de beta ; 100 estimations")
 abline(v= confBeta[1])
 abline(v= confBeta[2])
 ```
 
 On remarque les valerus de alpha et beta sont plus importante vers 2.5
-et 1.5 ce qui sont les résultats que l'on souhaite originellement
+et 1.5 ce qui sont les résultats que l'on souhaite originellement.
 
 12. Tester avec des échantillons de taille $n=15$ et $n=100$ et comparer
     avec les résultats précédents. Quel est l'effet de la taille de
@@ -273,10 +316,10 @@ confBeta = quantile(betaVect,c(0.025,0.975))
 
 #histogramme pour le vecteur alpha et le vecteur beta
 
-hist(alphaVect,main=" Histogramme des valeurs d'alpha ")
+hist(alphaVect,main=" Histogramme des valeurs d'alpha ; n=15")
 abline(v= confAlpha[1])
 abline(v= confAlpha[2])
-hist(betaVect,main=" Histogramme des valeurs de beta ")
+hist(betaVect,main=" Histogramme des valeurs de beta ; n=15")
 abline(v= confBeta[1])
 abline(v= confBeta[2])
 ```
@@ -309,10 +352,10 @@ confBeta = quantile(betaVect,c(0.025,0.975))
 
 #histogramme pour le vecteur alpha et le vecteur beta
 
-hist(alphaVect,main=" Histogramme des valeurs d'alpha ")
+hist(alphaVect,main=" Histogramme des valeurs d'alpha ; n=100")
 abline(v= confAlpha[1])
 abline(v= confAlpha[2])
-hist(betaVect,main=" Histogramme des valeurs de beta ")
+hist(betaVect,main=" Histogramme des valeurs de beta ; n=100")
 abline(v= confBeta[1])
 abline(v= confBeta[2])
 ```
