@@ -11,7 +11,6 @@ editor_options:
   markdown: 
     wrap: 72
 ---
-
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
@@ -30,8 +29,7 @@ echantillon <- rbinom(10,1,0.6)
 print(echantillon)
 ```
 
-Une façon simple d'estimer p est de calculer la moyenne empirique de
-l'échantillon.Cependant cette méthode n'est pas très précise pour de petits échantillons.
+Une façon simple d'estimer p est de calculer la moyenne empirique de l'échantillon.Cependant cette méthode n'est pas très précise pour des échantillons de petites tailles.
 
 ```{r Bernoulli moy}
 print(mean(echantillon))
@@ -55,9 +53,10 @@ L_bern <- function(p,x) {
 
 ```{r vraisemblance}
 p <- seq(0,1,length.out = 100)
-plot(p,L_bern(p,echantillon),type = "l")
+plot(p,L_bern(p,echantillon),type = "l",main="Vraisemblance d'un échantillon de Bernouili")
 ```
-LA plupart du temps, le sommet de la fonction se trouve a x=p.
+
+On remarque que la fonction se trouve régulièrement à x=p.Cela était prévisible que la moyenne empirique soit proche de la moyenne, en effet nous savons que c'est un estimateur convergent.
 
 4.  En utilisant la fonction `optim` de R, trouvez la valeur de $p$ la
     plus probable d'avoir généré cet échantillon.
@@ -89,7 +88,7 @@ for(i in seq(10,2000,10)){
 }
 ```
 
-Il faut utiliser la logvraisemblance car le log transforme les multiplications en addition donc cela permet de réduire l'instabilité.
+On remarque qu'il est préférable d'utiliser la logvraisemblance, le log transforme les multiplications en addition, cela permet donc de réduire l'instabilité.
 
 6.  Trouver deux intervalles de confiance de niveau 0.90 pour le
     paramètre $p$, d'après (i) l'inégalité de Bienaymé-Chebycheff et
@@ -97,17 +96,22 @@ Il faut utiliser la logvraisemblance car le log transforme les multiplications e
     valeur réelle ?
 
 (i) : 
-On étudie un échantillon avec de nombreuses valeurs. Nous savons que la moyenne empirique est un estimateur convergent de p. Prenons :
+On étudie un échantillon avec de nombreuses valeurs. Nous savons que la moyenne empirique est un estimateur convergent de p. 
+Prenons :
 $$
 \bar{X} = \frac{1}{n} \sum_{i=1}^n X_i 
 \\
 X_i \sim B(p)
 $$
+
 Rappelons l'inégalité de Bienaymé-Tchebychev :
+
 $$
 P(|X-\mu| \ge \delta) \le \frac{V(X)}{\delta²}
 $$
+
 Appliquons cette inégalité à la moyenne empirique :
+
 $$
 P(|\bar{X}-p| \ge \delta) \le \frac{p(1-p)}{\delta²n}
 \\
@@ -115,35 +119,50 @@ P(|\bar{X}-p| < \delta) \ge 1 - \frac{p(1-p)}{\delta²n}
 \\
 P(\bar{X}-\delta < p < \bar{X} + \delta) \ge 1 - \frac{p(1-p)}{\delta²n}
 $$
+
 On trouve donc notre intervalle de confiance, cependant p est encore dans la partie droite. Il est donc nécessaire de l'enlever pour continuer notre estimation.
 passons $p(1-p)$ sous forme canonique :
+
 $$
 p(1-p) = p-p² = -(p-\frac{1}{2}) + \frac{1}{4}
 \\
 p(1-p) \le \frac{1}{4}
 $$
+
 Modifions l'inégalité : 
+
 $$
 P(\bar{X}-\delta < p < \bar{X} + \delta) \ge 1 - \frac{1}{\delta²4n}
 $$
+
 Finalement nous avons donc : 
+
 $$
 \alpha = \frac{1}{\delta²4n}\rightarrow \delta = \frac{1}{2\sqrt{\alpha*n}}
 $$
+
 Ainsi : 
+
 $$
 P(\bar{X}- \frac{1}{2\sqrt{\alpha*n}} < p < \bar{X} +\frac{1}{2\sqrt{\alpha*n}}  ) \ge 1 - \alpha
 $$
+
 Finalement, nous avons donc : 
+
 $$
 I_{n,\alpha} = [\bar{X} \pm \frac{1}{2\sqrt{\alpha * n}}]
 $$
+
 (ii)Inégalité de Hoeffding:
+
 Rappelons l'inégalité : 
+
 $$
 P(|\bar{X} - p]| \ge \delta) \le 2exp(-2n\delta^{2}) \\
 $$
+
 Avec : $\alpha = 2exp(-2n\delta^{2})$ , on obtient l'intervalle de confiance suivante :
+
 $$
 I_{n,\alpha} = [\bar{X} \pm \sqrt{\frac{1}{2n}\log({\frac{2}{\alpha}}})]
 $$
@@ -244,7 +263,7 @@ n(\log(\beta) - \frac{\psi_{0}(\alpha)}{\alpha}) + \sum_{i=1}^{n}\log(x_{i}) \\
 \frac{n\alpha}{\beta} - \sum_{i=1}^{n}x_{i}
 \end{array}\right)
 $$
-Avec $\psi$ la fonction digamma dérivé de la fonction gamma.
+Avec $\psi$ la fonction dérivé de la fonction gamma.
 
 ```{r}
 x0 <- c(1,1)
@@ -296,14 +315,14 @@ abline(v= confBeta[1])
 abline(v= confBeta[2])
 ```
 
-On remarque les valerus de alpha et beta sont plus importante vers 2.5
-et 1.5 ce qui sont les résultats que l'on souhaite originellement.
+On remarque que les valeurs d'alpha et beta sont plus importante vers 2.5
+et 1.5 .Ce sont les résultats que l'on souhaite originellement.
 
 12. Tester avec des échantillons de taille $n=15$ et $n=100$ et comparer
     avec les résultats précédents. Quel est l'effet de la taille de
     l'échantillon ?
     
-Avec un échantillon n=15
+Avec un échantillon n=15 :
 ```{r}
 # on fait 100 estimations 
 n=100
@@ -458,8 +477,6 @@ $I_O(\hat{\theta})^{-1}= -H(\hat{\theta})^{-1}$.
 Nous pouvons utiliser l'option 'hessian=TRUE' dans `optim` pour obtenir
 la matrice hessienne et estimer la fonction de covariance par son
 inverse.
-
-IL Y A UNE FONCTION POUR CELA
 
 14. Estimer la covariance asymptotique avec l'information observée et
     construire un intervalle de confiance asymptotique de niveau $0.95$.

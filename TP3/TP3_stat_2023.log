@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.4.2)  16 APR 2023 19:53
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.4.2)  16 APR 2023 20:39
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -434,52 +434,27 @@ File: t1lmtt.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
 LaTeX Font Info:    Font shape `T1/lmtt/bx/n' in size <10> not available
 (Font)              Font shape `T1/lmtt/b/n' tried instead on input line 174.
-<TP3_stat_2023_files/figure-latex/vraisemblance-1.pdf, id=20, 440.64626pt x 250.9375pt>
+LaTeX Font Info:    Trying to load font information for TS1+lmtt on input line 194.
+(/home/matth-l/.TinyTeX/texmf-dist/tex/latex/lm/ts1lmtt.fd
+File: ts1lmtt.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
+)
+<TP3_stat_2023_files/figure-latex/vraisemblance-1.pdf, id=20, 440.64626pt x 286.06876pt>
 File: TP3_stat_2023_files/figure-latex/vraisemblance-1.pdf Graphic file (type pdf)
 <use TP3_stat_2023_files/figure-latex/vraisemblance-1.pdf>
 Package pdftex.def Info: TP3_stat_2023_files/figure-latex/vraisemblance-1.pdf  used on input line 198.
-(pdftex.def)             Requested size: 440.66533pt x 250.94835pt.
-
-Underfull \hbox (badness 10000) in paragraph at lines 198--200
-[][] \T1/lmr/m/n/10 LA
- []
-
+(pdftex.def)             Requested size: 440.65189pt x 286.07242pt.
 [1
 
-{/home/matth-l/.TinyTeX/texmf-var/fonts/map/pdftex/updmap/pdftex.map}{/home/matth-l/.TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc}{/home/matth-l/.TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc}{/home/matth-l/.TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc}] [2 <./TP3_stat_2023_files/figure-latex/vraisemblance-1.pdf>]
+{/home/matth-l/.TinyTeX/texmf-var/fonts/map/pdftex/updmap/pdftex.map}{/home/matth-l/.TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc}{/home/matth-l/.TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc}{/home/matth-l/.TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc}{/home/matth-l/.TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-ts1.enc}] [2 <./TP3_stat_2023_files/figure-latex/vraisemblance-1.pdf>]
 
-LaTeX Warning: Command \texttwosuperior invalid in math mode on input line 295.
+LaTeX Warning: Command \texttwosuperior invalid in math mode on input line 304.
 
-LaTeX Font Info:    Trying to load font information for TS1+lmr on input line 295.
+LaTeX Font Info:    Trying to load font information for TS1+lmr on input line 304.
 (/home/matth-l/.TinyTeX/texmf-dist/tex/latex/lm/ts1lmr.fd
 File: ts1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
 
-LaTeX Warning: Command \texttwosuperior invalid in math mode on input line 295.
-
-
-LaTeX Warning: Command \texttwosuperior invalid in math mode on input line 297.
-
-
-LaTeX Warning: Command \texttwosuperior invalid in math mode on input line 297.
-
-
-LaTeX Warning: Command \texttwosuperior invalid in math mode on input line 299.
-
-
-LaTeX Warning: Command \texttwosuperior invalid in math mode on input line 299.
-
-
-LaTeX Warning: Command \texttwosuperior invalid in math mode on input line 301.
-
-
-LaTeX Warning: Command \texttwosuperior invalid in math mode on input line 301.
-
-
-LaTeX Warning: Command \texttwosuperior invalid in math mode on input line 306.
-
-
-LaTeX Warning: Command \texttwosuperior invalid in math mode on input line 306.
+LaTeX Warning: Command \texttwosuperior invalid in math mode on input line 304.
 
 
 LaTeX Warning: Command \texttwosuperior invalid in math mode on input line 310.
@@ -492,81 +467,102 @@ LaTeX Warning: Command \texttwosuperior invalid in math mode on input line 312.
 
 
 LaTeX Warning: Command \texttwosuperior invalid in math mode on input line 312.
+
+
+LaTeX Warning: Command \texttwosuperior invalid in math mode on input line 314.
+
+
+LaTeX Warning: Command \texttwosuperior invalid in math mode on input line 314.
+
+
+LaTeX Warning: Command \texttwosuperior invalid in math mode on input line 322.
+
+
+LaTeX Warning: Command \texttwosuperior invalid in math mode on input line 322.
+
+
+LaTeX Warning: Command \texttwosuperior invalid in math mode on input line 330.
+
+
+LaTeX Warning: Command \texttwosuperior invalid in math mode on input line 330.
+
+
+LaTeX Warning: Command \texttwosuperior invalid in math mode on input line 336.
+
+
+LaTeX Warning: Command \texttwosuperior invalid in math mode on input line 336.
 
 [3{/home/matth-l/.TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathex.enc}{/home/matth-l/.TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc}]
-<TP3_stat_2023_files/figure-latex/unnamed-chunk-1-1.pdf, id=66, 435.6275pt x 283.0575pt>
+<TP3_stat_2023_files/figure-latex/unnamed-chunk-1-1.pdf, id=67, 435.6275pt x 283.0575pt>
 File: TP3_stat_2023_files/figure-latex/unnamed-chunk-1-1.pdf Graphic file (type pdf)
 <use TP3_stat_2023_files/figure-latex/unnamed-chunk-1-1.pdf>
-Package pdftex.def Info: TP3_stat_2023_files/figure-latex/unnamed-chunk-1-1.pdf  used on input line 359.
+Package pdftex.def Info: TP3_stat_2023_files/figure-latex/unnamed-chunk-1-1.pdf  used on input line 400.
 (pdftex.def)             Requested size: 435.62643pt x 283.0568pt.
-[4 <./TP3_stat_2023_files/figure-latex/unnamed-chunk-1-1.pdf>]
-LaTeX Font Info:    Trying to load font information for TS1+lmtt on input line 429.
-(/home/matth-l/.TinyTeX/texmf-dist/tex/latex/lm/ts1lmtt.fd
-File: ts1lmtt.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
-)
-<TP3_stat_2023_files/figure-latex/unnamed-chunk-3-1.pdf, id=83, 407.5225pt x 254.9525pt>
+[4] [5 <./TP3_stat_2023_files/figure-latex/unnamed-chunk-1-1.pdf>]
+<TP3_stat_2023_files/figure-latex/unnamed-chunk-3-1.pdf, id=89, 407.5225pt x 254.9525pt>
 File: TP3_stat_2023_files/figure-latex/unnamed-chunk-3-1.pdf Graphic file (type pdf)
 <use TP3_stat_2023_files/figure-latex/unnamed-chunk-3-1.pdf>
-Package pdftex.def Info: TP3_stat_2023_files/figure-latex/unnamed-chunk-3-1.pdf  used on input line 433.
+Package pdftex.def Info: TP3_stat_2023_files/figure-latex/unnamed-chunk-3-1.pdf  used on input line 474.
 (pdftex.def)             Requested size: 407.54015pt x 254.96352pt.
-[5{/home/matth-l/.TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-ts1.enc}] [6 <./TP3_stat_2023_files/figure-latex/unnamed-chunk-3-1.pdf>]
-<TP3_stat_2023_files/figure-latex/unnamed-chunk-5-1.pdf, id=104, 424.58624pt x 285.065pt>
+[6 <./TP3_stat_2023_files/figure-latex/unnamed-chunk-3-1.pdf>] [7]
+<TP3_stat_2023_files/figure-latex/unnamed-chunk-5-1.pdf, id=111, 422.57875pt x 285.065pt>
 File: TP3_stat_2023_files/figure-latex/unnamed-chunk-5-1.pdf Graphic file (type pdf)
 <use TP3_stat_2023_files/figure-latex/unnamed-chunk-5-1.pdf>
-Package pdftex.def Info: TP3_stat_2023_files/figure-latex/unnamed-chunk-5-1.pdf  used on input line 530.
-(pdftex.def)             Requested size: 424.5852pt x 285.0643pt.
-[7]
-<TP3_stat_2023_files/figure-latex/unnamed-chunk-5-2.pdf, id=111, 429.605pt x 283.0575pt>
+Package pdftex.def Info: TP3_stat_2023_files/figure-latex/unnamed-chunk-5-1.pdf  used on input line 571.
+(pdftex.def)             Requested size: 422.57771pt x 285.0643pt.
+<TP3_stat_2023_files/figure-latex/unnamed-chunk-5-2.pdf, id=112, 424.58624pt x 283.0575pt>
 File: TP3_stat_2023_files/figure-latex/unnamed-chunk-5-2.pdf Graphic file (type pdf)
 <use TP3_stat_2023_files/figure-latex/unnamed-chunk-5-2.pdf>
-Package pdftex.def Info: TP3_stat_2023_files/figure-latex/unnamed-chunk-5-2.pdf  used on input line 540.
-(pdftex.def)             Requested size: 429.61049pt x 283.06111pt.
-[8 <./TP3_stat_2023_files/figure-latex/unnamed-chunk-5-1.pdf> <./TP3_stat_2023_files/figure-latex/unnamed-chunk-5-2.pdf>]
-<TP3_stat_2023_files/figure-latex/unnamed-chunk-6-1.pdf, id=132, 422.57875pt x 285.065pt>
+Package pdftex.def Info: TP3_stat_2023_files/figure-latex/unnamed-chunk-5-2.pdf  used on input line 581.
+(pdftex.def)             Requested size: 424.60463pt x 283.06975pt.
+[8 <./TP3_stat_2023_files/figure-latex/unnamed-chunk-5-1.pdf>] [9 <./TP3_stat_2023_files/figure-latex/unnamed-chunk-5-2.pdf>]
+<TP3_stat_2023_files/figure-latex/unnamed-chunk-6-1.pdf, id=138, 424.58624pt x 285.065pt>
 File: TP3_stat_2023_files/figure-latex/unnamed-chunk-6-1.pdf Graphic file (type pdf)
 <use TP3_stat_2023_files/figure-latex/unnamed-chunk-6-1.pdf>
-Package pdftex.def Info: TP3_stat_2023_files/figure-latex/unnamed-chunk-6-1.pdf  used on input line 592.
-(pdftex.def)             Requested size: 422.57771pt x 285.0643pt.
-[9]
-<TP3_stat_2023_files/figure-latex/unnamed-chunk-6-2.pdf, id=138, 424.58624pt x 283.0575pt>
+Package pdftex.def Info: TP3_stat_2023_files/figure-latex/unnamed-chunk-6-1.pdf  used on input line 633.
+(pdftex.def)             Requested size: 424.5852pt x 285.0643pt.
+<TP3_stat_2023_files/figure-latex/unnamed-chunk-6-2.pdf, id=139, 424.58624pt x 283.0575pt>
 File: TP3_stat_2023_files/figure-latex/unnamed-chunk-6-2.pdf Graphic file (type pdf)
 <use TP3_stat_2023_files/figure-latex/unnamed-chunk-6-2.pdf>
-Package pdftex.def Info: TP3_stat_2023_files/figure-latex/unnamed-chunk-6-2.pdf  used on input line 602.
+Package pdftex.def Info: TP3_stat_2023_files/figure-latex/unnamed-chunk-6-2.pdf  used on input line 643.
 (pdftex.def)             Requested size: 424.60463pt x 283.06975pt.
-[10 <./TP3_stat_2023_files/figure-latex/unnamed-chunk-6-1.pdf> <./TP3_stat_2023_files/figure-latex/unnamed-chunk-6-2.pdf>]
-<TP3_stat_2023_files/figure-latex/echantillon 100-1.pdf, id=160, 429.605pt x 285.065pt>
+[10 <./TP3_stat_2023_files/figure-latex/unnamed-chunk-6-1.pdf>]
+Underfull \vbox (badness 1931) detected at line 679
+ []
+
+[11 <./TP3_stat_2023_files/figure-latex/unnamed-chunk-6-2.pdf>]
+<TP3_stat_2023_files/figure-latex/echantillon 100-1.pdf, id=165, 422.57875pt x 285.065pt>
 File: TP3_stat_2023_files/figure-latex/echantillon 100-1.pdf Graphic file (type pdf)
 <use TP3_stat_2023_files/figure-latex/echantillon 100-1.pdf>
-Package pdftex.def Info: TP3_stat_2023_files/figure-latex/echantillon 100-1.pdf  used on input line 640.
-(pdftex.def)             Requested size: 429.60394pt x 285.0643pt.
-[11]
-<TP3_stat_2023_files/figure-latex/echantillon 100-2.pdf, id=165, 429.605pt x 283.0575pt>
+Package pdftex.def Info: TP3_stat_2023_files/figure-latex/echantillon 100-1.pdf  used on input line 681.
+(pdftex.def)             Requested size: 422.57771pt x 285.0643pt.
+<TP3_stat_2023_files/figure-latex/echantillon 100-2.pdf, id=166, 429.605pt x 283.0575pt>
 File: TP3_stat_2023_files/figure-latex/echantillon 100-2.pdf Graphic file (type pdf)
 <use TP3_stat_2023_files/figure-latex/echantillon 100-2.pdf>
-Package pdftex.def Info: TP3_stat_2023_files/figure-latex/echantillon 100-2.pdf  used on input line 650.
+Package pdftex.def Info: TP3_stat_2023_files/figure-latex/echantillon 100-2.pdf  used on input line 691.
 (pdftex.def)             Requested size: 429.61049pt x 283.06111pt.
 
-Overfull \hbox (30.82741pt too wide) in paragraph at lines 650--654
+Overfull \hbox (30.82741pt too wide) in paragraph at lines 691--695
 [][] \T1/lmr/m/n/10 L'augmentation
  []
 
-[12 <./TP3_stat_2023_files/figure-latex/echantillon 100-1.pdf> <./TP3_stat_2023_files/figure-latex/echantillon 100-2.pdf>] [13] [14] (./TP3_stat_2023.aux)
+[12 <./TP3_stat_2023_files/figure-latex/echantillon 100-1.pdf>] [13 <./TP3_stat_2023_files/figure-latex/echantillon 100-2.pdf>] [14] (./TP3_stat_2023.aux)
 Package rerunfilecheck Info: File `TP3_stat_2023.out' has not changed.
 (rerunfilecheck)             Checksum: 312294F22D241D99C5FF1294D0ABDF77;1344.
  ) 
 Here is how much of TeX's memory you used:
  11692 strings out of 477977
  185178 string characters out of 5838886
- 1869666 words of memory out of 5000000
+ 1863666 words of memory out of 5000000
  31648 multiletter control sequences out of 15000+600000
  557464 words of font info for 74 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 75i,8n,76p,571b,520s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 75i,8n,76p,589b,516s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </home/matth-l/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmbx10.pfb></home/matth-l/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmbx12.pfb></home/matth-l/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmex10.pfb></home/matth-l/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi10.pfb></home/matth-l/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi7.pfb></home/matth-l/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmr10.pfb></home/matth-l/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmr12.pfb></home/matth-l/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmr17.pfb></home/matth-l/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmr5.pfb></home/matth-l/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmr7.pfb></home/matth-l/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmri10.pfb></home/matth-l/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmsy10.pfb></home/matth-l/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmsy7.pfb></home/matth-l/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmtk10.pfb></home/matth-l/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmtt10.pfb></home/matth-l/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmtti10.pfb>
-Output written on TP3_stat_2023.pdf (14 pages, 401780 bytes).
+Output written on TP3_stat_2023.pdf (14 pages, 401774 bytes).
 PDF statistics:
- 289 PDF objects out of 1000 (max. 8388607)
- 209 compressed objects within 3 object streams
+ 290 PDF objects out of 1000 (max. 8388607)
+ 210 compressed objects within 3 object streams
  40 named destinations out of 1000 (max. 500000)
  78 words of extra memory for PDF output out of 10000 (max. 10000000)
 
