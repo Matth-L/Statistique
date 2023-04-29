@@ -1,1 +1,1 @@
-*.qmd linguist-language=markdown
+*.Rmd linguist-language=R
