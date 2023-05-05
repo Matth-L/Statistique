@@ -1,0 +1,189 @@
+---
+title: 'TP Statistiques 4'
+author: "Matthias LAPU | Amael Kreis"
+output:
+  pdf_document: 
+    fig_caption: yes
+  html_document: default
+fontsize: 10pt
+---
+<style type="text/css">
+  body .main-container{
+   max-width: 1100px !important;
+   width: 1100px !important;
+  }
+  body {
+    max-width: 1100px !important;
+    margin = auto;
+    padding: 5em;
+  }
+  body, td{
+    font-size: 2em;
+  }
+  code.r{
+    font-size: 1em;
+  }
+  pre{
+    font-size: 1em;
+    color: #191970;
+  }
+</style>
+
+
+```{r color, include=FALSE}
+colorize <- function(x, color) {
+  if (knitr::is_latex_output()) {
+    sprintf("\\textcolor{%s}{%s}", color, x)
+  } else if (knitr::is_html_output()) {
+    sprintf("<span style='color: %s;'>%s</span>", color, x)
+  } else x
+}
+```
+<!-- Does it show color? `r colorize("some words in red", "red")` -->
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(error = TRUE)
+knitr::opts_chunk$set(cache = TRUE)
+knitr::opts_chunk$set(fig.align = "center")
+knitr::opts_chunk$set(echo = TRUE, results="hide")
+sol=FALSE
+```
+
+
+
+## Tests d'Hypothèse
+
+### Tests paramétriques
+
+1. Construire le NP test. Quelle est la statistique du test, $T(\mathbf{X})$?
+Étant donné $n=10, \sigma_0 = 1, \mu_0 = 0, \mu_1 = 0.1$, évaluer les valeurs théoriques pour $k_\alpha$ et $\beta$. Quelle est l'interprétation de ces valeurs $\alpha$ et $\beta$?
+
+Il est demandé de faire un test simple avec la méthode de Neyman-Pearson.
+Le test d'hypothèse est : 
+$$
+H_0 : \mu = \mu_0 \\
+H_1 : \mu = \mu_1 
+$$
+
+D'après le cours , la région critique optimale est définie par $W$ tel que :
+$$
+Z_n = \frac{L(log(X_i);\mu_1)}{L(log(X_i);\mu_0)} = e^{(\frac{-\sum_{i=1}^{n}(log(X_i)- \mu_{1})^{2}+\sum_{i=1}^{n}(log(X_i)- \mu_{0})^{2}}{2\sigma_{0}^{2}})}\\
+= e^{\frac{(\mu_{1}-\mu_{0})\sum_{i=1}^{n}(Y_{i})}{\sigma_{0}^{2}}}e^{\frac{-n(\mu_{1}^{2}-\mu_{0}^{2})}{\sigma_{0}^{2}}}
+$$
+Z_n est une variable aléatoire continue sous $\mathbb{P}_{\mu_0}$. Comme dans le cours, la région critique optimale au seuil $\alpha$ est donc : 
+$$
+\left \{ 
+W=(log(x_1),...,log(x_n)); e^{\frac{\sum_{i=1}^{n}(log(x_{i})- \mu_{0})^{2}-\sum_{i=1}^{n}(log(x_{i})- \mu_{1})^{2}}{2\sigma_{0}^{2}})} > k  
+\right \}
+\\
+\left \{
+(log(x_1),...,log(x_n));e^{\frac{(\mu_{1}-\mu_{0})\sum_{i=1}^{n}log(x_{i})}{\sigma_{0}^{2}}}e^{\frac{-n(\mu_{1}^{2}-\mu_{0}^{2})}{\sigma_{0}^{2}}} > k
+\right \}
+\\
+\left \{
+log(x_1),...,log(x_n);\frac{1}{n}\sum_{i=1}^{n}log(x_i) > c
+\right \}
+$$
+Ainsi nous connaissons la statistique du test : 
+$$
+T(\mathbb{X})=\frac{1}{n}\sum_{i=1}^{n}log(x_i)
+$$
+Afin de terminer la construction du NP test , il va falloir déterminer $K_\alpha$.
+Il va falloir se baser sur l'hypothèse $H_0$.
+$$
+T(\mathbb{X}) \sim \mathbb{N}(\mu_0,\frac{\sigma^2}{n})
+$$
+En notant Y = log(X), nous avons donc : 
+$$
+\mathbb{P}_{H_0}(\frac{1}{n}\sum_{i=1}^{n}log(x_i) > K_\alpha) =\\
+\mathbb P_{H_{0}}(\frac{\sqrt{n}(\bar{Y_{n}}-\mu_{0})}{\sigma_{0}}>\frac{\sqrt{n}(K_{\alpha}-\mu_{0})}{\sigma_{0}})= \\
+{1-\phi(\frac{\sqrt{n}(K_{\alpha}-\mu_{0})}{\sigma_{0}})=\alpha}
+$$
+On retrouve donc $K_\alpha$.
+$$
+K_{\alpha}=\mu_{0}+\frac{\sigma_{0}}{\sqrt{n}}\phi^{-1}(1-\alpha)
+$$
+Calculons la puissance du test. 
+$$
+\mathbb P_{H_{1}}(W)= \mathbb P_{H_{1}} ( \bar{Y_{n}} > K_{\alpha}) = \\ 
+\beta = {1-\phi (\frac{\sqrt{n}(\mu_{0}-\mu_{1})}{\sigma_{0}}+\phi^{-1}(1-\alpha))}
+$$
+
+Ainsi la construction du test est terminé.
+
+Evaluons les valeurs théoriques.
+
+2. Simulez les données avec le paramètre ci-dessus et effectuez le test de niveau $\alpha=0.1$ $M=100$ fois. Donnez un approxmation de $\alpha$ et $\beta$.
+Le test contrôle-t-il l'erreurs comme promis ? 
+
+3. Au lieu de déterminer $k_\alpha$ pour les tests, nous pouvons calculer la valeur $p$, définie comme
+\[
+p-val = P_{H_0}(T(\mathbf{X}) > T(\mathbf{x}))
+\]
+où $T(\mathbf{x})$ est la statistique du test observée.
+Expliquez comment utiliser la valeur $p$ pour établir une règle de décision pour le test.
+
+4. Répéter pour les tailles d’échantillon croissantes $n = 20, 50, 100$. Quelle est l’influence de la taille de l’échantillon $n$ sur le test?
+
+5. Consideron le cas o\'u $\sigma$ est inconnu et répétez les questions précédentes. Y a-t-il une différence dans votre conclusion?
+
+
+## Application: Air quality monitoring
+
+[\textcolor{blue}{Airparif}](https://airparif.asso.fr) exploite un système de surveillance de la qualité de l'air avec un réseau de sites dans la région de la capitale (Ile de France) sur lesquels les mesures de la qualité de l'air sont effectuées automatiquement. Ces mesures sont utilisées pour résumer les niveaux actuels de pollution atmosphérique, pour prévoir les niveaux futurs et pour fournir des données pour la recherche scientifique, contribuant à l'évaluation des risques pour la santé et des impacts environnementaux des polluants atmosphériques.
+
+Nous examinerons *l'ozone troposphérique* ($O_3$). Ce polluant n'est pas émis directement dans l'atmosphère, mais est produit par des réactions chimiques entre le dioxyde d'azote ($NO_2$), les hydrocarbures et la lumière du soleil.
+
+Nous nous concentrerons sur les données de deux sites de surveillance: un site urbain à Neuilly-sur-seine (**NEUIL**) et un site rural (**RUR.SE**) près de la forêt de Fontainbleu.
+
+Les données de chaque site sont des mesures quotidiennes de la concentration moyenne horaire maximale de $O_3$ enregistrée en microgrammes par mètre cube ($\mu g/m^3$), de 2014 à 2019 inclusivement. Pour nous concentrer sur la question de la saison, nous comparons les données de *hiver* (novembre-février inclus) (`Ozone_hiver.csv`) et *été* (mai - août inclus) (`Ozone_ete.csv`).
+
+Nous souhaitons savoir comment la distribution des mesures de l'ozone varie-t-elle entre les sites urbains et ruraux. Nous désignons les données sur l'ozone du site urbain par $X_i$ et le site rural par $Y_i$, $i=1,\ldots,n$, l'indice indiquant les $n$ jours différents pour lesquels nous avons des mesures et définissons la variable $D_i = X_i-Y_i$ pour la difference.
+
+6. Appliquer l'analyse exploratoire des données (TPs 1-2) et suggérer un modèle approprié pour $D_i$.
+
+7. En supposant que les différences $D_i$ forment un échantillon iid suivant une loi normale $N(\mu, \sigma^2)$, quelle est l'hypothèse sous-jacente que nous voulons tester ? Définir $H_0$ et $H_1$ et effectuez le lest pour les données en été et en hiver séparément. Quelle est la conclusion?
+
+
+## Méthodes de simulation pour les tests d'hypothèse
+
+Un test d'hypothèse valide exige que nous rejetions incorrectement l'hypothèse nulle une proportion appropriée du temps (par exemple, au plus 5% de fois).
+
+Ainsi pour une statistique de test donnée, $T(\mathbf{X})$ telle que nous rejetterons l'hypothèse nulle si $T(\mathbf{X})$ est plus grande (ou plus petite) qu'un certain seuil, si nous voulons un test de taille $\alpha$ nous devons pouvoir calculer $k_\alpha$ tel que
+\[
+\Pr(T(\mathbf{X})> k_\alpha | \mbox{Hypothèse nulle vraie}) = \alpha.
+\]
+Si nous ne pouvons pas calculer $k_\alpha$ analytiquement, nous pouvons utiliser la simulation pour aider à choisir un $k_\alpha$ approprié. 
+Ce que nous devons faire est de simuler des ensembles de données répliqués sous l'hypothèse Nulle. 
+
+**Monte Carlo approximation to the sampling distribution of the test statistic**
+\begin{itemize}
+\item [(1)] Simuler des $M$ ensembles de données indépendants, $\mathbf{x}_1, \ldots, \mathbf{x}_M$ sous l'hypothèse nulle.
+\item [(2)] Pour chaque $\mathbf{x}_i$, calculez la statistique de test $T(\mathbf{x}_i)$. 
+\item [(3)] Les valeurs $\{T(\mathbf{x}_1),\ldots, T(\mathbf{x}_M)\}$ sont les échatillion de la loi de $T(\mathbf{X})$, desquelles on obtient la fontion de r\'epartition empirique comme l'approximation de Monte Carlo. 
+\item [(4)] Estimez le seuil $k_\alpha$ comme le centile empirique $100(1-\alpha)$ de cette approximation.
+\end{itemize}
+
+Notez que pour implémenter cela, nous avons seulement besoin de pouvoir simuler des données sous l'hypothèse nulle. Dans de nombreuses applications scientifiques, les scientifiques effectueront un test d'hypothèse en utilisant cette approche. Ils/Elles décideront d'une statistique du test, en fonction de leur compréhension du problème, et utiliseront la simulation pour calculer la valeur seuil.
+
+
+### Test d'ajustement de Kolmogorov
+
+Nous pouvons appliquer la stratégie de simulation pour évaluer la pertinence des modèles statistiques pour les données. 
+
+Soit $X_1,\ldots, X_n$ un échantillon de loi inconnue $P_{\boldsymbol{\theta}}$ de fonction de répartition $F$ supposée continue. L’objectif du test de Kolmogorov est l’ajustement de la loi inconnue $P$ à une loi connue $P_0$ de fonction de répartition continue $F_0$:
+\[
+H_0: F = F_0 \qquad H_1: F \neq F_0
+\]
+
+8. Constuire le test de Kolmogorov (Kolmogorov-Smirnov) de niveau $\alpha$ (sur la base de l'approximation asymmtotique). Suggérer une méthode alternative basée sur la simulation.
+
+Supposons que le modèle le mieux adjusté ait la valeur de paramètre $\hat{\boldsymbol{\theta}}$. Soit $F_0$ la fonction de répartition du modèle ajusté $P_{\hat{\boldsymbol{\theta}}}$. 
+
+9. Pour les données sur l'ozone, nous voulons tester si l'thypothèse de gaussianité était appropriée. Nous envisageons deux scénarios. Le premier est que les données originales de l'ozone suivent une loi gaussienne ($H_0^{(1)}$). 
+Le second suppose que seules les différences suivent la loi gaussienne ($H_0^{(2)}$).
+Effectuez les tests utilisant la méthode asymptotique et la méthode de simulation. Résumez vos conclusions.
+
+
+
+
