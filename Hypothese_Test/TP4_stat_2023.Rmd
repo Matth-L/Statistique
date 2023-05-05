@@ -113,6 +113,27 @@ Ainsi la construction du test est terminé.
 
 Evaluons les valeurs théoriques.
 
+```{r}
+#initialisation des paramètres 
+n<-10
+sig <- 1
+mu0 <- 0
+mu1 <- 0.1
+#calcul de k_alpha
+K_alpha<-(1/sqrt(n))*(1/qlnorm(1-0.05,mu0,1/n)) 
+print(K_alpha)
+```
+```{r}
+alpha<- pnorm(K_alpha,mu0,1/n)
+print(alpha)
+```
+
+```{r}
+beta<-1-pnorm(K_alpha,mu0,1/n)
+print(beta)
+```
+D'après le cours, nous savons qu'$\alpha$ est le taux d'erreur de première espèce, c'est-à-dire la probabilité à accepté l'hypothèse 1 sachant que l'hypothèse 0 est vrai , tandis que $\beta$ est le taux d'erreur de second espèce, c'est à dire, la probabilité de garder l'hypothèse 0 sachant que l'hypothèse 1 est bonne.
+
 2. Simulez les données avec le paramètre ci-dessus et effectuez le test de niveau $\alpha=0.1$ $M=100$ fois. Donnez un approxmation de $\alpha$ et $\beta$.
 Le test contrôle-t-il l'erreurs comme promis ? 
 
