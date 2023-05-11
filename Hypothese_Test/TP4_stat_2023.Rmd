@@ -72,8 +72,9 @@ Z_n = \frac{L(log(X_i);\mu_1)}{L(log(X_i);\mu_0)} = e^{(\frac{-\sum_{i=1}^{n}(lo
 $$
 Z_n est une variable aléatoire continue sous $\mathbb{P}_{\mu_0}$. Comme dans le cours, la région critique optimale au seuil $\alpha$ est donc : 
 $$
+W=
 \left \{ 
-W=(log(x_1),...,log(x_n)); e^{\frac{\sum_{i=1}^{n}(log(x_{i})- \mu_{0})^{2}-\sum_{i=1}^{n}(log(x_{i})- \mu_{1})^{2}}{2\sigma_{0}^{2}})} > k  
+(log(x_1),...,log(x_n)); e^{\frac{\sum_{i=1}^{n}(log(x_{i})- \mu_{0})^{2}-\sum_{i=1}^{n}(log(x_{i})- \mu_{1})^{2}}{2\sigma_{0}^{2}})} > k  
 \right \}
 \\
 \left \{
@@ -136,6 +137,22 @@ D'après le cours, nous savons qu'$\alpha$ est le taux d'erreur de première esp
 
 2. Simulez les données avec le paramètre ci-dessus et effectuez le test de niveau $\alpha=0.1$ $M=100$ fois. Donnez un approxmation de $\alpha$ et $\beta$.
 Le test contrôle-t-il l'erreurs comme promis ? 
+
+```{r}
+l<-c()
+for( i in 1:100){
+  lnnorm<-rlnorm(10,0,1)
+  l[i]<-Dl_norm(lnnorm)
+}
+lsorted<-sort(l)
+K_alpha_moy<-lsorted[90]-0.0001
+beta_moy<-1-pnorm(K_alpha_moy,0,1/10)
+
+print(K_alpha_moy)
+print(alpha_moy)
+print(beta_moy)
+```
+On trouve ds valeurs très proches meme avec la marge d'erreur.
 
 3. Au lieu de déterminer $k_\alpha$ pour les tests, nous pouvons calculer la valeur $p$, définie comme
 \[
