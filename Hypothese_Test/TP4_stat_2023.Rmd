@@ -161,10 +161,45 @@ p-val = P_{H_0}(T(\mathbf{X}) > T(\mathbf{x}))
 où $T(\mathbf{x})$ est la statistique du test observée.
 Expliquez comment utiliser la valeur $p$ pour établir une règle de décision pour le test.
 
+On utilise la fonction de répartition pour trouver p:
+```{r}
+lnnorm<-rlnorm(10,0,1)
+p<-pnorm(Dl_norm(lnnorm),0,1/10)
+print(p)
+```
+
 4. Répéter pour les tailles d’échantillon croissantes $n = 20, 50, 100$. Quelle est l’influence de la taille de l’échantillon $n$ sur le test?
 
 5. Consideron le cas o\'u $\sigma$ est inconnu et répétez les questions précédentes. Y a-t-il une différence dans votre conclusion?
 
+D'après le lemme de Neyman-Pearson, la région de rejet $W$ optimale est définie par l'ensemble des points $(x_{1},x_{2},..,x_{n})$ de $R^{n}$ tels que : $\frac{\mathcal{L}(x,\theta_{1})}{\mathcal{L}(x,\theta_{0})} > k_{\alpha}$. On note $S_{n}^2$ l'estimateur sans biais de $\sigma^2$. 
+
+On choisit les hypothèses 
+
+
+$$
+Test = \left\{
+    \begin{array}{ll}
+        H_{0} : \mu = \mu_{0} \\
+        H_{1} : \mu = \mu_{1}
+    \end{array}
+\right.
+$$
+
+
+On a $W={\Lambda_{n}>k_{\alpha}}$ où $\Lambda_{n}=\frac{\sqrt{n}(\bar{X_{n}}-\mu_{0})}{S_{n}}$ suit une loi de Student à $n - 1$ degrés de liberté notée $T_{n-1}$. Ainsi $k_{\alpha}=F^{-1}{T{n-1}} (1-\alpha)$. 
+
+Ainsi la région de rejet est de la forme $W>F^{-1}{T{n-1}} (1-\alpha)$ avec  $F_{T_{n-1}}$ la fonction de répartion de $T_{n-1}$.
+
+Alors:
+
+$$\mathbb P_{H_{0}}(W) =\boxed{1-F_{T_{n-1}}(\frac{\sqrt{n}(K_{\alpha}-\mu_{0})}{\sigma_{0}})=\alpha}$$
+
+D'où , en fixant un premier alpha:
+$$\boxed{K_{\alpha}=\mu_{0}+\frac{S_{n}}{\sqrt{n}}F_{T_{n-1}}^{-1}(1-\alpha)}$$
+Ainsi que:
+
+$$\mathbb P_{H_{1}}(W) = \boxed{1-F_{T_{n-1}} (\frac{\sqrt{n}(\mu_{0}-\mu_{1})}{S_{n}}+F_{T_{n-1}}^{-1}(1-\alpha))=\beta}$$
 
 ## Application: Air quality monitoring
 
