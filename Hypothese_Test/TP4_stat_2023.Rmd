@@ -139,18 +139,28 @@ D'après le cours, nous savons qu'$\alpha$ est le taux d'erreur de première esp
 Le test contrôle-t-il l'erreurs comme promis ? 
 
 ```{r}
+
+trueNorm<- function(x){
+  r=0
+  for(l in x){
+    r=r+log(l)
+  }
+  return(r/length(x))
+}
+
 l<-c()
 for( i in 1:100){
   lnnorm<-rlnorm(10,0,1)
-  l[i]<-Dl_norm(lnnorm)
+  l[i]<-trueNorm(lnnorm)
 }
 lsorted<-sort(l)
-K_alpha_moy<-lsorted[90]-0.0001
-beta_moy<-1-pnorm(K_alpha_moy,0,1/10)
+K_alpha_mean<-lsorted[90]-0.0001
+alphaMean<- pnorm(K_alpha_mean,0,1/10)
+betaMean<-1-pnorm(K_alpha_mean,0,1/10)
 
-print(K_alpha_moy)
-print(alpha_moy)
-print(beta_moy)
+print(K_alpha_mean)
+print(alphaMean)
+print(betaMean)
 ```
 On trouve ds valeurs très proches meme avec la marge d'erreur.
 
@@ -164,13 +174,22 @@ Expliquez comment utiliser la valeur $p$ pour établir une règle de décision p
 On utilise la fonction de répartition pour trouver p:
 ```{r}
 lnnorm<-rlnorm(10,0,1)
-p<-pnorm(Dl_norm(lnnorm),0,1/10)
+p<-pnorm(trueNorm(lnnorm),0,1/10)
 print(p)
 ```
 
 4. Répéter pour les tailles d’échantillon croissantes $n = 20, 50, 100$. Quelle est l’influence de la taille de l’échantillon $n$ sur le test?
 
-5. Consideron le cas o\'u $\sigma$ est inconnu et répétez les questions précédentes. Y a-t-il une différence dans votre conclusion?
+```{r}
+n<- c(20,50,100)
+for(x in n){
+  norm <- rlnorm(x,0,1)
+  p_val <- pnorm(trueNorm(norm),0,1/x)
+  print(p_val)
+}
+```
+
+5. Considerons le cas o\'u $\sigma$ est inconnu et répétez les questions précédentes. Y a-t-il une différence dans votre conclusion?
 
 D'après le lemme de Neyman-Pearson, la région de rejet $W$ optimale est définie par l'ensemble des points $(x_{1},x_{2},..,x_{n})$ de $R^{n}$ tels que : $\frac{\mathcal{L}(x,\theta_{1})}{\mathcal{L}(x,\theta_{0})} > k_{\alpha}$. On note $S_{n}^2$ l'estimateur sans biais de $\sigma^2$. 
 
@@ -215,9 +234,54 @@ Nous souhaitons savoir comment la distribution des mesures de l'ozone varie-t-el
 
 6. Appliquer l'analyse exploratoire des données (TPs 1-2) et suggérer un modèle approprié pour $D_i$.
 
-7. En supposant que les différences $D_i$ forment un échantillon iid suivant une loi normale $N(\mu, \sigma^2)$, quelle est l'hypothèse sous-jacente que nous voulons tester ? Définir $H_0$ et $H_1$ et effectuez le lest pour les données en été et en hiver séparément. Quelle est la conclusion?
 
 
+7. En supposant que les différences $D_i$ forment un échantillon iid suivant une loi normale $N(\mu, \sigma^2)$, quelle est l'hypothèse sous-jacente que nous voulons tester ? Définir $H_0$ et $H_1$ et effectuez le test pour les données en été et en hiver séparément. Quelle est la conclusion?
+
+Si les différents $D_i$ suivent une loi normale. On veux tester si cette estimateur est "bon". Sachant que les différents $D_i$ suivent une loi normale. La moyenne empirique suit également une loi normale $\bar{D_n} = \frac{1}{n} \sum_{i=1}^n D_i$. Nous avons déja démontré en cours que la moyenne empirique d'une loi normale reste une loi normale et que ses paramètres sont : $N(\mu, \frac{\sigma^2}{n})$.
+
+D'après le cours nous savons que c'est un estimateur sans biais et convergent.
+En centrant et réduisant, on a donc : $\bar{D_n} \sim N(0,1)$.
+Dans l'énoncé il est supposé que $\sigma$ est connu. 
+On va donc effectuer le test suivant: 
+$$
+Test = \left\{
+    \begin{array}{ll}
+        H_{0} : \mu = \mu_{0} \\
+        H_{1} : \mu \neq \mu_{0}
+    \end{array}
+\right.
+$$
+
+La statistique pertinente a été énoncé précedemment. 
+$Z_0 = \bar{D_n} \sim N(0,1) $
+
+pour cela il va être nécessaire de calculer la vrai moyenne des échantillons . Nous allons ensuite effectuer le test à 95%
+```{r}
+ete <- read.csv("summer_ozone.csv")
+hiver <- read.csv("winter_zone.csv")
+
+eteNeuilRur <- ete$NEUIL - ete$RUR.SE
+hiverNeuilRur <- hiver$NEUIL - hiver$RUR.SE
+eteMean <- mean(eteNeuilRur)
+varEte <- sig(eteNeuilRur)
+hiverMean <- mean(hiverMean)
+varHiver <- sig(hiverNeuilRur)
+print("Moyenne en éte : " + eteMean)
+print ("Moyenne en hiver : " + hiverMean)
+
+
+normEte <- dnorm(-100:100,eteMean,varEte)
+alpha <- 0.05
+K_alpha<-(1/sqrt(n))*(1/qnorm(1-alpha,eteMean,1/n))
+print(K_alpha)
+
+trueAlpha <- pnorm(K_alpha,eteMean,1/n)
+print(trueAlpha)
+
+beta <- 1-pnorm(K_alpha,eteMean,1/n)
+print(beta)
+```
 ## Méthodes de simulation pour les tests d'hypothèse
 
 Un test d'hypothèse valide exige que nous rejetions incorrectement l'hypothèse nulle une proportion appropriée du temps (par exemple, au plus 5% de fois).
